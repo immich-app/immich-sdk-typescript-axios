@@ -12,4 +12,9 @@ jobs:
       - name: Generate SDK
         run: |
           npm install @openapitools/openapi-generator-cli -g
-          make update
+          make build
+          git config --global user.email "alex.tran1502@gmail.com"
+          git config --global user.name "Alex Tran"
+          git add .
+          git commit -m "Update SDK"
+          git push
