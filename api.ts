@@ -567,31 +567,6 @@ export interface CreateAlbumDto {
 /**
  * 
  * @export
- * @interface CreateDeviceInfoDto
- */
-export interface CreateDeviceInfoDto {
-    /**
-     * 
-     * @type {DeviceTypeEnum}
-     * @memberof CreateDeviceInfoDto
-     */
-    'deviceType': DeviceTypeEnum;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateDeviceInfoDto
-     */
-    'deviceId': string;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof CreateDeviceInfoDto
-     */
-    'isAutoBackup'?: boolean;
-}
-/**
- * 
- * @export
  * @interface CreateProfileImageResponseDto
  */
 export interface CreateProfileImageResponseDto {
@@ -1453,63 +1428,107 @@ export interface SmartInfoResponseDto {
 /**
  * 
  * @export
- * @enum {string}
+ * @interface SystemConfigDto
  */
-
-export const SystemConfigKey = {
-    Crf: 'ffmpeg_crf',
-    Preset: 'ffmpeg_preset',
-    TargetVideoCodec: 'ffmpeg_target_video_codec',
-    TargetAudioCodec: 'ffmpeg_target_audio_codec',
-    TargetScaling: 'ffmpeg_target_scaling'
-} as const;
-
-export type SystemConfigKey = typeof SystemConfigKey[keyof typeof SystemConfigKey];
-
-
-/**
- * 
- * @export
- * @interface SystemConfigResponseDto
- */
-export interface SystemConfigResponseDto {
+export interface SystemConfigDto {
     /**
      * 
-     * @type {Array<SystemConfigResponseItem>}
-     * @memberof SystemConfigResponseDto
+     * @type {SystemConfigFFmpegDto}
+     * @memberof SystemConfigDto
      */
-    'config': Array<SystemConfigResponseItem>;
+    'ffmpeg': SystemConfigFFmpegDto;
+    /**
+     * 
+     * @type {SystemConfigOAuthDto}
+     * @memberof SystemConfigDto
+     */
+    'oauth': SystemConfigOAuthDto;
 }
 /**
  * 
  * @export
- * @interface SystemConfigResponseItem
+ * @interface SystemConfigFFmpegDto
  */
-export interface SystemConfigResponseItem {
+export interface SystemConfigFFmpegDto {
     /**
      * 
      * @type {string}
-     * @memberof SystemConfigResponseItem
+     * @memberof SystemConfigFFmpegDto
      */
-    'name': string;
-    /**
-     * 
-     * @type {SystemConfigKey}
-     * @memberof SystemConfigResponseItem
-     */
-    'key': SystemConfigKey;
+    'crf': string;
     /**
      * 
      * @type {string}
-     * @memberof SystemConfigResponseItem
+     * @memberof SystemConfigFFmpegDto
      */
-    'value': string;
+    'preset': string;
     /**
      * 
      * @type {string}
-     * @memberof SystemConfigResponseItem
+     * @memberof SystemConfigFFmpegDto
      */
-    'defaultValue': string;
+    'targetVideoCodec': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SystemConfigFFmpegDto
+     */
+    'targetAudioCodec': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SystemConfigFFmpegDto
+     */
+    'targetScaling': string;
+}
+/**
+ * 
+ * @export
+ * @interface SystemConfigOAuthDto
+ */
+export interface SystemConfigOAuthDto {
+    /**
+     * 
+     * @type {boolean}
+     * @memberof SystemConfigOAuthDto
+     */
+    'enabled': boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof SystemConfigOAuthDto
+     */
+    'issuerUrl': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SystemConfigOAuthDto
+     */
+    'clientId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SystemConfigOAuthDto
+     */
+    'clientSecret': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SystemConfigOAuthDto
+     */
+    'scope': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SystemConfigOAuthDto
+     */
+    'buttonText': string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof SystemConfigOAuthDto
+     */
+    'autoRegister': boolean;
 }
 /**
  * 
@@ -1632,31 +1651,6 @@ export interface UpdateAssetDto {
 /**
  * 
  * @export
- * @interface UpdateDeviceInfoDto
- */
-export interface UpdateDeviceInfoDto {
-    /**
-     * 
-     * @type {DeviceTypeEnum}
-     * @memberof UpdateDeviceInfoDto
-     */
-    'deviceType': DeviceTypeEnum;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateDeviceInfoDto
-     */
-    'deviceId': string;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof UpdateDeviceInfoDto
-     */
-    'isAutoBackup'?: boolean;
-}
-/**
- * 
- * @export
  * @interface UpdateTagDto
  */
 export interface UpdateTagDto {
@@ -1721,6 +1715,31 @@ export interface UpdateUserDto {
      * @memberof UpdateUserDto
      */
     'profileImagePath'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface UpsertDeviceInfoDto
+ */
+export interface UpsertDeviceInfoDto {
+    /**
+     * 
+     * @type {DeviceTypeEnum}
+     * @memberof UpsertDeviceInfoDto
+     */
+    'deviceType': DeviceTypeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpsertDeviceInfoDto
+     */
+    'deviceId': string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof UpsertDeviceInfoDto
+     */
+    'isAutoBackup'?: boolean;
 }
 /**
  * 
@@ -4321,14 +4340,15 @@ export class AuthenticationApi extends BaseAPI {
 export const DeviceInfoApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * 
-         * @param {CreateDeviceInfoDto} createDeviceInfoDto 
+         * @deprecated
+         * @summary 
+         * @param {UpsertDeviceInfoDto} upsertDeviceInfoDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createDeviceInfo: async (createDeviceInfoDto: CreateDeviceInfoDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'createDeviceInfoDto' is not null or undefined
-            assertParamExists('createDeviceInfo', 'createDeviceInfoDto', createDeviceInfoDto)
+        createDeviceInfo: async (upsertDeviceInfoDto: UpsertDeviceInfoDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'upsertDeviceInfoDto' is not null or undefined
+            assertParamExists('createDeviceInfo', 'upsertDeviceInfoDto', upsertDeviceInfoDto)
             const localVarPath = `/device-info`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -4352,7 +4372,7 @@ export const DeviceInfoApiAxiosParamCreator = function (configuration?: Configur
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(createDeviceInfoDto, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(upsertDeviceInfoDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -4360,14 +4380,15 @@ export const DeviceInfoApiAxiosParamCreator = function (configuration?: Configur
             };
         },
         /**
-         * 
-         * @param {UpdateDeviceInfoDto} updateDeviceInfoDto 
+         * @deprecated
+         * @summary 
+         * @param {UpsertDeviceInfoDto} upsertDeviceInfoDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateDeviceInfo: async (updateDeviceInfoDto: UpdateDeviceInfoDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'updateDeviceInfoDto' is not null or undefined
-            assertParamExists('updateDeviceInfo', 'updateDeviceInfoDto', updateDeviceInfoDto)
+        updateDeviceInfo: async (upsertDeviceInfoDto: UpsertDeviceInfoDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'upsertDeviceInfoDto' is not null or undefined
+            assertParamExists('updateDeviceInfo', 'upsertDeviceInfoDto', upsertDeviceInfoDto)
             const localVarPath = `/device-info`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -4391,7 +4412,46 @@ export const DeviceInfoApiAxiosParamCreator = function (configuration?: Configur
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(updateDeviceInfoDto, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(upsertDeviceInfoDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {UpsertDeviceInfoDto} upsertDeviceInfoDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        upsertDeviceInfo: async (upsertDeviceInfoDto: UpsertDeviceInfoDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'upsertDeviceInfoDto' is not null or undefined
+            assertParamExists('upsertDeviceInfo', 'upsertDeviceInfoDto', upsertDeviceInfoDto)
+            const localVarPath = `/device-info`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(upsertDeviceInfoDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -4409,23 +4469,35 @@ export const DeviceInfoApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = DeviceInfoApiAxiosParamCreator(configuration)
     return {
         /**
-         * 
-         * @param {CreateDeviceInfoDto} createDeviceInfoDto 
+         * @deprecated
+         * @summary 
+         * @param {UpsertDeviceInfoDto} upsertDeviceInfoDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createDeviceInfo(createDeviceInfoDto: CreateDeviceInfoDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DeviceInfoResponseDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.createDeviceInfo(createDeviceInfoDto, options);
+        async createDeviceInfo(upsertDeviceInfoDto: UpsertDeviceInfoDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DeviceInfoResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createDeviceInfo(upsertDeviceInfoDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * @deprecated
+         * @summary 
+         * @param {UpsertDeviceInfoDto} upsertDeviceInfoDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateDeviceInfo(upsertDeviceInfoDto: UpsertDeviceInfoDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DeviceInfoResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateDeviceInfo(upsertDeviceInfoDto, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
-         * @param {UpdateDeviceInfoDto} updateDeviceInfoDto 
+         * @param {UpsertDeviceInfoDto} upsertDeviceInfoDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateDeviceInfo(updateDeviceInfoDto: UpdateDeviceInfoDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DeviceInfoResponseDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.updateDeviceInfo(updateDeviceInfoDto, options);
+        async upsertDeviceInfo(upsertDeviceInfoDto: UpsertDeviceInfoDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DeviceInfoResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.upsertDeviceInfo(upsertDeviceInfoDto, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -4439,22 +4511,33 @@ export const DeviceInfoApiFactory = function (configuration?: Configuration, bas
     const localVarFp = DeviceInfoApiFp(configuration)
     return {
         /**
-         * 
-         * @param {CreateDeviceInfoDto} createDeviceInfoDto 
+         * @deprecated
+         * @summary 
+         * @param {UpsertDeviceInfoDto} upsertDeviceInfoDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createDeviceInfo(createDeviceInfoDto: CreateDeviceInfoDto, options?: any): AxiosPromise<DeviceInfoResponseDto> {
-            return localVarFp.createDeviceInfo(createDeviceInfoDto, options).then((request) => request(axios, basePath));
+        createDeviceInfo(upsertDeviceInfoDto: UpsertDeviceInfoDto, options?: any): AxiosPromise<DeviceInfoResponseDto> {
+            return localVarFp.createDeviceInfo(upsertDeviceInfoDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * @deprecated
+         * @summary 
+         * @param {UpsertDeviceInfoDto} upsertDeviceInfoDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateDeviceInfo(upsertDeviceInfoDto: UpsertDeviceInfoDto, options?: any): AxiosPromise<DeviceInfoResponseDto> {
+            return localVarFp.updateDeviceInfo(upsertDeviceInfoDto, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {UpdateDeviceInfoDto} updateDeviceInfoDto 
+         * @param {UpsertDeviceInfoDto} upsertDeviceInfoDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateDeviceInfo(updateDeviceInfoDto: UpdateDeviceInfoDto, options?: any): AxiosPromise<DeviceInfoResponseDto> {
-            return localVarFp.updateDeviceInfo(updateDeviceInfoDto, options).then((request) => request(axios, basePath));
+        upsertDeviceInfo(upsertDeviceInfoDto: UpsertDeviceInfoDto, options?: any): AxiosPromise<DeviceInfoResponseDto> {
+            return localVarFp.upsertDeviceInfo(upsertDeviceInfoDto, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -4467,25 +4550,38 @@ export const DeviceInfoApiFactory = function (configuration?: Configuration, bas
  */
 export class DeviceInfoApi extends BaseAPI {
     /**
-     * 
-     * @param {CreateDeviceInfoDto} createDeviceInfoDto 
+     * @deprecated
+     * @summary 
+     * @param {UpsertDeviceInfoDto} upsertDeviceInfoDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DeviceInfoApi
      */
-    public createDeviceInfo(createDeviceInfoDto: CreateDeviceInfoDto, options?: AxiosRequestConfig) {
-        return DeviceInfoApiFp(this.configuration).createDeviceInfo(createDeviceInfoDto, options).then((request) => request(this.axios, this.basePath));
+    public createDeviceInfo(upsertDeviceInfoDto: UpsertDeviceInfoDto, options?: AxiosRequestConfig) {
+        return DeviceInfoApiFp(this.configuration).createDeviceInfo(upsertDeviceInfoDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * @deprecated
+     * @summary 
+     * @param {UpsertDeviceInfoDto} upsertDeviceInfoDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DeviceInfoApi
+     */
+    public updateDeviceInfo(upsertDeviceInfoDto: UpsertDeviceInfoDto, options?: AxiosRequestConfig) {
+        return DeviceInfoApiFp(this.configuration).updateDeviceInfo(upsertDeviceInfoDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
-     * @param {UpdateDeviceInfoDto} updateDeviceInfoDto 
+     * @param {UpsertDeviceInfoDto} upsertDeviceInfoDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DeviceInfoApi
      */
-    public updateDeviceInfo(updateDeviceInfoDto: UpdateDeviceInfoDto, options?: AxiosRequestConfig) {
-        return DeviceInfoApiFp(this.configuration).updateDeviceInfo(updateDeviceInfoDto, options).then((request) => request(this.axios, this.basePath));
+    public upsertDeviceInfo(upsertDeviceInfoDto: UpsertDeviceInfoDto, options?: AxiosRequestConfig) {
+        return DeviceInfoApiFp(this.configuration).upsertDeviceInfo(upsertDeviceInfoDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -5202,13 +5298,46 @@ export const SystemConfigApiAxiosParamCreator = function (configuration?: Config
         },
         /**
          * 
-         * @param {object} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateConfig: async (body: object, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'body' is not null or undefined
-            assertParamExists('updateConfig', 'body', body)
+        getDefaults: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/system-config/defaults`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {SystemConfigDto} systemConfigDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateConfig: async (systemConfigDto: SystemConfigDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'systemConfigDto' is not null or undefined
+            assertParamExists('updateConfig', 'systemConfigDto', systemConfigDto)
             const localVarPath = `/system-config`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -5232,7 +5361,7 @@ export const SystemConfigApiAxiosParamCreator = function (configuration?: Config
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(systemConfigDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -5254,18 +5383,27 @@ export const SystemConfigApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getConfig(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SystemConfigResponseDto>> {
+        async getConfig(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SystemConfigDto>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getConfig(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
-         * @param {object} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateConfig(body: object, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SystemConfigResponseDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.updateConfig(body, options);
+        async getDefaults(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SystemConfigDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getDefaults(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {SystemConfigDto} systemConfigDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateConfig(systemConfigDto: SystemConfigDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SystemConfigDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateConfig(systemConfigDto, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -5283,17 +5421,25 @@ export const SystemConfigApiFactory = function (configuration?: Configuration, b
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getConfig(options?: any): AxiosPromise<SystemConfigResponseDto> {
+        getConfig(options?: any): AxiosPromise<SystemConfigDto> {
             return localVarFp.getConfig(options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {object} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateConfig(body: object, options?: any): AxiosPromise<SystemConfigResponseDto> {
-            return localVarFp.updateConfig(body, options).then((request) => request(axios, basePath));
+        getDefaults(options?: any): AxiosPromise<SystemConfigDto> {
+            return localVarFp.getDefaults(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {SystemConfigDto} systemConfigDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateConfig(systemConfigDto: SystemConfigDto, options?: any): AxiosPromise<SystemConfigDto> {
+            return localVarFp.updateConfig(systemConfigDto, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -5317,13 +5463,23 @@ export class SystemConfigApi extends BaseAPI {
 
     /**
      * 
-     * @param {object} body 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SystemConfigApi
      */
-    public updateConfig(body: object, options?: AxiosRequestConfig) {
-        return SystemConfigApiFp(this.configuration).updateConfig(body, options).then((request) => request(this.axios, this.basePath));
+    public getDefaults(options?: AxiosRequestConfig) {
+        return SystemConfigApiFp(this.configuration).getDefaults(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {SystemConfigDto} systemConfigDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SystemConfigApi
+     */
+    public updateConfig(systemConfigDto: SystemConfigDto, options?: AxiosRequestConfig) {
+        return SystemConfigApiFp(this.configuration).updateConfig(systemConfigDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
