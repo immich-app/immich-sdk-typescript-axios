@@ -5300,6 +5300,7 @@ export const DeviceInfoApiAxiosParamCreator = function (configuration?: Configur
          * @deprecated
          * @param {UpsertDeviceInfoDto} upsertDeviceInfoDto 
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         createDeviceInfo: async (upsertDeviceInfoDto: UpsertDeviceInfoDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -5339,6 +5340,7 @@ export const DeviceInfoApiAxiosParamCreator = function (configuration?: Configur
          * @deprecated
          * @param {UpsertDeviceInfoDto} upsertDeviceInfoDto 
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         updateDeviceInfo: async (upsertDeviceInfoDto: UpsertDeviceInfoDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -5427,6 +5429,7 @@ export const DeviceInfoApiFp = function(configuration?: Configuration) {
          * @deprecated
          * @param {UpsertDeviceInfoDto} upsertDeviceInfoDto 
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async createDeviceInfo(upsertDeviceInfoDto: UpsertDeviceInfoDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DeviceInfoResponseDto>> {
@@ -5437,6 +5440,7 @@ export const DeviceInfoApiFp = function(configuration?: Configuration) {
          * @deprecated
          * @param {UpsertDeviceInfoDto} upsertDeviceInfoDto 
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async updateDeviceInfo(upsertDeviceInfoDto: UpsertDeviceInfoDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DeviceInfoResponseDto>> {
@@ -5467,6 +5471,7 @@ export const DeviceInfoApiFactory = function (configuration?: Configuration, bas
          * @deprecated
          * @param {UpsertDeviceInfoDto} upsertDeviceInfoDto 
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         createDeviceInfo(upsertDeviceInfoDto: UpsertDeviceInfoDto, options?: any): AxiosPromise<DeviceInfoResponseDto> {
@@ -5476,6 +5481,7 @@ export const DeviceInfoApiFactory = function (configuration?: Configuration, bas
          * @deprecated
          * @param {UpsertDeviceInfoDto} upsertDeviceInfoDto 
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         updateDeviceInfo(upsertDeviceInfoDto: UpsertDeviceInfoDto, options?: any): AxiosPromise<DeviceInfoResponseDto> {
@@ -5504,6 +5510,7 @@ export class DeviceInfoApi extends BaseAPI {
      * @deprecated
      * @param {UpsertDeviceInfoDto} upsertDeviceInfoDto 
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof DeviceInfoApi
      */
@@ -5515,6 +5522,7 @@ export class DeviceInfoApi extends BaseAPI {
      * @deprecated
      * @param {UpsertDeviceInfoDto} upsertDeviceInfoDto 
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof DeviceInfoApi
      */
