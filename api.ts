@@ -667,6 +667,18 @@ export interface CreateAlbumShareLinkDto {
     'allowUpload'?: boolean;
     /**
      * 
+     * @type {boolean}
+     * @memberof CreateAlbumShareLinkDto
+     */
+    'allowDownload'?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CreateAlbumShareLinkDto
+     */
+    'showExif'?: boolean;
+    /**
+     * 
      * @type {string}
      * @memberof CreateAlbumShareLinkDto
      */
@@ -696,6 +708,18 @@ export interface CreateAssetsShareLinkDto {
      * @memberof CreateAssetsShareLinkDto
      */
     'allowUpload'?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CreateAssetsShareLinkDto
+     */
+    'allowDownload'?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CreateAssetsShareLinkDto
+     */
+    'showExif'?: boolean;
     /**
      * 
      * @type {string}
@@ -987,6 +1011,18 @@ export interface EditSharedLinkDto {
      * @memberof EditSharedLinkDto
      */
     'allowUpload'?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof EditSharedLinkDto
+     */
+    'allowDownload'?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof EditSharedLinkDto
+     */
+    'showExif'?: boolean;
     /**
      * 
      * @type {boolean}
@@ -1612,6 +1648,18 @@ export interface SharedLinkResponseDto {
      * @memberof SharedLinkResponseDto
      */
     'allowUpload': boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof SharedLinkResponseDto
+     */
+    'allowDownload': boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof SharedLinkResponseDto
+     */
+    'showExif': boolean;
 }
 /**
  * 
@@ -3765,7 +3813,7 @@ export const AssetApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * 
+         * Current this is not used in any UI element
          * @param {number} [skip] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -4451,7 +4499,7 @@ export const AssetApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * 
+         * Current this is not used in any UI element
          * @param {number} [skip] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -4677,7 +4725,7 @@ export const AssetApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.downloadFiles(downloadFilesDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Current this is not used in any UI element
          * @param {number} [skip] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -4899,7 +4947,7 @@ export class AssetApi extends BaseAPI {
     }
 
     /**
-     * 
+     * Current this is not used in any UI element
      * @param {number} [skip] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
