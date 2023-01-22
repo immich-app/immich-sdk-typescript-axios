@@ -1799,6 +1799,12 @@ export interface SystemConfigFFmpegDto {
      * @memberof SystemConfigFFmpegDto
      */
     'targetScaling': string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof SystemConfigFFmpegDto
+     */
+    'transcodeAll': boolean;
 }
 /**
  * 
