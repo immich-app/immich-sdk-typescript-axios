@@ -282,61 +282,31 @@ export interface AllJobStatusResponseDto {
      * @type {JobCounts}
      * @memberof AllJobStatusResponseDto
      */
-    'thumbnailGenerationQueueCount': JobCounts;
+    'thumbnail-generation': JobCounts;
     /**
      * 
      * @type {JobCounts}
      * @memberof AllJobStatusResponseDto
      */
-    'metadataExtractionQueueCount': JobCounts;
+    'metadata-extraction': JobCounts;
     /**
      * 
      * @type {JobCounts}
      * @memberof AllJobStatusResponseDto
      */
-    'videoConversionQueueCount': JobCounts;
+    'video-conversion': JobCounts;
     /**
      * 
      * @type {JobCounts}
      * @memberof AllJobStatusResponseDto
      */
-    'machineLearningQueueCount': JobCounts;
+    'machine-learning': JobCounts;
     /**
      * 
      * @type {JobCounts}
      * @memberof AllJobStatusResponseDto
      */
-    'storageMigrationQueueCount': JobCounts;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof AllJobStatusResponseDto
-     */
-    'isThumbnailGenerationActive': boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof AllJobStatusResponseDto
-     */
-    'isMetadataExtractionActive': boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof AllJobStatusResponseDto
-     */
-    'isVideoConversionActive': boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof AllJobStatusResponseDto
-     */
-    'isMachineLearningActive': boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof AllJobStatusResponseDto
-     */
-    'isStorageMigrationActive': boolean;
+    'storage-template-migration': JobCounts;
 }
 /**
  * 
@@ -1258,25 +1228,6 @@ export const JobId = {
 export type JobId = typeof JobId[keyof typeof JobId];
 
 
-/**
- * 
- * @export
- * @interface JobStatusResponseDto
- */
-export interface JobStatusResponseDto {
-    /**
-     * 
-     * @type {boolean}
-     * @memberof JobStatusResponseDto
-     */
-    'isActive': boolean;
-    /**
-     * 
-     * @type {object}
-     * @memberof JobStatusResponseDto
-     */
-    'queueCount': object;
-}
 /**
  * 
  * @export
@@ -5773,43 +5724,6 @@ export const JobApiAxiosParamCreator = function (configuration?: Configuration) 
         /**
          * 
          * @param {JobId} jobId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getJobStatus: async (jobId: JobId, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'jobId' is not null or undefined
-            assertParamExists('getJobStatus', 'jobId', jobId)
-            const localVarPath = `/jobs/{jobId}`
-                .replace(`{${"jobId"}}`, encodeURIComponent(String(jobId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {JobId} jobId 
          * @param {JobCommandDto} jobCommandDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -5872,16 +5786,6 @@ export const JobApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {JobId} jobId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getJobStatus(jobId: JobId, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<JobStatusResponseDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getJobStatus(jobId, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {JobId} jobId 
          * @param {JobCommandDto} jobCommandDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -5911,15 +5815,6 @@ export const JobApiFactory = function (configuration?: Configuration, basePath?:
         /**
          * 
          * @param {JobId} jobId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getJobStatus(jobId: JobId, options?: any): AxiosPromise<JobStatusResponseDto> {
-            return localVarFp.getJobStatus(jobId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {JobId} jobId 
          * @param {JobCommandDto} jobCommandDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -5945,17 +5840,6 @@ export class JobApi extends BaseAPI {
      */
     public getAllJobsStatus(options?: AxiosRequestConfig) {
         return JobApiFp(this.configuration).getAllJobsStatus(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {JobId} jobId 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof JobApi
-     */
-    public getJobStatus(jobId: JobId, options?: AxiosRequestConfig) {
-        return JobApiFp(this.configuration).getJobStatus(jobId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
