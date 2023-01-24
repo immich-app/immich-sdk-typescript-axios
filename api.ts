@@ -1575,12 +1575,6 @@ export interface ServerVersionReponseDto {
      * @memberof ServerVersionReponseDto
      */
     'patch': number;
-    /**
-     * 
-     * @type {number}
-     * @memberof ServerVersionReponseDto
-     */
-    'build': number;
 }
 /**
  * 
