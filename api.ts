@@ -395,6 +395,12 @@ export interface AssetFileUploadResponseDto {
      * @memberof AssetFileUploadResponseDto
      */
     'id': string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof AssetFileUploadResponseDto
+     */
+    'duplicate': boolean;
 }
 /**
  * 
