@@ -251,6 +251,12 @@ export interface AlbumResponseDto {
      * @type {string}
      * @memberof AlbumResponseDto
      */
+    'updatedAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AlbumResponseDto
+     */
     'albumThumbnailAssetId': string | null;
     /**
      * 
@@ -462,6 +468,12 @@ export interface AssetResponseDto {
      * @memberof AssetResponseDto
      */
     'modifiedAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AssetResponseDto
+     */
+    'updatedAt': string;
     /**
      * 
      * @type {boolean}
