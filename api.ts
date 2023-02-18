@@ -61,10 +61,10 @@ export interface APIKeyCreateResponseDto {
 export interface APIKeyResponseDto {
     /**
      * 
-     * @type {number}
+     * @type {string}
      * @memberof APIKeyResponseDto
      */
-    'id': number;
+    'id': string;
     /**
      * 
      * @type {string}
@@ -2356,11 +2356,11 @@ export const APIKeyApiAxiosParamCreator = function (configuration?: Configuratio
         },
         /**
          * 
-         * @param {number} id 
+         * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteKey: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        deleteKey: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('deleteKey', 'id', id)
             const localVarPath = `/api-key/{id}`
@@ -2389,11 +2389,11 @@ export const APIKeyApiAxiosParamCreator = function (configuration?: Configuratio
         },
         /**
          * 
-         * @param {number} id 
+         * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getKey: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getKey: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getKey', 'id', id)
             const localVarPath = `/api-key/{id}`
@@ -2451,12 +2451,12 @@ export const APIKeyApiAxiosParamCreator = function (configuration?: Configuratio
         },
         /**
          * 
-         * @param {number} id 
+         * @param {string} id 
          * @param {APIKeyUpdateDto} aPIKeyUpdateDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateKey: async (id: number, aPIKeyUpdateDto: APIKeyUpdateDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        updateKey: async (id: string, aPIKeyUpdateDto: APIKeyUpdateDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('updateKey', 'id', id)
             // verify required parameter 'aPIKeyUpdateDto' is not null or undefined
@@ -2510,21 +2510,21 @@ export const APIKeyApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {number} id 
+         * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteKey(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async deleteKey(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.deleteKey(id, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
-         * @param {number} id 
+         * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getKey(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<APIKeyResponseDto>> {
+        async getKey(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<APIKeyResponseDto>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getKey(id, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -2539,12 +2539,12 @@ export const APIKeyApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {number} id 
+         * @param {string} id 
          * @param {APIKeyUpdateDto} aPIKeyUpdateDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateKey(id: number, aPIKeyUpdateDto: APIKeyUpdateDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<APIKeyResponseDto>> {
+        async updateKey(id: string, aPIKeyUpdateDto: APIKeyUpdateDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<APIKeyResponseDto>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.updateKey(id, aPIKeyUpdateDto, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -2569,20 +2569,20 @@ export const APIKeyApiFactory = function (configuration?: Configuration, basePat
         },
         /**
          * 
-         * @param {number} id 
+         * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteKey(id: number, options?: any): AxiosPromise<void> {
+        deleteKey(id: string, options?: any): AxiosPromise<void> {
             return localVarFp.deleteKey(id, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {number} id 
+         * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getKey(id: number, options?: any): AxiosPromise<APIKeyResponseDto> {
+        getKey(id: string, options?: any): AxiosPromise<APIKeyResponseDto> {
             return localVarFp.getKey(id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -2595,12 +2595,12 @@ export const APIKeyApiFactory = function (configuration?: Configuration, basePat
         },
         /**
          * 
-         * @param {number} id 
+         * @param {string} id 
          * @param {APIKeyUpdateDto} aPIKeyUpdateDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateKey(id: number, aPIKeyUpdateDto: APIKeyUpdateDto, options?: any): AxiosPromise<APIKeyResponseDto> {
+        updateKey(id: string, aPIKeyUpdateDto: APIKeyUpdateDto, options?: any): AxiosPromise<APIKeyResponseDto> {
             return localVarFp.updateKey(id, aPIKeyUpdateDto, options).then((request) => request(axios, basePath));
         },
     };
@@ -2626,23 +2626,23 @@ export class APIKeyApi extends BaseAPI {
 
     /**
      * 
-     * @param {number} id 
+     * @param {string} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof APIKeyApi
      */
-    public deleteKey(id: number, options?: AxiosRequestConfig) {
+    public deleteKey(id: string, options?: AxiosRequestConfig) {
         return APIKeyApiFp(this.configuration).deleteKey(id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
-     * @param {number} id 
+     * @param {string} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof APIKeyApi
      */
-    public getKey(id: number, options?: AxiosRequestConfig) {
+    public getKey(id: string, options?: AxiosRequestConfig) {
         return APIKeyApiFp(this.configuration).getKey(id, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -2658,13 +2658,13 @@ export class APIKeyApi extends BaseAPI {
 
     /**
      * 
-     * @param {number} id 
+     * @param {string} id 
      * @param {APIKeyUpdateDto} aPIKeyUpdateDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof APIKeyApi
      */
-    public updateKey(id: number, aPIKeyUpdateDto: APIKeyUpdateDto, options?: AxiosRequestConfig) {
+    public updateKey(id: string, aPIKeyUpdateDto: APIKeyUpdateDto, options?: AxiosRequestConfig) {
         return APIKeyApiFp(this.configuration).updateKey(id, aPIKeyUpdateDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
