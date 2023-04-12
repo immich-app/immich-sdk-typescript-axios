@@ -512,6 +512,12 @@ export interface AssetResponseDto {
     'isFavorite': boolean;
     /**
      * 
+     * @type {boolean}
+     * @memberof AssetResponseDto
+     */
+    'isArchived': boolean;
+    /**
+     * 
      * @type {string}
      * @memberof AssetResponseDto
      */
@@ -2311,6 +2317,12 @@ export interface UpdateAssetDto {
      * @memberof UpdateAssetDto
      */
     'isFavorite'?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof UpdateAssetDto
+     */
+    'isArchived'?: boolean;
 }
 /**
  * 
@@ -4254,12 +4266,13 @@ export const AssetApiAxiosParamCreator = function (configuration?: Configuration
         /**
          * Get all AssetEntity belong to the user
          * @param {boolean} [isFavorite] 
+         * @param {boolean} [isArchived] 
          * @param {number} [skip] 
          * @param {string} [ifNoneMatch] ETag of data already cached on the client
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getAllAssets: async (isFavorite?: boolean, skip?: number, ifNoneMatch?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getAllAssets: async (isFavorite?: boolean, isArchived?: boolean, skip?: number, ifNoneMatch?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/asset`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -4282,6 +4295,10 @@ export const AssetApiAxiosParamCreator = function (configuration?: Configuration
                 localVarQueryParameter['isFavorite'] = isFavorite;
             }
 
+            if (isArchived !== undefined) {
+                localVarQueryParameter['isArchived'] = isArchived;
+            }
+
             if (skip !== undefined) {
                 localVarQueryParameter['skip'] = skip;
             }
@@ -4289,6 +4306,41 @@ export const AssetApiAxiosParamCreator = function (configuration?: Configuration
             if (ifNoneMatch != null) {
                 localVarHeaderParameter['if-none-match'] = String(ifNoneMatch);
             }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getArchivedAssetCountByUserId: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/asset/stat/archive`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication cookie required
 
 
     
@@ -4853,12 +4905,13 @@ export const AssetApiAxiosParamCreator = function (configuration?: Configuration
          * @param {string} fileExtension 
          * @param {string} [key] 
          * @param {File} [livePhotoData] 
+         * @param {boolean} [isArchived] 
          * @param {boolean} [isVisible] 
          * @param {string} [duration] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        uploadFile: async (assetType: AssetTypeEnum, assetData: File, deviceAssetId: string, deviceId: string, fileCreatedAt: string, fileModifiedAt: string, isFavorite: boolean, fileExtension: string, key?: string, livePhotoData?: File, isVisible?: boolean, duration?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        uploadFile: async (assetType: AssetTypeEnum, assetData: File, deviceAssetId: string, deviceId: string, fileCreatedAt: string, fileModifiedAt: string, isFavorite: boolean, fileExtension: string, key?: string, livePhotoData?: File, isArchived?: boolean, isVisible?: boolean, duration?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'assetType' is not null or undefined
             assertParamExists('uploadFile', 'assetType', assetType)
             // verify required parameter 'assetData' is not null or undefined
@@ -4929,6 +4982,10 @@ export const AssetApiAxiosParamCreator = function (configuration?: Configuration
     
             if (isFavorite !== undefined) { 
                 localVarFormParams.append('isFavorite', isFavorite as any);
+            }
+    
+            if (isArchived !== undefined) { 
+                localVarFormParams.append('isArchived', isArchived as any);
             }
     
             if (isVisible !== undefined) { 
@@ -5055,13 +5112,23 @@ export const AssetApiFp = function(configuration?: Configuration) {
         /**
          * Get all AssetEntity belong to the user
          * @param {boolean} [isFavorite] 
+         * @param {boolean} [isArchived] 
          * @param {number} [skip] 
          * @param {string} [ifNoneMatch] ETag of data already cached on the client
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getAllAssets(isFavorite?: boolean, skip?: number, ifNoneMatch?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<AssetResponseDto>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getAllAssets(isFavorite, skip, ifNoneMatch, options);
+        async getAllAssets(isFavorite?: boolean, isArchived?: boolean, skip?: number, ifNoneMatch?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<AssetResponseDto>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAllAssets(isFavorite, isArchived, skip, ifNoneMatch, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getArchivedAssetCountByUserId(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AssetCountByUserIdResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getArchivedAssetCountByUserId(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -5210,13 +5277,14 @@ export const AssetApiFp = function(configuration?: Configuration) {
          * @param {string} fileExtension 
          * @param {string} [key] 
          * @param {File} [livePhotoData] 
+         * @param {boolean} [isArchived] 
          * @param {boolean} [isVisible] 
          * @param {string} [duration] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async uploadFile(assetType: AssetTypeEnum, assetData: File, deviceAssetId: string, deviceId: string, fileCreatedAt: string, fileModifiedAt: string, isFavorite: boolean, fileExtension: string, key?: string, livePhotoData?: File, isVisible?: boolean, duration?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AssetFileUploadResponseDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadFile(assetType, assetData, deviceAssetId, deviceId, fileCreatedAt, fileModifiedAt, isFavorite, fileExtension, key, livePhotoData, isVisible, duration, options);
+        async uploadFile(assetType: AssetTypeEnum, assetData: File, deviceAssetId: string, deviceId: string, fileCreatedAt: string, fileModifiedAt: string, isFavorite: boolean, fileExtension: string, key?: string, livePhotoData?: File, isArchived?: boolean, isVisible?: boolean, duration?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AssetFileUploadResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadFile(assetType, assetData, deviceAssetId, deviceId, fileCreatedAt, fileModifiedAt, isFavorite, fileExtension, key, livePhotoData, isArchived, isVisible, duration, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -5310,13 +5378,22 @@ export const AssetApiFactory = function (configuration?: Configuration, basePath
         /**
          * Get all AssetEntity belong to the user
          * @param {boolean} [isFavorite] 
+         * @param {boolean} [isArchived] 
          * @param {number} [skip] 
          * @param {string} [ifNoneMatch] ETag of data already cached on the client
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getAllAssets(isFavorite?: boolean, skip?: number, ifNoneMatch?: string, options?: any): AxiosPromise<Array<AssetResponseDto>> {
-            return localVarFp.getAllAssets(isFavorite, skip, ifNoneMatch, options).then((request) => request(axios, basePath));
+        getAllAssets(isFavorite?: boolean, isArchived?: boolean, skip?: number, ifNoneMatch?: string, options?: any): AxiosPromise<Array<AssetResponseDto>> {
+            return localVarFp.getAllAssets(isFavorite, isArchived, skip, ifNoneMatch, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getArchivedAssetCountByUserId(options?: any): AxiosPromise<AssetCountByUserIdResponseDto> {
+            return localVarFp.getArchivedAssetCountByUserId(options).then((request) => request(axios, basePath));
         },
         /**
          * Get a single asset\'s information
@@ -5451,13 +5528,14 @@ export const AssetApiFactory = function (configuration?: Configuration, basePath
          * @param {string} fileExtension 
          * @param {string} [key] 
          * @param {File} [livePhotoData] 
+         * @param {boolean} [isArchived] 
          * @param {boolean} [isVisible] 
          * @param {string} [duration] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        uploadFile(assetType: AssetTypeEnum, assetData: File, deviceAssetId: string, deviceId: string, fileCreatedAt: string, fileModifiedAt: string, isFavorite: boolean, fileExtension: string, key?: string, livePhotoData?: File, isVisible?: boolean, duration?: string, options?: any): AxiosPromise<AssetFileUploadResponseDto> {
-            return localVarFp.uploadFile(assetType, assetData, deviceAssetId, deviceId, fileCreatedAt, fileModifiedAt, isFavorite, fileExtension, key, livePhotoData, isVisible, duration, options).then((request) => request(axios, basePath));
+        uploadFile(assetType: AssetTypeEnum, assetData: File, deviceAssetId: string, deviceId: string, fileCreatedAt: string, fileModifiedAt: string, isFavorite: boolean, fileExtension: string, key?: string, livePhotoData?: File, isArchived?: boolean, isVisible?: boolean, duration?: string, options?: any): AxiosPromise<AssetFileUploadResponseDto> {
+            return localVarFp.uploadFile(assetType, assetData, deviceAssetId, deviceId, fileCreatedAt, fileModifiedAt, isFavorite, fileExtension, key, livePhotoData, isArchived, isVisible, duration, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -5566,14 +5644,25 @@ export class AssetApi extends BaseAPI {
     /**
      * Get all AssetEntity belong to the user
      * @param {boolean} [isFavorite] 
+     * @param {boolean} [isArchived] 
      * @param {number} [skip] 
      * @param {string} [ifNoneMatch] ETag of data already cached on the client
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AssetApi
      */
-    public getAllAssets(isFavorite?: boolean, skip?: number, ifNoneMatch?: string, options?: AxiosRequestConfig) {
-        return AssetApiFp(this.configuration).getAllAssets(isFavorite, skip, ifNoneMatch, options).then((request) => request(this.axios, this.basePath));
+    public getAllAssets(isFavorite?: boolean, isArchived?: boolean, skip?: number, ifNoneMatch?: string, options?: AxiosRequestConfig) {
+        return AssetApiFp(this.configuration).getAllAssets(isFavorite, isArchived, skip, ifNoneMatch, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AssetApi
+     */
+    public getArchivedAssetCountByUserId(options?: AxiosRequestConfig) {
+        return AssetApiFp(this.configuration).getArchivedAssetCountByUserId(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -5735,14 +5824,15 @@ export class AssetApi extends BaseAPI {
      * @param {string} fileExtension 
      * @param {string} [key] 
      * @param {File} [livePhotoData] 
+     * @param {boolean} [isArchived] 
      * @param {boolean} [isVisible] 
      * @param {string} [duration] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AssetApi
      */
-    public uploadFile(assetType: AssetTypeEnum, assetData: File, deviceAssetId: string, deviceId: string, fileCreatedAt: string, fileModifiedAt: string, isFavorite: boolean, fileExtension: string, key?: string, livePhotoData?: File, isVisible?: boolean, duration?: string, options?: AxiosRequestConfig) {
-        return AssetApiFp(this.configuration).uploadFile(assetType, assetData, deviceAssetId, deviceId, fileCreatedAt, fileModifiedAt, isFavorite, fileExtension, key, livePhotoData, isVisible, duration, options).then((request) => request(this.axios, this.basePath));
+    public uploadFile(assetType: AssetTypeEnum, assetData: File, deviceAssetId: string, deviceId: string, fileCreatedAt: string, fileModifiedAt: string, isFavorite: boolean, fileExtension: string, key?: string, livePhotoData?: File, isArchived?: boolean, isVisible?: boolean, duration?: string, options?: AxiosRequestConfig) {
+        return AssetApiFp(this.configuration).uploadFile(assetType, assetData, deviceAssetId, deviceId, fileCreatedAt, fileModifiedAt, isFavorite, fileExtension, key, livePhotoData, isArchived, isVisible, duration, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -6837,6 +6927,7 @@ export const SearchApiAxiosParamCreator = function (configuration?: Configuratio
          * @param {boolean} [clip] 
          * @param {'IMAGE' | 'VIDEO' | 'AUDIO' | 'OTHER'} [type] 
          * @param {boolean} [isFavorite] 
+         * @param {boolean} [isArchived] 
          * @param {string} [exifInfoCity] 
          * @param {string} [exifInfoState] 
          * @param {string} [exifInfoCountry] 
@@ -6849,7 +6940,7 @@ export const SearchApiAxiosParamCreator = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        search: async (q?: string, query?: string, clip?: boolean, type?: 'IMAGE' | 'VIDEO' | 'AUDIO' | 'OTHER', isFavorite?: boolean, exifInfoCity?: string, exifInfoState?: string, exifInfoCountry?: string, exifInfoMake?: string, exifInfoModel?: string, smartInfoObjects?: Array<string>, smartInfoTags?: Array<string>, recent?: boolean, motion?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        search: async (q?: string, query?: string, clip?: boolean, type?: 'IMAGE' | 'VIDEO' | 'AUDIO' | 'OTHER', isFavorite?: boolean, isArchived?: boolean, exifInfoCity?: string, exifInfoState?: string, exifInfoCountry?: string, exifInfoMake?: string, exifInfoModel?: string, smartInfoObjects?: Array<string>, smartInfoTags?: Array<string>, recent?: boolean, motion?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/search`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -6886,6 +6977,10 @@ export const SearchApiAxiosParamCreator = function (configuration?: Configuratio
 
             if (isFavorite !== undefined) {
                 localVarQueryParameter['isFavorite'] = isFavorite;
+            }
+
+            if (isArchived !== undefined) {
+                localVarQueryParameter['isArchived'] = isArchived;
             }
 
             if (exifInfoCity !== undefined) {
@@ -6970,6 +7065,7 @@ export const SearchApiFp = function(configuration?: Configuration) {
          * @param {boolean} [clip] 
          * @param {'IMAGE' | 'VIDEO' | 'AUDIO' | 'OTHER'} [type] 
          * @param {boolean} [isFavorite] 
+         * @param {boolean} [isArchived] 
          * @param {string} [exifInfoCity] 
          * @param {string} [exifInfoState] 
          * @param {string} [exifInfoCountry] 
@@ -6982,8 +7078,8 @@ export const SearchApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async search(q?: string, query?: string, clip?: boolean, type?: 'IMAGE' | 'VIDEO' | 'AUDIO' | 'OTHER', isFavorite?: boolean, exifInfoCity?: string, exifInfoState?: string, exifInfoCountry?: string, exifInfoMake?: string, exifInfoModel?: string, smartInfoObjects?: Array<string>, smartInfoTags?: Array<string>, recent?: boolean, motion?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SearchResponseDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.search(q, query, clip, type, isFavorite, exifInfoCity, exifInfoState, exifInfoCountry, exifInfoMake, exifInfoModel, smartInfoObjects, smartInfoTags, recent, motion, options);
+        async search(q?: string, query?: string, clip?: boolean, type?: 'IMAGE' | 'VIDEO' | 'AUDIO' | 'OTHER', isFavorite?: boolean, isArchived?: boolean, exifInfoCity?: string, exifInfoState?: string, exifInfoCountry?: string, exifInfoMake?: string, exifInfoModel?: string, smartInfoObjects?: Array<string>, smartInfoTags?: Array<string>, recent?: boolean, motion?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SearchResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.search(q, query, clip, type, isFavorite, isArchived, exifInfoCity, exifInfoState, exifInfoCountry, exifInfoMake, exifInfoModel, smartInfoObjects, smartInfoTags, recent, motion, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -7019,6 +7115,7 @@ export const SearchApiFactory = function (configuration?: Configuration, basePat
          * @param {boolean} [clip] 
          * @param {'IMAGE' | 'VIDEO' | 'AUDIO' | 'OTHER'} [type] 
          * @param {boolean} [isFavorite] 
+         * @param {boolean} [isArchived] 
          * @param {string} [exifInfoCity] 
          * @param {string} [exifInfoState] 
          * @param {string} [exifInfoCountry] 
@@ -7031,8 +7128,8 @@ export const SearchApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        search(q?: string, query?: string, clip?: boolean, type?: 'IMAGE' | 'VIDEO' | 'AUDIO' | 'OTHER', isFavorite?: boolean, exifInfoCity?: string, exifInfoState?: string, exifInfoCountry?: string, exifInfoMake?: string, exifInfoModel?: string, smartInfoObjects?: Array<string>, smartInfoTags?: Array<string>, recent?: boolean, motion?: boolean, options?: any): AxiosPromise<SearchResponseDto> {
-            return localVarFp.search(q, query, clip, type, isFavorite, exifInfoCity, exifInfoState, exifInfoCountry, exifInfoMake, exifInfoModel, smartInfoObjects, smartInfoTags, recent, motion, options).then((request) => request(axios, basePath));
+        search(q?: string, query?: string, clip?: boolean, type?: 'IMAGE' | 'VIDEO' | 'AUDIO' | 'OTHER', isFavorite?: boolean, isArchived?: boolean, exifInfoCity?: string, exifInfoState?: string, exifInfoCountry?: string, exifInfoMake?: string, exifInfoModel?: string, smartInfoObjects?: Array<string>, smartInfoTags?: Array<string>, recent?: boolean, motion?: boolean, options?: any): AxiosPromise<SearchResponseDto> {
+            return localVarFp.search(q, query, clip, type, isFavorite, isArchived, exifInfoCity, exifInfoState, exifInfoCountry, exifInfoMake, exifInfoModel, smartInfoObjects, smartInfoTags, recent, motion, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -7071,6 +7168,7 @@ export class SearchApi extends BaseAPI {
      * @param {boolean} [clip] 
      * @param {'IMAGE' | 'VIDEO' | 'AUDIO' | 'OTHER'} [type] 
      * @param {boolean} [isFavorite] 
+     * @param {boolean} [isArchived] 
      * @param {string} [exifInfoCity] 
      * @param {string} [exifInfoState] 
      * @param {string} [exifInfoCountry] 
@@ -7084,8 +7182,8 @@ export class SearchApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof SearchApi
      */
-    public search(q?: string, query?: string, clip?: boolean, type?: 'IMAGE' | 'VIDEO' | 'AUDIO' | 'OTHER', isFavorite?: boolean, exifInfoCity?: string, exifInfoState?: string, exifInfoCountry?: string, exifInfoMake?: string, exifInfoModel?: string, smartInfoObjects?: Array<string>, smartInfoTags?: Array<string>, recent?: boolean, motion?: boolean, options?: AxiosRequestConfig) {
-        return SearchApiFp(this.configuration).search(q, query, clip, type, isFavorite, exifInfoCity, exifInfoState, exifInfoCountry, exifInfoMake, exifInfoModel, smartInfoObjects, smartInfoTags, recent, motion, options).then((request) => request(this.axios, this.basePath));
+    public search(q?: string, query?: string, clip?: boolean, type?: 'IMAGE' | 'VIDEO' | 'AUDIO' | 'OTHER', isFavorite?: boolean, isArchived?: boolean, exifInfoCity?: string, exifInfoState?: string, exifInfoCountry?: string, exifInfoMake?: string, exifInfoModel?: string, smartInfoObjects?: Array<string>, smartInfoTags?: Array<string>, recent?: boolean, motion?: boolean, options?: AxiosRequestConfig) {
+        return SearchApiFp(this.configuration).search(q, query, clip, type, isFavorite, isArchived, exifInfoCity, exifInfoState, exifInfoCountry, exifInfoMake, exifInfoModel, smartInfoObjects, smartInfoTags, recent, motion, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
