@@ -1198,6 +1198,12 @@ export interface ExifResponseDto {
      * @memberof ExifResponseDto
      */
     'country'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ExifResponseDto
+     */
+    'description'?: string | null;
 }
 /**
  * 
@@ -2323,6 +2329,12 @@ export interface UpdateAssetDto {
      * @memberof UpdateAssetDto
      */
     'isArchived'?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateAssetDto
+     */
+    'description'?: string;
 }
 /**
  * 
