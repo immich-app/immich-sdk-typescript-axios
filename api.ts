@@ -584,6 +584,49 @@ export type AssetTypeEnum = typeof AssetTypeEnum[keyof typeof AssetTypeEnum];
 /**
  * 
  * @export
+ * @interface AuthDeviceResponseDto
+ */
+export interface AuthDeviceResponseDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof AuthDeviceResponseDto
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AuthDeviceResponseDto
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AuthDeviceResponseDto
+     */
+    'updatedAt': string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof AuthDeviceResponseDto
+     */
+    'current': boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof AuthDeviceResponseDto
+     */
+    'deviceType': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AuthDeviceResponseDto
+     */
+    'deviceOS': string;
+}
+/**
+ * 
+ * @export
  * @interface ChangePasswordDto
  */
 export interface ChangePasswordDto {
@@ -5933,6 +5976,41 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
         },
         /**
          * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAuthDevices: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/auth/devices`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication cookie required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {LoginCredentialDto} loginCredentialDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -5981,6 +6059,45 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
             }
 
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication cookie required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        logoutAuthDevice: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('logoutAuthDevice', 'id', id)
+            const localVarPath = `/auth/devices/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -6068,6 +6185,15 @@ export const AuthenticationApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getAuthDevices(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<AuthDeviceResponseDto>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAuthDevices(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @param {LoginCredentialDto} loginCredentialDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -6083,6 +6209,16 @@ export const AuthenticationApiFp = function(configuration?: Configuration) {
          */
         async logout(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LogoutResponseDto>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.logout(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async logoutAuthDevice(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.logoutAuthDevice(id, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -6124,6 +6260,14 @@ export const AuthenticationApiFactory = function (configuration?: Configuration,
         },
         /**
          * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAuthDevices(options?: any): AxiosPromise<Array<AuthDeviceResponseDto>> {
+            return localVarFp.getAuthDevices(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @param {LoginCredentialDto} loginCredentialDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -6138,6 +6282,15 @@ export const AuthenticationApiFactory = function (configuration?: Configuration,
          */
         logout(options?: any): AxiosPromise<LogoutResponseDto> {
             return localVarFp.logout(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        logoutAuthDevice(id: string, options?: any): AxiosPromise<void> {
+            return localVarFp.logoutAuthDevice(id, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -6181,6 +6334,16 @@ export class AuthenticationApi extends BaseAPI {
 
     /**
      * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AuthenticationApi
+     */
+    public getAuthDevices(options?: AxiosRequestConfig) {
+        return AuthenticationApiFp(this.configuration).getAuthDevices(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
      * @param {LoginCredentialDto} loginCredentialDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -6198,6 +6361,17 @@ export class AuthenticationApi extends BaseAPI {
      */
     public logout(options?: AxiosRequestConfig) {
         return AuthenticationApiFp(this.configuration).logout(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AuthenticationApi
+     */
+    public logoutAuthDevice(id: string, options?: AxiosRequestConfig) {
+        return AuthenticationApiFp(this.configuration).logoutAuthDevice(id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
