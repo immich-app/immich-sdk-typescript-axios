@@ -904,6 +904,12 @@ export interface CreateUserDto {
      * @memberof CreateUserDto
      */
     'lastName': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateUserDto
+     */
+    'storageLabel'?: string | null;
 }
 /**
  * 
@@ -2439,6 +2445,12 @@ export interface UpdateUserDto {
      * @type {string}
      * @memberof UpdateUserDto
      */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateUserDto
+     */
     'email'?: string;
     /**
      * 
@@ -2463,7 +2475,7 @@ export interface UpdateUserDto {
      * @type {string}
      * @memberof UpdateUserDto
      */
-    'id': string;
+    'storageLabel'?: string;
     /**
      * 
      * @type {boolean}
@@ -2563,6 +2575,12 @@ export interface UserResponseDto {
      * @memberof UserResponseDto
      */
     'lastName': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserResponseDto
+     */
+    'storageLabel': string | null;
     /**
      * 
      * @type {string}
