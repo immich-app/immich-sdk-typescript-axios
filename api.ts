@@ -2701,12 +2701,6 @@ export interface UserResponseDto {
      * @type {string}
      * @memberof UserResponseDto
      */
-    'createdAt': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UserResponseDto
-     */
     'profileImagePath': string;
     /**
      * 
@@ -2725,13 +2719,19 @@ export interface UserResponseDto {
      * @type {string}
      * @memberof UserResponseDto
      */
-    'deletedAt'?: string;
+    'createdAt': string;
     /**
      * 
      * @type {string}
      * @memberof UserResponseDto
      */
-    'updatedAt'?: string;
+    'deletedAt': string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserResponseDto
+     */
+    'updatedAt': string;
     /**
      * 
      * @type {string}
