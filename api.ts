@@ -5225,13 +5225,13 @@ export const AssetApiAxiosParamCreator = function (configuration?: Configuration
         },
         /**
          * 
-         * @param {string} timezone 
+         * @param {string} timestamp Get pictures for +24 hours from this time going back x years
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getMemoryLane: async (timezone: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'timezone' is not null or undefined
-            assertParamExists('getMemoryLane', 'timezone', timezone)
+        getMemoryLane: async (timestamp: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'timestamp' is not null or undefined
+            assertParamExists('getMemoryLane', 'timestamp', timestamp)
             const localVarPath = `/asset/memory-lane`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -5253,8 +5253,10 @@ export const AssetApiAxiosParamCreator = function (configuration?: Configuration
 
             // authentication cookie required
 
-            if (timezone !== undefined) {
-                localVarQueryParameter['timezone'] = timezone;
+            if (timestamp !== undefined) {
+                localVarQueryParameter['timestamp'] = (timestamp as any instanceof Date) ?
+                    (timestamp as any).toISOString() :
+                    timestamp;
             }
 
 
@@ -5859,12 +5861,12 @@ export const AssetApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {string} timezone 
+         * @param {string} timestamp Get pictures for +24 hours from this time going back x years
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getMemoryLane(timezone: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<MemoryLaneResponseDto>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getMemoryLane(timezone, options);
+        async getMemoryLane(timestamp: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<MemoryLaneResponseDto>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getMemoryLane(timestamp, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -6148,12 +6150,12 @@ export const AssetApiFactory = function (configuration?: Configuration, basePath
         },
         /**
          * 
-         * @param {string} timezone 
+         * @param {string} timestamp Get pictures for +24 hours from this time going back x years
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getMemoryLane(timezone: string, options?: any): AxiosPromise<Array<MemoryLaneResponseDto>> {
-            return localVarFp.getMemoryLane(timezone, options).then((request) => request(axios, basePath));
+        getMemoryLane(timestamp: string, options?: any): AxiosPromise<Array<MemoryLaneResponseDto>> {
+            return localVarFp.getMemoryLane(timestamp, options).then((request) => request(axios, basePath));
         },
         /**
          * Get all asset of a device that are in the database, ID only.
@@ -6470,13 +6472,13 @@ export class AssetApi extends BaseAPI {
 
     /**
      * 
-     * @param {string} timezone 
+     * @param {string} timestamp Get pictures for +24 hours from this time going back x years
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AssetApi
      */
-    public getMemoryLane(timezone: string, options?: AxiosRequestConfig) {
-        return AssetApiFp(this.configuration).getMemoryLane(timezone, options).then((request) => request(this.axios, this.basePath));
+    public getMemoryLane(timestamp: string, options?: AxiosRequestConfig) {
+        return AssetApiFp(this.configuration).getMemoryLane(timestamp, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
