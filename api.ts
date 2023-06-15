@@ -1648,6 +1648,25 @@ export interface MapMarkerResponseDto {
 /**
  * 
  * @export
+ * @interface MemoryLaneResponseDto
+ */
+export interface MemoryLaneResponseDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof MemoryLaneResponseDto
+     */
+    'title': string;
+    /**
+     * 
+     * @type {Array<AssetResponseDto>}
+     * @memberof MemoryLaneResponseDto
+     */
+    'assets': Array<AssetResponseDto>;
+}
+/**
+ * 
+ * @export
  * @interface OAuthCallbackDto
  */
 export interface OAuthCallbackDto {
@@ -5205,6 +5224,51 @@ export const AssetApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
+         * 
+         * @param {string} timezone 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getMemoryLane: async (timezone: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'timezone' is not null or undefined
+            assertParamExists('getMemoryLane', 'timezone', timezone)
+            const localVarPath = `/asset/memory-lane`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication api_key required
+            await setApiKeyToObject(localVarHeaderParameter, "x-api-key", configuration)
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication cookie required
+
+            if (timezone !== undefined) {
+                localVarQueryParameter['timezone'] = timezone;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Get all asset of a device that are in the database, ID only.
          * @param {string} deviceId 
          * @param {*} [options] Override http request option.
@@ -5794,6 +5858,16 @@ export const AssetApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
+         * 
+         * @param {string} timezone 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getMemoryLane(timezone: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<MemoryLaneResponseDto>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getMemoryLane(timezone, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
          * Get all asset of a device that are in the database, ID only.
          * @param {string} deviceId 
          * @param {*} [options] Override http request option.
@@ -6071,6 +6145,15 @@ export const AssetApiFactory = function (configuration?: Configuration, basePath
          */
         getMapMarkers(isFavorite?: boolean, fileCreatedAfter?: string, fileCreatedBefore?: string, options?: any): AxiosPromise<Array<MapMarkerResponseDto>> {
             return localVarFp.getMapMarkers(isFavorite, fileCreatedAfter, fileCreatedBefore, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} timezone 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getMemoryLane(timezone: string, options?: any): AxiosPromise<Array<MemoryLaneResponseDto>> {
+            return localVarFp.getMemoryLane(timezone, options).then((request) => request(axios, basePath));
         },
         /**
          * Get all asset of a device that are in the database, ID only.
@@ -6383,6 +6466,17 @@ export class AssetApi extends BaseAPI {
      */
     public getMapMarkers(isFavorite?: boolean, fileCreatedAfter?: string, fileCreatedBefore?: string, options?: AxiosRequestConfig) {
         return AssetApiFp(this.configuration).getMapMarkers(isFavorite, fileCreatedAfter, fileCreatedBefore, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} timezone 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AssetApi
+     */
+    public getMemoryLane(timezone: string, options?: AxiosRequestConfig) {
+        return AssetApiFp(this.configuration).getMemoryLane(timezone, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
