@@ -5648,7 +5648,7 @@ export const AssetApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getAssetThumbnail(id: string, format?: ThumbnailFormat, key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<File>> {
+        async getAssetThumbnail(id: string, format?: ThumbnailFormat, key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getAssetThumbnail(id, format, key, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -5745,7 +5745,7 @@ export const AssetApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async serveFile(id: string, isThumb?: boolean, isWeb?: boolean, key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<File>> {
+        async serveFile(id: string, isThumb?: boolean, isWeb?: boolean, key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.serveFile(id, isThumb, isWeb, key, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -5925,7 +5925,7 @@ export const AssetApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getAssetThumbnail(id: string, format?: ThumbnailFormat, key?: string, options?: any): AxiosPromise<File> {
+        getAssetThumbnail(id: string, format?: ThumbnailFormat, key?: string, options?: any): AxiosPromise<void> {
             return localVarFp.getAssetThumbnail(id, format, key, options).then((request) => request(axios, basePath));
         },
         /**
@@ -6013,7 +6013,7 @@ export const AssetApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        serveFile(id: string, isThumb?: boolean, isWeb?: boolean, key?: string, options?: any): AxiosPromise<File> {
+        serveFile(id: string, isThumb?: boolean, isWeb?: boolean, key?: string, options?: any): AxiosPromise<void> {
             return localVarFp.serveFile(id, isThumb, isWeb, key, options).then((request) => request(axios, basePath));
         },
         /**
@@ -8007,7 +8007,7 @@ export const PersonApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getPersonThumbnail(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<File>> {
+        async getPersonThumbnail(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getPersonThumbnail(id, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -8064,7 +8064,7 @@ export const PersonApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getPersonThumbnail(id: string, options?: any): AxiosPromise<File> {
+        getPersonThumbnail(id: string, options?: any): AxiosPromise<void> {
             return localVarFp.getPersonThumbnail(id, options).then((request) => request(axios, basePath));
         },
         /**
