@@ -682,12 +682,6 @@ export interface AssetResponseDto {
      * @type {string}
      * @memberof AssetResponseDto
      */
-    'mimeType': string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof AssetResponseDto
-     */
     'duration': string;
     /**
      * 
