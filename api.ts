@@ -487,43 +487,6 @@ export interface AssetCountByTimeBucketResponseDto {
 /**
  * 
  * @export
- * @interface AssetCountByUserIdResponseDto
- */
-export interface AssetCountByUserIdResponseDto {
-    /**
-     * 
-     * @type {number}
-     * @memberof AssetCountByUserIdResponseDto
-     */
-    'audio': number;
-    /**
-     * 
-     * @type {number}
-     * @memberof AssetCountByUserIdResponseDto
-     */
-    'photos': number;
-    /**
-     * 
-     * @type {number}
-     * @memberof AssetCountByUserIdResponseDto
-     */
-    'videos': number;
-    /**
-     * 
-     * @type {number}
-     * @memberof AssetCountByUserIdResponseDto
-     */
-    'other': number;
-    /**
-     * 
-     * @type {number}
-     * @memberof AssetCountByUserIdResponseDto
-     */
-    'total': number;
-}
-/**
- * 
- * @export
  * @interface AssetFileUploadResponseDto
  */
 export interface AssetFileUploadResponseDto {
@@ -719,6 +682,31 @@ export interface AssetResponseDto {
      * @memberof AssetResponseDto
      */
     'checksum': string;
+}
+/**
+ * 
+ * @export
+ * @interface AssetStatsResponseDto
+ */
+export interface AssetStatsResponseDto {
+    /**
+     * 
+     * @type {number}
+     * @memberof AssetStatsResponseDto
+     */
+    'images': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof AssetStatsResponseDto
+     */
+    'videos': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof AssetStatsResponseDto
+     */
+    'total': number;
 }
 /**
  * 
@@ -4655,44 +4643,6 @@ export const AssetApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getArchivedAssetCountByUserId: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/asset/stat/archive`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication api_key required
-            await setApiKeyToObject(localVarHeaderParameter, "x-api-key", configuration)
-
-            // authentication bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication cookie required
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
          * Get a single asset\'s information
          * @param {string} id 
          * @param {string} [key] 
@@ -4832,8 +4782,8 @@ export const AssetApiAxiosParamCreator = function (configuration?: Configuration
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getAssetCountByUserId: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/asset/count-by-user-id`;
+        getAssetSearchTerms: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/asset/search-terms`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -4867,11 +4817,13 @@ export const AssetApiAxiosParamCreator = function (configuration?: Configuration
         },
         /**
          * 
+         * @param {boolean} [isArchived] 
+         * @param {boolean} [isFavorite] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getAssetSearchTerms: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/asset/search-terms`;
+        getAssetStats: async (isArchived?: boolean, isFavorite?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/asset/statistics`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -4891,6 +4843,14 @@ export const AssetApiAxiosParamCreator = function (configuration?: Configuration
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
             // authentication cookie required
+
+            if (isArchived !== undefined) {
+                localVarQueryParameter['isArchived'] = isArchived;
+            }
+
+            if (isFavorite !== undefined) {
+                localVarQueryParameter['isFavorite'] = isFavorite;
+            }
 
 
     
@@ -5641,15 +5601,6 @@ export const AssetApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getArchivedAssetCountByUserId(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AssetCountByUserIdResponseDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getArchivedAssetCountByUserId(options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
          * Get a single asset\'s information
          * @param {string} id 
          * @param {string} [key] 
@@ -5685,17 +5636,19 @@ export const AssetApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getAssetCountByUserId(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AssetCountByUserIdResponseDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getAssetCountByUserId(options);
+        async getAssetSearchTerms(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<string>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAssetSearchTerms(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
+         * @param {boolean} [isArchived] 
+         * @param {boolean} [isFavorite] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getAssetSearchTerms(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<string>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getAssetSearchTerms(options);
+        async getAssetStats(isArchived?: boolean, isFavorite?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AssetStatsResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAssetStats(isArchived, isFavorite, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -5922,14 +5875,6 @@ export const AssetApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.getAllAssets(userId, isFavorite, isArchived, withoutThumbs, skip, ifNoneMatch, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getArchivedAssetCountByUserId(options?: any): AxiosPromise<AssetCountByUserIdResponseDto> {
-            return localVarFp.getArchivedAssetCountByUserId(options).then((request) => request(axios, basePath));
-        },
-        /**
          * Get a single asset\'s information
          * @param {string} id 
          * @param {string} [key] 
@@ -5962,16 +5907,18 @@ export const AssetApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getAssetCountByUserId(options?: any): AxiosPromise<AssetCountByUserIdResponseDto> {
-            return localVarFp.getAssetCountByUserId(options).then((request) => request(axios, basePath));
+        getAssetSearchTerms(options?: any): AxiosPromise<Array<string>> {
+            return localVarFp.getAssetSearchTerms(options).then((request) => request(axios, basePath));
         },
         /**
          * 
+         * @param {boolean} [isArchived] 
+         * @param {boolean} [isFavorite] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getAssetSearchTerms(options?: any): AxiosPromise<Array<string>> {
-            return localVarFp.getAssetSearchTerms(options).then((request) => request(axios, basePath));
+        getAssetStats(isArchived?: boolean, isFavorite?: boolean, options?: any): AxiosPromise<AssetStatsResponseDto> {
+            return localVarFp.getAssetStats(isArchived, isFavorite, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -6199,16 +6146,6 @@ export class AssetApi extends BaseAPI {
     }
 
     /**
-     * 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof AssetApi
-     */
-    public getArchivedAssetCountByUserId(options?: AxiosRequestConfig) {
-        return AssetApiFp(this.configuration).getArchivedAssetCountByUserId(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
      * Get a single asset\'s information
      * @param {string} id 
      * @param {string} [key] 
@@ -6248,18 +6185,20 @@ export class AssetApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof AssetApi
      */
-    public getAssetCountByUserId(options?: AxiosRequestConfig) {
-        return AssetApiFp(this.configuration).getAssetCountByUserId(options).then((request) => request(this.axios, this.basePath));
+    public getAssetSearchTerms(options?: AxiosRequestConfig) {
+        return AssetApiFp(this.configuration).getAssetSearchTerms(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
+     * @param {boolean} [isArchived] 
+     * @param {boolean} [isFavorite] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AssetApi
      */
-    public getAssetSearchTerms(options?: AxiosRequestConfig) {
-        return AssetApiFp(this.configuration).getAssetSearchTerms(options).then((request) => request(this.axios, this.basePath));
+    public getAssetStats(isArchived?: boolean, isFavorite?: boolean, options?: AxiosRequestConfig) {
+        return AssetApiFp(this.configuration).getAssetStats(isArchived, isFavorite, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
