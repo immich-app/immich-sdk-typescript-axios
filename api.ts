@@ -2583,6 +2583,12 @@ export interface SystemConfigOAuthDto {
      * @type {string}
      * @memberof SystemConfigOAuthDto
      */
+    'storageLabelClaim': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof SystemConfigOAuthDto
+     */
     'buttonText': string;
     /**
      * 
