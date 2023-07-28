@@ -1296,6 +1296,12 @@ export interface ExifResponseDto {
      * @memberof ExifResponseDto
      */
     'description'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ExifResponseDto
+     */
+    'projectionType'?: string | null;
 }
 /**
  * 
