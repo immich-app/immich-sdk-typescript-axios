@@ -662,13 +662,13 @@ export interface AssetStatsResponseDto {
      * @type {number}
      * @memberof AssetStatsResponseDto
      */
-    'total': number;
+    'videos': number;
     /**
      * 
      * @type {number}
      * @memberof AssetStatsResponseDto
      */
-    'videos': number;
+    'total': number;
 }
 /**
  * 
@@ -2496,6 +2496,12 @@ export interface SystemConfigDto {
 export interface SystemConfigFFmpegDto {
     /**
      * 
+     * @type {TranscodeHWAccel}
+     * @memberof SystemConfigFFmpegDto
+     */
+    'accel': TranscodeHWAccel;
+    /**
+     * 
      * @type {number}
      * @memberof SystemConfigFFmpegDto
      */
@@ -2836,6 +2842,22 @@ export const TimeGroupEnum = {
 } as const;
 
 export type TimeGroupEnum = typeof TimeGroupEnum[keyof typeof TimeGroupEnum];
+
+
+/**
+ * 
+ * @export
+ * @enum {string}
+ */
+
+export const TranscodeHWAccel = {
+    Nvenc: 'nvenc',
+    Qsv: 'qsv',
+    Vaapi: 'vaapi',
+    Disabled: 'disabled'
+} as const;
+
+export type TranscodeHWAccel = typeof TranscodeHWAccel[keyof typeof TranscodeHWAccel];
 
 
 /**
