@@ -10794,15 +10794,15 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
         },
         /**
          * 
-         * @param {string} userId 
+         * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteUser: async (userId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'userId' is not null or undefined
-            assertParamExists('deleteUser', 'userId', userId)
-            const localVarPath = `/user/{userId}`
-                .replace(`{${"userId"}}`, encodeURIComponent(String(userId)));
+        deleteUser: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('deleteUser', 'id', id)
+            const localVarPath = `/user/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -10919,15 +10919,15 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
         },
         /**
          * 
-         * @param {string} userId 
+         * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getProfileImage: async (userId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'userId' is not null or undefined
-            assertParamExists('getProfileImage', 'userId', userId)
-            const localVarPath = `/user/profile-image/{userId}`
-                .replace(`{${"userId"}}`, encodeURIComponent(String(userId)));
+        getProfileImage: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('getProfileImage', 'id', id)
+            const localVarPath = `/user/profile-image/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -10961,15 +10961,15 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
         },
         /**
          * 
-         * @param {string} userId 
+         * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getUserById: async (userId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'userId' is not null or undefined
-            assertParamExists('getUserById', 'userId', userId)
-            const localVarPath = `/user/info/{userId}`
-                .replace(`{${"userId"}}`, encodeURIComponent(String(userId)));
+        getUserById: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('getUserById', 'id', id)
+            const localVarPath = `/user/info/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -11037,15 +11037,15 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
         },
         /**
          * 
-         * @param {string} userId 
+         * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        restoreUser: async (userId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'userId' is not null or undefined
-            assertParamExists('restoreUser', 'userId', userId)
-            const localVarPath = `/user/{userId}/restore`
-                .replace(`{${"userId"}}`, encodeURIComponent(String(userId)));
+        restoreUser: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('restoreUser', 'id', id)
+            const localVarPath = `/user/{id}/restore`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -11153,12 +11153,12 @@ export const UserApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {string} userId 
+         * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteUser(userId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserResponseDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteUser(userId, options);
+        async deleteUser(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteUser(id, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -11182,22 +11182,22 @@ export const UserApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {string} userId 
+         * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getProfileImage(userId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getProfileImage(userId, options);
+        async getProfileImage(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getProfileImage(id, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
-         * @param {string} userId 
+         * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getUserById(userId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserResponseDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getUserById(userId, options);
+        async getUserById(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getUserById(id, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -11212,12 +11212,12 @@ export const UserApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {string} userId 
+         * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async restoreUser(userId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserResponseDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.restoreUser(userId, options);
+        async restoreUser(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.restoreUser(id, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -11260,12 +11260,12 @@ export const UserApiFactory = function (configuration?: Configuration, basePath?
         },
         /**
          * 
-         * @param {string} userId 
+         * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteUser(userId: string, options?: any): AxiosPromise<UserResponseDto> {
-            return localVarFp.deleteUser(userId, options).then((request) => request(axios, basePath));
+        deleteUser(id: string, options?: any): AxiosPromise<UserResponseDto> {
+            return localVarFp.deleteUser(id, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -11286,21 +11286,21 @@ export const UserApiFactory = function (configuration?: Configuration, basePath?
         },
         /**
          * 
-         * @param {string} userId 
+         * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getProfileImage(userId: string, options?: any): AxiosPromise<object> {
-            return localVarFp.getProfileImage(userId, options).then((request) => request(axios, basePath));
+        getProfileImage(id: string, options?: any): AxiosPromise<object> {
+            return localVarFp.getProfileImage(id, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {string} userId 
+         * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getUserById(userId: string, options?: any): AxiosPromise<UserResponseDto> {
-            return localVarFp.getUserById(userId, options).then((request) => request(axios, basePath));
+        getUserById(id: string, options?: any): AxiosPromise<UserResponseDto> {
+            return localVarFp.getUserById(id, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -11313,12 +11313,12 @@ export const UserApiFactory = function (configuration?: Configuration, basePath?
         },
         /**
          * 
-         * @param {string} userId 
+         * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        restoreUser(userId: string, options?: any): AxiosPromise<UserResponseDto> {
-            return localVarFp.restoreUser(userId, options).then((request) => request(axios, basePath));
+        restoreUser(id: string, options?: any): AxiosPromise<UserResponseDto> {
+            return localVarFp.restoreUser(id, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -11363,13 +11363,13 @@ export class UserApi extends BaseAPI {
 
     /**
      * 
-     * @param {string} userId 
+     * @param {string} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UserApi
      */
-    public deleteUser(userId: string, options?: AxiosRequestConfig) {
-        return UserApiFp(this.configuration).deleteUser(userId, options).then((request) => request(this.axios, this.basePath));
+    public deleteUser(id: string, options?: AxiosRequestConfig) {
+        return UserApiFp(this.configuration).deleteUser(id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -11395,24 +11395,24 @@ export class UserApi extends BaseAPI {
 
     /**
      * 
-     * @param {string} userId 
+     * @param {string} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UserApi
      */
-    public getProfileImage(userId: string, options?: AxiosRequestConfig) {
-        return UserApiFp(this.configuration).getProfileImage(userId, options).then((request) => request(this.axios, this.basePath));
+    public getProfileImage(id: string, options?: AxiosRequestConfig) {
+        return UserApiFp(this.configuration).getProfileImage(id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
-     * @param {string} userId 
+     * @param {string} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UserApi
      */
-    public getUserById(userId: string, options?: AxiosRequestConfig) {
-        return UserApiFp(this.configuration).getUserById(userId, options).then((request) => request(this.axios, this.basePath));
+    public getUserById(id: string, options?: AxiosRequestConfig) {
+        return UserApiFp(this.configuration).getUserById(id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -11428,13 +11428,13 @@ export class UserApi extends BaseAPI {
 
     /**
      * 
-     * @param {string} userId 
+     * @param {string} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UserApi
      */
-    public restoreUser(userId: string, options?: AxiosRequestConfig) {
-        return UserApiFp(this.configuration).restoreUser(userId, options).then((request) => request(this.axios, this.basePath));
+    public restoreUser(id: string, options?: AxiosRequestConfig) {
+        return UserApiFp(this.configuration).restoreUser(id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
