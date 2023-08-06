@@ -213,6 +213,12 @@ export interface AlbumResponseDto {
      * @type {string}
      * @memberof AlbumResponseDto
      */
+    'description': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AlbumResponseDto
+     */
     'id': string;
     /**
      * 
@@ -861,6 +867,12 @@ export interface CreateAlbumDto {
      * @memberof CreateAlbumDto
      */
     'assetIds'?: Array<string>;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateAlbumDto
+     */
+    'description'?: string;
     /**
      * 
      * @type {Array<string>}
@@ -2825,6 +2837,12 @@ export interface UpdateAlbumDto {
      * @memberof UpdateAlbumDto
      */
     'albumThumbnailAssetId'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateAlbumDto
+     */
+    'description'?: string;
 }
 /**
  * 
