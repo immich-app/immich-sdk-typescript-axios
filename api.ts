@@ -950,6 +950,12 @@ export interface CreateUserDto {
     'lastName': string;
     /**
      * 
+     * @type {boolean}
+     * @memberof CreateUserDto
+     */
+    'memoriesEnabled'?: boolean;
+    /**
+     * 
      * @type {string}
      * @memberof CreateUserDto
      */
@@ -2979,6 +2985,12 @@ export interface UpdateUserDto {
     'lastName'?: string;
     /**
      * 
+     * @type {boolean}
+     * @memberof UpdateUserDto
+     */
+    'memoriesEnabled'?: boolean;
+    /**
+     * 
      * @type {string}
      * @memberof UpdateUserDto
      */
@@ -3106,6 +3118,12 @@ export interface UserResponseDto {
      * @memberof UserResponseDto
      */
     'lastName': string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof UserResponseDto
+     */
+    'memoriesEnabled': boolean;
     /**
      * 
      * @type {string}
