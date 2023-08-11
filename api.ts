@@ -219,6 +219,18 @@ export interface AlbumResponseDto {
      * @type {string}
      * @memberof AlbumResponseDto
      */
+    'endDate'?: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof AlbumResponseDto
+     */
+    'hasSharedLink': boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof AlbumResponseDto
+     */
     'id': string;
     /**
      * 
@@ -250,6 +262,12 @@ export interface AlbumResponseDto {
      * @memberof AlbumResponseDto
      */
     'sharedUsers': Array<UserResponseDto>;
+    /**
+     * 
+     * @type {string}
+     * @memberof AlbumResponseDto
+     */
+    'startDate'?: string;
     /**
      * 
      * @type {string}
@@ -3820,11 +3838,12 @@ export const AlbumApiAxiosParamCreator = function (configuration?: Configuration
         /**
          * 
          * @param {string} id 
+         * @param {boolean} [withoutAssets] 
          * @param {string} [key] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getAlbumInfo: async (id: string, key?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getAlbumInfo: async (id: string, withoutAssets?: boolean, key?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getAlbumInfo', 'id', id)
             const localVarPath = `/album/{id}`
@@ -3848,6 +3867,10 @@ export const AlbumApiAxiosParamCreator = function (configuration?: Configuration
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
             // authentication cookie required
+
+            if (withoutAssets !== undefined) {
+                localVarQueryParameter['withoutAssets'] = withoutAssets;
+            }
 
             if (key !== undefined) {
                 localVarQueryParameter['key'] = key;
@@ -4119,12 +4142,13 @@ export const AlbumApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {string} id 
+         * @param {boolean} [withoutAssets] 
          * @param {string} [key] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getAlbumInfo(id: string, key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AlbumResponseDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getAlbumInfo(id, key, options);
+        async getAlbumInfo(id: string, withoutAssets?: boolean, key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AlbumResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAlbumInfo(id, withoutAssets, key, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -4231,12 +4255,13 @@ export const AlbumApiFactory = function (configuration?: Configuration, basePath
         /**
          * 
          * @param {string} id 
+         * @param {boolean} [withoutAssets] 
          * @param {string} [key] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getAlbumInfo(id: string, key?: string, options?: any): AxiosPromise<AlbumResponseDto> {
-            return localVarFp.getAlbumInfo(id, key, options).then((request) => request(axios, basePath));
+        getAlbumInfo(id: string, withoutAssets?: boolean, key?: string, options?: any): AxiosPromise<AlbumResponseDto> {
+            return localVarFp.getAlbumInfo(id, withoutAssets, key, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -4348,13 +4373,14 @@ export class AlbumApi extends BaseAPI {
     /**
      * 
      * @param {string} id 
+     * @param {boolean} [withoutAssets] 
      * @param {string} [key] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AlbumApi
      */
-    public getAlbumInfo(id: string, key?: string, options?: AxiosRequestConfig) {
-        return AlbumApiFp(this.configuration).getAlbumInfo(id, key, options).then((request) => request(this.axios, this.basePath));
+    public getAlbumInfo(id: string, withoutAssets?: boolean, key?: string, options?: AxiosRequestConfig) {
+        return AlbumApiFp(this.configuration).getAlbumInfo(id, withoutAssets, key, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
