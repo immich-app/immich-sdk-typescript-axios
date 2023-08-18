@@ -526,6 +526,40 @@ export type AssetIdsResponseDtoErrorEnum = typeof AssetIdsResponseDtoErrorEnum[k
 /**
  * 
  * @export
+ * @enum {string}
+ */
+
+export const AssetJobName = {
+    RegenerateThumbnail: 'regenerate-thumbnail',
+    RefreshMetadata: 'refresh-metadata',
+    TranscodeVideo: 'transcode-video'
+} as const;
+
+export type AssetJobName = typeof AssetJobName[keyof typeof AssetJobName];
+
+
+/**
+ * 
+ * @export
+ * @interface AssetJobsDto
+ */
+export interface AssetJobsDto {
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof AssetJobsDto
+     */
+    'assetIds': Array<string>;
+    /**
+     * 
+     * @type {AssetJobName}
+     * @memberof AssetJobsDto
+     */
+    'name': AssetJobName;
+}
+/**
+ * 
+ * @export
  * @interface AssetResponseDto
  */
 export interface AssetResponseDto {
@@ -5536,6 +5570,50 @@ export const AssetApiAxiosParamCreator = function (configuration?: Configuration
         },
         /**
          * 
+         * @param {AssetJobsDto} assetJobsDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        runAssetJobs: async (assetJobsDto: AssetJobsDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'assetJobsDto' is not null or undefined
+            assertParamExists('runAssetJobs', 'assetJobsDto', assetJobsDto)
+            const localVarPath = `/asset/jobs`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication api_key required
+            await setApiKeyToObject(localVarHeaderParameter, "x-api-key", configuration)
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication cookie required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(assetJobsDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {SearchAssetDto} searchAssetDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -6083,6 +6161,16 @@ export const AssetApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {AssetJobsDto} assetJobsDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async runAssetJobs(assetJobsDto: AssetJobsDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.runAssetJobs(assetJobsDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @param {SearchAssetDto} searchAssetDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -6361,6 +6449,15 @@ export const AssetApiFactory = function (configuration?: Configuration, basePath
          */
         importFile(importAssetDto: ImportAssetDto, options?: any): AxiosPromise<AssetFileUploadResponseDto> {
             return localVarFp.importFile(importAssetDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {AssetJobsDto} assetJobsDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        runAssetJobs(assetJobsDto: AssetJobsDto, options?: any): AxiosPromise<void> {
+            return localVarFp.runAssetJobs(assetJobsDto, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -6676,6 +6773,17 @@ export class AssetApi extends BaseAPI {
      */
     public importFile(importAssetDto: ImportAssetDto, options?: AxiosRequestConfig) {
         return AssetApiFp(this.configuration).importFile(importAssetDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {AssetJobsDto} assetJobsDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AssetApi
+     */
+    public runAssetJobs(assetJobsDto: AssetJobsDto, options?: AxiosRequestConfig) {
+        return AssetApiFp(this.configuration).runAssetJobs(assetJobsDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
