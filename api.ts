@@ -2080,6 +2080,43 @@ export interface SearchResponseDto {
 /**
  * 
  * @export
+ * @interface ServerFeaturesDto
+ */
+export interface ServerFeaturesDto {
+    /**
+     * 
+     * @type {boolean}
+     * @memberof ServerFeaturesDto
+     */
+    'machineLearning': boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof ServerFeaturesDto
+     */
+    'oauth': boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof ServerFeaturesDto
+     */
+    'oauthAutoLaunch': boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof ServerFeaturesDto
+     */
+    'passwordLogin': boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof ServerFeaturesDto
+     */
+    'search': boolean;
+}
+/**
+ * 
+ * @export
  * @interface ServerInfoResponseDto
  */
 export interface ServerInfoResponseDto {
@@ -2198,25 +2235,25 @@ export interface ServerStatsResponseDto {
 /**
  * 
  * @export
- * @interface ServerVersionReponseDto
+ * @interface ServerVersionResponseDto
  */
-export interface ServerVersionReponseDto {
+export interface ServerVersionResponseDto {
     /**
      * 
      * @type {number}
-     * @memberof ServerVersionReponseDto
+     * @memberof ServerVersionResponseDto
      */
     'major': number;
     /**
      * 
      * @type {number}
-     * @memberof ServerVersionReponseDto
+     * @memberof ServerVersionResponseDto
      */
     'minor': number;
     /**
      * 
      * @type {number}
-     * @memberof ServerVersionReponseDto
+     * @memberof ServerVersionResponseDto
      */
     'patch': number;
 }
@@ -9027,6 +9064,35 @@ export const ServerInfoApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+        getServerFeatures: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/server-info/features`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
         getServerInfo: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/server-info`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -9200,6 +9266,15 @@ export const ServerInfoApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+        async getServerFeatures(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServerFeaturesDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getServerFeatures(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
         async getServerInfo(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServerInfoResponseDto>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getServerInfo(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
@@ -9209,7 +9284,7 @@ export const ServerInfoApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getServerVersion(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServerVersionReponseDto>> {
+        async getServerVersion(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServerVersionResponseDto>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getServerVersion(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -9255,6 +9330,14 @@ export const ServerInfoApiFactory = function (configuration?: Configuration, bas
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+        getServerFeatures(options?: any): AxiosPromise<ServerFeaturesDto> {
+            return localVarFp.getServerFeatures(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
         getServerInfo(options?: any): AxiosPromise<ServerInfoResponseDto> {
             return localVarFp.getServerInfo(options).then((request) => request(axios, basePath));
         },
@@ -9263,7 +9346,7 @@ export const ServerInfoApiFactory = function (configuration?: Configuration, bas
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getServerVersion(options?: any): AxiosPromise<ServerVersionReponseDto> {
+        getServerVersion(options?: any): AxiosPromise<ServerVersionResponseDto> {
             return localVarFp.getServerVersion(options).then((request) => request(axios, basePath));
         },
         /**
@@ -9300,6 +9383,16 @@ export const ServerInfoApiFactory = function (configuration?: Configuration, bas
  * @extends {BaseAPI}
  */
 export class ServerInfoApi extends BaseAPI {
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ServerInfoApi
+     */
+    public getServerFeatures(options?: AxiosRequestConfig) {
+        return ServerInfoApiFp(this.configuration).getServerFeatures(options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * 
      * @param {*} [options] Override http request option.
