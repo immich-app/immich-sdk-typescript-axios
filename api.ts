@@ -749,6 +749,25 @@ export type AudioCodec = typeof AudioCodec[keyof typeof AudioCodec];
 /**
  * 
  * @export
+ * @interface AuditDeletesResponseDto
+ */
+export interface AuditDeletesResponseDto {
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof AuditDeletesResponseDto
+     */
+    'ids': Array<string>;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof AuditDeletesResponseDto
+     */
+    'needsFullSync': boolean;
+}
+/**
+ * 
+ * @export
  * @interface AuthDeviceResponseDto
  */
 export interface AuthDeviceResponseDto {
@@ -1233,6 +1252,20 @@ export interface DownloadResponseDto {
      */
     'totalSize': number;
 }
+/**
+ * 
+ * @export
+ * @enum {string}
+ */
+
+export const EntityType = {
+    Asset: 'ASSET',
+    Album: 'ALBUM'
+} as const;
+
+export type EntityType = typeof EntityType[keyof typeof EntityType];
+
+
 /**
  * 
  * @export
@@ -4868,11 +4901,12 @@ export const AssetApiAxiosParamCreator = function (configuration?: Configuration
          * @param {boolean} [isArchived] 
          * @param {boolean} [withoutThumbs] Include assets without thumbnails
          * @param {number} [skip] 
+         * @param {string} [updatedAfter] 
          * @param {string} [ifNoneMatch] ETag of data already cached on the client
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getAllAssets: async (userId?: string, isFavorite?: boolean, isArchived?: boolean, withoutThumbs?: boolean, skip?: number, ifNoneMatch?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getAllAssets: async (userId?: string, isFavorite?: boolean, isArchived?: boolean, withoutThumbs?: boolean, skip?: number, updatedAfter?: string, ifNoneMatch?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/asset`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -4912,6 +4946,12 @@ export const AssetApiAxiosParamCreator = function (configuration?: Configuration
 
             if (skip !== undefined) {
                 localVarQueryParameter['skip'] = skip;
+            }
+
+            if (updatedAfter !== undefined) {
+                localVarQueryParameter['updatedAfter'] = (updatedAfter as any instanceof Date) ?
+                    (updatedAfter as any).toISOString() :
+                    updatedAfter;
             }
 
             if (ifNoneMatch != null) {
@@ -6022,12 +6062,13 @@ export const AssetApiFp = function(configuration?: Configuration) {
          * @param {boolean} [isArchived] 
          * @param {boolean} [withoutThumbs] Include assets without thumbnails
          * @param {number} [skip] 
+         * @param {string} [updatedAfter] 
          * @param {string} [ifNoneMatch] ETag of data already cached on the client
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getAllAssets(userId?: string, isFavorite?: boolean, isArchived?: boolean, withoutThumbs?: boolean, skip?: number, ifNoneMatch?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<AssetResponseDto>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getAllAssets(userId, isFavorite, isArchived, withoutThumbs, skip, ifNoneMatch, options);
+        async getAllAssets(userId?: string, isFavorite?: boolean, isArchived?: boolean, withoutThumbs?: boolean, skip?: number, updatedAfter?: string, ifNoneMatch?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<AssetResponseDto>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAllAssets(userId, isFavorite, isArchived, withoutThumbs, skip, updatedAfter, ifNoneMatch, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -6327,12 +6368,13 @@ export const AssetApiFactory = function (configuration?: Configuration, basePath
          * @param {boolean} [isArchived] 
          * @param {boolean} [withoutThumbs] Include assets without thumbnails
          * @param {number} [skip] 
+         * @param {string} [updatedAfter] 
          * @param {string} [ifNoneMatch] ETag of data already cached on the client
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getAllAssets(userId?: string, isFavorite?: boolean, isArchived?: boolean, withoutThumbs?: boolean, skip?: number, ifNoneMatch?: string, options?: any): AxiosPromise<Array<AssetResponseDto>> {
-            return localVarFp.getAllAssets(userId, isFavorite, isArchived, withoutThumbs, skip, ifNoneMatch, options).then((request) => request(axios, basePath));
+        getAllAssets(userId?: string, isFavorite?: boolean, isArchived?: boolean, withoutThumbs?: boolean, skip?: number, updatedAfter?: string, ifNoneMatch?: string, options?: any): AxiosPromise<Array<AssetResponseDto>> {
+            return localVarFp.getAllAssets(userId, isFavorite, isArchived, withoutThumbs, skip, updatedAfter, ifNoneMatch, options).then((request) => request(axios, basePath));
         },
         /**
          * Get a single asset\'s information
@@ -6624,13 +6666,14 @@ export class AssetApi extends BaseAPI {
      * @param {boolean} [isArchived] 
      * @param {boolean} [withoutThumbs] Include assets without thumbnails
      * @param {number} [skip] 
+     * @param {string} [updatedAfter] 
      * @param {string} [ifNoneMatch] ETag of data already cached on the client
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AssetApi
      */
-    public getAllAssets(userId?: string, isFavorite?: boolean, isArchived?: boolean, withoutThumbs?: boolean, skip?: number, ifNoneMatch?: string, options?: AxiosRequestConfig) {
-        return AssetApiFp(this.configuration).getAllAssets(userId, isFavorite, isArchived, withoutThumbs, skip, ifNoneMatch, options).then((request) => request(this.axios, this.basePath));
+    public getAllAssets(userId?: string, isFavorite?: boolean, isArchived?: boolean, withoutThumbs?: boolean, skip?: number, updatedAfter?: string, ifNoneMatch?: string, options?: AxiosRequestConfig) {
+        return AssetApiFp(this.configuration).getAllAssets(userId, isFavorite, isArchived, withoutThumbs, skip, updatedAfter, ifNoneMatch, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -6873,6 +6916,139 @@ export class AssetApi extends BaseAPI {
      */
     public uploadFile(assetData: File, deviceAssetId: string, deviceId: string, fileCreatedAt: string, fileModifiedAt: string, isFavorite: boolean, key?: string, duration?: string, isArchived?: boolean, isReadOnly?: boolean, isVisible?: boolean, livePhotoData?: File, sidecarData?: File, options?: AxiosRequestConfig) {
         return AssetApiFp(this.configuration).uploadFile(assetData, deviceAssetId, deviceId, fileCreatedAt, fileModifiedAt, isFavorite, key, duration, isArchived, isReadOnly, isVisible, livePhotoData, sidecarData, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * AuditApi - axios parameter creator
+ * @export
+ */
+export const AuditApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {EntityType} entityType 
+         * @param {string} after 
+         * @param {string} [userId] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAuditDeletes: async (entityType: EntityType, after: string, userId?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'entityType' is not null or undefined
+            assertParamExists('getAuditDeletes', 'entityType', entityType)
+            // verify required parameter 'after' is not null or undefined
+            assertParamExists('getAuditDeletes', 'after', after)
+            const localVarPath = `/audit/deletes`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication api_key required
+            await setApiKeyToObject(localVarHeaderParameter, "x-api-key", configuration)
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication cookie required
+
+            if (entityType !== undefined) {
+                localVarQueryParameter['entityType'] = entityType;
+            }
+
+            if (userId !== undefined) {
+                localVarQueryParameter['userId'] = userId;
+            }
+
+            if (after !== undefined) {
+                localVarQueryParameter['after'] = (after as any instanceof Date) ?
+                    (after as any).toISOString() :
+                    after;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * AuditApi - functional programming interface
+ * @export
+ */
+export const AuditApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = AuditApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {EntityType} entityType 
+         * @param {string} after 
+         * @param {string} [userId] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getAuditDeletes(entityType: EntityType, after: string, userId?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AuditDeletesResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAuditDeletes(entityType, after, userId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * AuditApi - factory interface
+ * @export
+ */
+export const AuditApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = AuditApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {EntityType} entityType 
+         * @param {string} after 
+         * @param {string} [userId] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAuditDeletes(entityType: EntityType, after: string, userId?: string, options?: any): AxiosPromise<AuditDeletesResponseDto> {
+            return localVarFp.getAuditDeletes(entityType, after, userId, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * AuditApi - object-oriented interface
+ * @export
+ * @class AuditApi
+ * @extends {BaseAPI}
+ */
+export class AuditApi extends BaseAPI {
+    /**
+     * 
+     * @param {EntityType} entityType 
+     * @param {string} after 
+     * @param {string} [userId] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AuditApi
+     */
+    public getAuditDeletes(entityType: EntityType, after: string, userId?: string, options?: AxiosRequestConfig) {
+        return AuditApiFp(this.configuration).getAuditDeletes(entityType, after, userId, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
