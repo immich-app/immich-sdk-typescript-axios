@@ -2057,19 +2057,6 @@ export interface SearchAssetResponseDto {
 /**
  * 
  * @export
- * @interface SearchConfigResponseDto
- */
-export interface SearchConfigResponseDto {
-    /**
-     * 
-     * @type {boolean}
-     * @memberof SearchConfigResponseDto
-     */
-    'enabled': boolean;
-}
-/**
- * 
- * @export
  * @interface SearchExploreItem
  */
 export interface SearchExploreItem {
@@ -2173,7 +2160,13 @@ export interface ServerFeaturesDto {
      * @type {boolean}
      * @memberof ServerFeaturesDto
      */
-    'machineLearning': boolean;
+    'clipEncode': boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof ServerFeaturesDto
+     */
+    'facialRecognition': boolean;
     /**
      * 
      * @type {boolean}
@@ -2198,6 +2191,18 @@ export interface ServerFeaturesDto {
      * @memberof ServerFeaturesDto
      */
     'search': boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof ServerFeaturesDto
+     */
+    'sidecar': boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof ServerFeaturesDto
+     */
+    'tagImage': boolean;
 }
 /**
  * 
@@ -2597,6 +2602,12 @@ export interface SystemConfigDto {
     'job': SystemConfigJobDto;
     /**
      * 
+     * @type {SystemConfigMachineLearningDto}
+     * @memberof SystemConfigDto
+     */
+    'machineLearning': SystemConfigMachineLearningDto;
+    /**
+     * 
      * @type {SystemConfigOAuthDto}
      * @memberof SystemConfigDto
      */
@@ -2759,6 +2770,43 @@ export interface SystemConfigJobDto {
      * @memberof SystemConfigJobDto
      */
     'videoConversion': JobSettingsDto;
+}
+/**
+ * 
+ * @export
+ * @interface SystemConfigMachineLearningDto
+ */
+export interface SystemConfigMachineLearningDto {
+    /**
+     * 
+     * @type {boolean}
+     * @memberof SystemConfigMachineLearningDto
+     */
+    'clipEncodeEnabled': boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof SystemConfigMachineLearningDto
+     */
+    'enabled': boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof SystemConfigMachineLearningDto
+     */
+    'facialRecognitionEnabled': boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof SystemConfigMachineLearningDto
+     */
+    'tagImageEnabled': boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof SystemConfigMachineLearningDto
+     */
+    'url': string;
 }
 /**
  * 
@@ -9032,44 +9080,6 @@ export const SearchApiAxiosParamCreator = function (configuration?: Configuratio
         },
         /**
          * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getSearchConfig: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/search/config`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication api_key required
-            await setApiKeyToObject(localVarHeaderParameter, "x-api-key", configuration)
-
-            // authentication bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication cookie required
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
          * @param {string} [q] 
          * @param {string} [query] 
          * @param {boolean} [clip] 
@@ -9207,15 +9217,6 @@ export const SearchApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getSearchConfig(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SearchConfigResponseDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getSearchConfig(options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
          * @param {string} [q] 
          * @param {string} [query] 
          * @param {boolean} [clip] 
@@ -9259,14 +9260,6 @@ export const SearchApiFactory = function (configuration?: Configuration, basePat
         },
         /**
          * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getSearchConfig(options?: any): AxiosPromise<SearchConfigResponseDto> {
-            return localVarFp.getSearchConfig(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
          * @param {string} [q] 
          * @param {string} [query] 
          * @param {boolean} [clip] 
@@ -9307,16 +9300,6 @@ export class SearchApi extends BaseAPI {
      */
     public getExploreData(options?: AxiosRequestConfig) {
         return SearchApiFp(this.configuration).getExploreData(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SearchApi
-     */
-    public getSearchConfig(options?: AxiosRequestConfig) {
-        return SearchApiFp(this.configuration).getSearchConfig(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
