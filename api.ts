@@ -1848,6 +1848,19 @@ export type ModelType = typeof ModelType[keyof typeof ModelType];
 /**
  * 
  * @export
+ * @interface OAuthAuthorizeResponseDto
+ */
+export interface OAuthAuthorizeResponseDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof OAuthAuthorizeResponseDto
+     */
+    'url': string;
+}
+/**
+ * 
+ * @export
  * @interface OAuthCallbackDto
  */
 export interface OAuthCallbackDto {
@@ -7993,6 +8006,41 @@ export const OAuthApiAxiosParamCreator = function (configuration?: Configuration
     return {
         /**
          * 
+         * @param {OAuthConfigDto} oAuthConfigDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        authorizeOAuth: async (oAuthConfigDto: OAuthConfigDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'oAuthConfigDto' is not null or undefined
+            assertParamExists('authorizeOAuth', 'oAuthConfigDto', oAuthConfigDto)
+            const localVarPath = `/oauth/authorize`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(oAuthConfigDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {OAuthCallbackDto} oAuthCallbackDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -8027,9 +8075,10 @@ export const OAuthApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * 
+         * @deprecated use feature flags and /oauth/authorize
          * @param {OAuthConfigDto} oAuthConfigDto 
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         generateConfig: async (oAuthConfigDto: OAuthConfigDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -8184,6 +8233,16 @@ export const OAuthApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
+         * @param {OAuthConfigDto} oAuthConfigDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async authorizeOAuth(oAuthConfigDto: OAuthConfigDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OAuthAuthorizeResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.authorizeOAuth(oAuthConfigDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @param {OAuthCallbackDto} oAuthCallbackDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -8193,9 +8252,10 @@ export const OAuthApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * 
+         * @deprecated use feature flags and /oauth/authorize
          * @param {OAuthConfigDto} oAuthConfigDto 
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async generateConfig(oAuthConfigDto: OAuthConfigDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OAuthConfigResponseDto>> {
@@ -8242,6 +8302,15 @@ export const OAuthApiFactory = function (configuration?: Configuration, basePath
     return {
         /**
          * 
+         * @param {OAuthConfigDto} oAuthConfigDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        authorizeOAuth(oAuthConfigDto: OAuthConfigDto, options?: any): AxiosPromise<OAuthAuthorizeResponseDto> {
+            return localVarFp.authorizeOAuth(oAuthConfigDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @param {OAuthCallbackDto} oAuthCallbackDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -8250,9 +8319,10 @@ export const OAuthApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.callback(oAuthCallbackDto, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * @deprecated use feature flags and /oauth/authorize
          * @param {OAuthConfigDto} oAuthConfigDto 
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         generateConfig(oAuthConfigDto: OAuthConfigDto, options?: any): AxiosPromise<OAuthConfigResponseDto> {
@@ -8295,6 +8365,17 @@ export const OAuthApiFactory = function (configuration?: Configuration, basePath
 export class OAuthApi extends BaseAPI {
     /**
      * 
+     * @param {OAuthConfigDto} oAuthConfigDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OAuthApi
+     */
+    public authorizeOAuth(oAuthConfigDto: OAuthConfigDto, options?: AxiosRequestConfig) {
+        return OAuthApiFp(this.configuration).authorizeOAuth(oAuthConfigDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
      * @param {OAuthCallbackDto} oAuthCallbackDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -8305,9 +8386,10 @@ export class OAuthApi extends BaseAPI {
     }
 
     /**
-     * 
+     * @deprecated use feature flags and /oauth/authorize
      * @param {OAuthConfigDto} oAuthConfigDto 
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof OAuthApi
      */
