@@ -904,6 +904,21 @@ export type CLIPMode = typeof CLIPMode[keyof typeof CLIPMode];
 /**
  * 
  * @export
+ * @enum {string}
+ */
+
+export const CQMode = {
+    Auto: 'auto',
+    Cqp: 'cqp',
+    Icq: 'icq'
+} as const;
+
+export type CQMode = typeof CQMode[keyof typeof CQMode];
+
+
+/**
+ * 
+ * @export
  * @interface ChangePasswordDto
  */
 export interface ChangePasswordDto {
@@ -2795,7 +2810,25 @@ export interface SystemConfigFFmpegDto {
      * @type {number}
      * @memberof SystemConfigFFmpegDto
      */
+    'bframes': number;
+    /**
+     * 
+     * @type {CQMode}
+     * @memberof SystemConfigFFmpegDto
+     */
+    'cqMode': CQMode;
+    /**
+     * 
+     * @type {number}
+     * @memberof SystemConfigFFmpegDto
+     */
     'crf': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof SystemConfigFFmpegDto
+     */
+    'gopSize': number;
     /**
      * 
      * @type {string}
@@ -2804,10 +2837,22 @@ export interface SystemConfigFFmpegDto {
     'maxBitrate': string;
     /**
      * 
+     * @type {number}
+     * @memberof SystemConfigFFmpegDto
+     */
+    'npl': number;
+    /**
+     * 
      * @type {string}
      * @memberof SystemConfigFFmpegDto
      */
     'preset': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof SystemConfigFFmpegDto
+     */
+    'refs': number;
     /**
      * 
      * @type {AudioCodec}
@@ -2826,6 +2871,12 @@ export interface SystemConfigFFmpegDto {
      * @memberof SystemConfigFFmpegDto
      */
     'targetVideoCodec': VideoCodec;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof SystemConfigFFmpegDto
+     */
+    'temporalAQ': boolean;
     /**
      * 
      * @type {number}
