@@ -3389,12 +3389,6 @@ export interface UpdateAssetDto {
      * @memberof UpdateAssetDto
      */
     'isFavorite'?: boolean;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof UpdateAssetDto
-     */
-    'tagIds'?: Array<string>;
 }
 /**
  * 
@@ -6039,7 +6033,7 @@ export const AssetApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * Update an asset
+         * 
          * @param {string} id 
          * @param {UpdateAssetDto} updateAssetDto 
          * @param {*} [options] Override http request option.
@@ -6518,7 +6512,7 @@ export const AssetApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Update an asset
+         * 
          * @param {string} id 
          * @param {UpdateAssetDto} updateAssetDto 
          * @param {*} [options] Override http request option.
@@ -6806,7 +6800,7 @@ export const AssetApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.serveFile(id, isThumb, isWeb, key, options).then((request) => request(axios, basePath));
         },
         /**
-         * Update an asset
+         * 
          * @param {string} id 
          * @param {UpdateAssetDto} updateAssetDto 
          * @param {*} [options] Override http request option.
@@ -7137,7 +7131,7 @@ export class AssetApi extends BaseAPI {
     }
 
     /**
-     * Update an asset
+     * 
      * @param {string} id 
      * @param {UpdateAssetDto} updateAssetDto 
      * @param {*} [options] Override http request option.
