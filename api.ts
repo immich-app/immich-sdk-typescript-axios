@@ -643,6 +643,12 @@ export interface AssetResponseDto {
     'originalPath': string;
     /**
      * 
+     * @type {UserResponseDto}
+     * @memberof AssetResponseDto
+     */
+    'owner'?: UserResponseDto;
+    /**
+     * 
      * @type {string}
      * @memberof AssetResponseDto
      */
