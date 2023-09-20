@@ -298,6 +298,12 @@ export interface AllJobStatusResponseDto {
      * @type {JobStatusDto}
      * @memberof AllJobStatusResponseDto
      */
+    'library': JobStatusDto;
+    /**
+     * 
+     * @type {JobStatusDto}
+     * @memberof AllJobStatusResponseDto
+     */
     'metadataExtraction': JobStatusDto;
     /**
      * 
@@ -622,7 +628,31 @@ export interface AssetResponseDto {
      * @type {boolean}
      * @memberof AssetResponseDto
      */
+    'isExternal': boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof AssetResponseDto
+     */
     'isFavorite': boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof AssetResponseDto
+     */
+    'isOffline': boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof AssetResponseDto
+     */
+    'isReadOnly': boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof AssetResponseDto
+     */
+    'libraryId': string;
     /**
      * 
      * @type {string}
@@ -1086,6 +1116,43 @@ export interface CreateAlbumDto {
      * @memberof CreateAlbumDto
      */
     'sharedWithUserIds'?: Array<string>;
+}
+/**
+ * 
+ * @export
+ * @interface CreateLibraryDto
+ */
+export interface CreateLibraryDto {
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof CreateLibraryDto
+     */
+    'exclusionPatterns'?: Array<string>;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof CreateLibraryDto
+     */
+    'importPaths'?: Array<string>;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CreateLibraryDto
+     */
+    'isVisible'?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateLibraryDto
+     */
+    'name'?: string;
+    /**
+     * 
+     * @type {LibraryType}
+     * @memberof CreateLibraryDto
+     */
+    'type': LibraryType;
 }
 /**
  * 
@@ -1563,7 +1630,19 @@ export interface ImportAssetDto {
      * @type {boolean}
      * @memberof ImportAssetDto
      */
+    'isExternal'?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof ImportAssetDto
+     */
     'isFavorite': boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof ImportAssetDto
+     */
+    'isOffline'?: boolean;
     /**
      * 
      * @type {boolean}
@@ -1576,6 +1655,12 @@ export interface ImportAssetDto {
      * @memberof ImportAssetDto
      */
     'isVisible'?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof ImportAssetDto
+     */
+    'libraryId'?: string;
     /**
      * 
      * @type {string}
@@ -1677,7 +1762,8 @@ export const JobName = {
     BackgroundTask: 'backgroundTask',
     StorageTemplateMigration: 'storageTemplateMigration',
     Search: 'search',
-    Sidecar: 'sidecar'
+    Sidecar: 'sidecar',
+    Library: 'library'
 } as const;
 
 export type JobName = typeof JobName[keyof typeof JobName];
@@ -1715,6 +1801,118 @@ export interface JobStatusDto {
      */
     'queueStatus': QueueStatusDto;
 }
+/**
+ * 
+ * @export
+ * @interface LibraryResponseDto
+ */
+export interface LibraryResponseDto {
+    /**
+     * 
+     * @type {number}
+     * @memberof LibraryResponseDto
+     */
+    'assetCount': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof LibraryResponseDto
+     */
+    'createdAt': string;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof LibraryResponseDto
+     */
+    'exclusionPatterns': Array<string>;
+    /**
+     * 
+     * @type {string}
+     * @memberof LibraryResponseDto
+     */
+    'id': string;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof LibraryResponseDto
+     */
+    'importPaths': Array<string>;
+    /**
+     * 
+     * @type {string}
+     * @memberof LibraryResponseDto
+     */
+    'name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof LibraryResponseDto
+     */
+    'ownerId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof LibraryResponseDto
+     */
+    'refreshedAt': string | null;
+    /**
+     * 
+     * @type {LibraryType}
+     * @memberof LibraryResponseDto
+     */
+    'type': LibraryType;
+    /**
+     * 
+     * @type {string}
+     * @memberof LibraryResponseDto
+     */
+    'updatedAt': string;
+}
+/**
+ * 
+ * @export
+ * @interface LibraryStatsResponseDto
+ */
+export interface LibraryStatsResponseDto {
+    /**
+     * 
+     * @type {number}
+     * @memberof LibraryStatsResponseDto
+     */
+    'photos': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof LibraryStatsResponseDto
+     */
+    'total': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof LibraryStatsResponseDto
+     */
+    'usage': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof LibraryStatsResponseDto
+     */
+    'videos': number;
+}
+/**
+ * 
+ * @export
+ * @enum {string}
+ */
+
+export const LibraryType = {
+    Upload: 'UPLOAD',
+    External: 'EXTERNAL'
+} as const;
+
+export type LibraryType = typeof LibraryType[keyof typeof LibraryType];
+
+
 /**
  * 
  * @export
@@ -2160,6 +2358,25 @@ export interface RecognitionConfig {
      * @memberof RecognitionConfig
      */
     'modelType'?: ModelType;
+}
+/**
+ * 
+ * @export
+ * @interface ScanLibraryDto
+ */
+export interface ScanLibraryDto {
+    /**
+     * 
+     * @type {boolean}
+     * @memberof ScanLibraryDto
+     */
+    'refreshAllFiles'?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof ScanLibraryDto
+     */
+    'refreshModifiedFiles'?: boolean;
 }
 /**
  * 
@@ -2988,6 +3205,12 @@ export interface SystemConfigJobDto {
      * @type {JobSettingsDto}
      * @memberof SystemConfigJobDto
      */
+    'library': JobSettingsDto;
+    /**
+     * 
+     * @type {JobSettingsDto}
+     * @memberof SystemConfigJobDto
+     */
     'metadataExtraction': JobSettingsDto;
     /**
      * 
@@ -3457,6 +3680,37 @@ export interface UpdateAssetDto {
      * @memberof UpdateAssetDto
      */
     'isFavorite'?: boolean;
+}
+/**
+ * 
+ * @export
+ * @interface UpdateLibraryDto
+ */
+export interface UpdateLibraryDto {
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof UpdateLibraryDto
+     */
+    'exclusionPatterns'?: Array<string>;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof UpdateLibraryDto
+     */
+    'importPaths'?: Array<string>;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof UpdateLibraryDto
+     */
+    'isVisible'?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateLibraryDto
+     */
+    'name'?: string;
 }
 /**
  * 
@@ -6203,14 +6457,17 @@ export const AssetApiAxiosParamCreator = function (configuration?: Configuration
          * @param {string} [key] 
          * @param {string} [duration] 
          * @param {boolean} [isArchived] 
+         * @param {boolean} [isExternal] 
+         * @param {boolean} [isOffline] 
          * @param {boolean} [isReadOnly] 
          * @param {boolean} [isVisible] 
+         * @param {string} [libraryId] 
          * @param {File} [livePhotoData] 
          * @param {File} [sidecarData] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        uploadFile: async (assetData: File, deviceAssetId: string, deviceId: string, fileCreatedAt: string, fileModifiedAt: string, isFavorite: boolean, key?: string, duration?: string, isArchived?: boolean, isReadOnly?: boolean, isVisible?: boolean, livePhotoData?: File, sidecarData?: File, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        uploadFile: async (assetData: File, deviceAssetId: string, deviceId: string, fileCreatedAt: string, fileModifiedAt: string, isFavorite: boolean, key?: string, duration?: string, isArchived?: boolean, isExternal?: boolean, isOffline?: boolean, isReadOnly?: boolean, isVisible?: boolean, libraryId?: string, livePhotoData?: File, sidecarData?: File, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'assetData' is not null or undefined
             assertParamExists('uploadFile', 'assetData', assetData)
             // verify required parameter 'deviceAssetId' is not null or undefined
@@ -6278,8 +6535,16 @@ export const AssetApiAxiosParamCreator = function (configuration?: Configuration
                 localVarFormParams.append('isArchived', isArchived as any);
             }
     
+            if (isExternal !== undefined) { 
+                localVarFormParams.append('isExternal', isExternal as any);
+            }
+    
             if (isFavorite !== undefined) { 
                 localVarFormParams.append('isFavorite', isFavorite as any);
+            }
+    
+            if (isOffline !== undefined) { 
+                localVarFormParams.append('isOffline', isOffline as any);
             }
     
             if (isReadOnly !== undefined) { 
@@ -6288,6 +6553,10 @@ export const AssetApiAxiosParamCreator = function (configuration?: Configuration
     
             if (isVisible !== undefined) { 
                 localVarFormParams.append('isVisible', isVisible as any);
+            }
+    
+            if (libraryId !== undefined) { 
+                localVarFormParams.append('libraryId', libraryId as any);
             }
     
             if (livePhotoData !== undefined) { 
@@ -6611,15 +6880,18 @@ export const AssetApiFp = function(configuration?: Configuration) {
          * @param {string} [key] 
          * @param {string} [duration] 
          * @param {boolean} [isArchived] 
+         * @param {boolean} [isExternal] 
+         * @param {boolean} [isOffline] 
          * @param {boolean} [isReadOnly] 
          * @param {boolean} [isVisible] 
+         * @param {string} [libraryId] 
          * @param {File} [livePhotoData] 
          * @param {File} [sidecarData] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async uploadFile(assetData: File, deviceAssetId: string, deviceId: string, fileCreatedAt: string, fileModifiedAt: string, isFavorite: boolean, key?: string, duration?: string, isArchived?: boolean, isReadOnly?: boolean, isVisible?: boolean, livePhotoData?: File, sidecarData?: File, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AssetFileUploadResponseDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadFile(assetData, deviceAssetId, deviceId, fileCreatedAt, fileModifiedAt, isFavorite, key, duration, isArchived, isReadOnly, isVisible, livePhotoData, sidecarData, options);
+        async uploadFile(assetData: File, deviceAssetId: string, deviceId: string, fileCreatedAt: string, fileModifiedAt: string, isFavorite: boolean, key?: string, duration?: string, isArchived?: boolean, isExternal?: boolean, isOffline?: boolean, isReadOnly?: boolean, isVisible?: boolean, libraryId?: string, livePhotoData?: File, sidecarData?: File, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AssetFileUploadResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.uploadFile(assetData, deviceAssetId, deviceId, fileCreatedAt, fileModifiedAt, isFavorite, key, duration, isArchived, isExternal, isOffline, isReadOnly, isVisible, libraryId, livePhotoData, sidecarData, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -6897,15 +7169,18 @@ export const AssetApiFactory = function (configuration?: Configuration, basePath
          * @param {string} [key] 
          * @param {string} [duration] 
          * @param {boolean} [isArchived] 
+         * @param {boolean} [isExternal] 
+         * @param {boolean} [isOffline] 
          * @param {boolean} [isReadOnly] 
          * @param {boolean} [isVisible] 
+         * @param {string} [libraryId] 
          * @param {File} [livePhotoData] 
          * @param {File} [sidecarData] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        uploadFile(assetData: File, deviceAssetId: string, deviceId: string, fileCreatedAt: string, fileModifiedAt: string, isFavorite: boolean, key?: string, duration?: string, isArchived?: boolean, isReadOnly?: boolean, isVisible?: boolean, livePhotoData?: File, sidecarData?: File, options?: any): AxiosPromise<AssetFileUploadResponseDto> {
-            return localVarFp.uploadFile(assetData, deviceAssetId, deviceId, fileCreatedAt, fileModifiedAt, isFavorite, key, duration, isArchived, isReadOnly, isVisible, livePhotoData, sidecarData, options).then((request) => request(axios, basePath));
+        uploadFile(assetData: File, deviceAssetId: string, deviceId: string, fileCreatedAt: string, fileModifiedAt: string, isFavorite: boolean, key?: string, duration?: string, isArchived?: boolean, isExternal?: boolean, isOffline?: boolean, isReadOnly?: boolean, isVisible?: boolean, libraryId?: string, livePhotoData?: File, sidecarData?: File, options?: any): AxiosPromise<AssetFileUploadResponseDto> {
+            return localVarFp.uploadFile(assetData, deviceAssetId, deviceId, fileCreatedAt, fileModifiedAt, isFavorite, key, duration, isArchived, isExternal, isOffline, isReadOnly, isVisible, libraryId, livePhotoData, sidecarData, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -7232,16 +7507,19 @@ export class AssetApi extends BaseAPI {
      * @param {string} [key] 
      * @param {string} [duration] 
      * @param {boolean} [isArchived] 
+     * @param {boolean} [isExternal] 
+     * @param {boolean} [isOffline] 
      * @param {boolean} [isReadOnly] 
      * @param {boolean} [isVisible] 
+     * @param {string} [libraryId] 
      * @param {File} [livePhotoData] 
      * @param {File} [sidecarData] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AssetApi
      */
-    public uploadFile(assetData: File, deviceAssetId: string, deviceId: string, fileCreatedAt: string, fileModifiedAt: string, isFavorite: boolean, key?: string, duration?: string, isArchived?: boolean, isReadOnly?: boolean, isVisible?: boolean, livePhotoData?: File, sidecarData?: File, options?: AxiosRequestConfig) {
-        return AssetApiFp(this.configuration).uploadFile(assetData, deviceAssetId, deviceId, fileCreatedAt, fileModifiedAt, isFavorite, key, duration, isArchived, isReadOnly, isVisible, livePhotoData, sidecarData, options).then((request) => request(this.axios, this.basePath));
+    public uploadFile(assetData: File, deviceAssetId: string, deviceId: string, fileCreatedAt: string, fileModifiedAt: string, isFavorite: boolean, key?: string, duration?: string, isArchived?: boolean, isExternal?: boolean, isOffline?: boolean, isReadOnly?: boolean, isVisible?: boolean, libraryId?: string, livePhotoData?: File, sidecarData?: File, options?: AxiosRequestConfig) {
+        return AssetApiFp(this.configuration).uploadFile(assetData, deviceAssetId, deviceId, fileCreatedAt, fileModifiedAt, isFavorite, key, duration, isArchived, isExternal, isOffline, isReadOnly, isVisible, libraryId, livePhotoData, sidecarData, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -8133,6 +8411,633 @@ export class JobApi extends BaseAPI {
      */
     public sendJobCommand(id: JobName, jobCommandDto: JobCommandDto, options?: AxiosRequestConfig) {
         return JobApiFp(this.configuration).sendJobCommand(id, jobCommandDto, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * LibraryApi - axios parameter creator
+ * @export
+ */
+export const LibraryApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @param {CreateLibraryDto} createLibraryDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createLibrary: async (createLibraryDto: CreateLibraryDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'createLibraryDto' is not null or undefined
+            assertParamExists('createLibrary', 'createLibraryDto', createLibraryDto)
+            const localVarPath = `/library`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication api_key required
+            await setApiKeyToObject(localVarHeaderParameter, "x-api-key", configuration)
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication cookie required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createLibraryDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteLibrary: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('deleteLibrary', 'id', id)
+            const localVarPath = `/library/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication api_key required
+            await setApiKeyToObject(localVarHeaderParameter, "x-api-key", configuration)
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication cookie required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAllForUser: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/library`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication api_key required
+            await setApiKeyToObject(localVarHeaderParameter, "x-api-key", configuration)
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication cookie required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getLibraryInfo: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('getLibraryInfo', 'id', id)
+            const localVarPath = `/library/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication api_key required
+            await setApiKeyToObject(localVarHeaderParameter, "x-api-key", configuration)
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication cookie required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getLibraryStatistics: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('getLibraryStatistics', 'id', id)
+            const localVarPath = `/library/{id}/statistics`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication api_key required
+            await setApiKeyToObject(localVarHeaderParameter, "x-api-key", configuration)
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication cookie required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        removeOfflineFiles: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('removeOfflineFiles', 'id', id)
+            const localVarPath = `/library/{id}/removeOffline`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication api_key required
+            await setApiKeyToObject(localVarHeaderParameter, "x-api-key", configuration)
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication cookie required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {ScanLibraryDto} scanLibraryDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        scanLibrary: async (id: string, scanLibraryDto: ScanLibraryDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('scanLibrary', 'id', id)
+            // verify required parameter 'scanLibraryDto' is not null or undefined
+            assertParamExists('scanLibrary', 'scanLibraryDto', scanLibraryDto)
+            const localVarPath = `/library/{id}/scan`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication api_key required
+            await setApiKeyToObject(localVarHeaderParameter, "x-api-key", configuration)
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication cookie required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(scanLibraryDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {UpdateLibraryDto} updateLibraryDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateLibrary: async (id: string, updateLibraryDto: UpdateLibraryDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('updateLibrary', 'id', id)
+            // verify required parameter 'updateLibraryDto' is not null or undefined
+            assertParamExists('updateLibrary', 'updateLibraryDto', updateLibraryDto)
+            const localVarPath = `/library/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication api_key required
+            await setApiKeyToObject(localVarHeaderParameter, "x-api-key", configuration)
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication cookie required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(updateLibraryDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * LibraryApi - functional programming interface
+ * @export
+ */
+export const LibraryApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = LibraryApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @param {CreateLibraryDto} createLibraryDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async createLibrary(createLibraryDto: CreateLibraryDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LibraryResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createLibrary(createLibraryDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteLibrary(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteLibrary(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getAllForUser(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<LibraryResponseDto>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAllForUser(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getLibraryInfo(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LibraryResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getLibraryInfo(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getLibraryStatistics(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LibraryStatsResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getLibraryStatistics(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async removeOfflineFiles(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.removeOfflineFiles(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {ScanLibraryDto} scanLibraryDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async scanLibrary(id: string, scanLibraryDto: ScanLibraryDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.scanLibrary(id, scanLibraryDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {UpdateLibraryDto} updateLibraryDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async updateLibrary(id: string, updateLibraryDto: UpdateLibraryDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LibraryResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateLibrary(id, updateLibraryDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * LibraryApi - factory interface
+ * @export
+ */
+export const LibraryApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = LibraryApiFp(configuration)
+    return {
+        /**
+         * 
+         * @param {CreateLibraryDto} createLibraryDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createLibrary(createLibraryDto: CreateLibraryDto, options?: any): AxiosPromise<LibraryResponseDto> {
+            return localVarFp.createLibrary(createLibraryDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteLibrary(id: string, options?: any): AxiosPromise<void> {
+            return localVarFp.deleteLibrary(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAllForUser(options?: any): AxiosPromise<Array<LibraryResponseDto>> {
+            return localVarFp.getAllForUser(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getLibraryInfo(id: string, options?: any): AxiosPromise<LibraryResponseDto> {
+            return localVarFp.getLibraryInfo(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getLibraryStatistics(id: string, options?: any): AxiosPromise<LibraryStatsResponseDto> {
+            return localVarFp.getLibraryStatistics(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        removeOfflineFiles(id: string, options?: any): AxiosPromise<void> {
+            return localVarFp.removeOfflineFiles(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {ScanLibraryDto} scanLibraryDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        scanLibrary(id: string, scanLibraryDto: ScanLibraryDto, options?: any): AxiosPromise<void> {
+            return localVarFp.scanLibrary(id, scanLibraryDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {UpdateLibraryDto} updateLibraryDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateLibrary(id: string, updateLibraryDto: UpdateLibraryDto, options?: any): AxiosPromise<LibraryResponseDto> {
+            return localVarFp.updateLibrary(id, updateLibraryDto, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * LibraryApi - object-oriented interface
+ * @export
+ * @class LibraryApi
+ * @extends {BaseAPI}
+ */
+export class LibraryApi extends BaseAPI {
+    /**
+     * 
+     * @param {CreateLibraryDto} createLibraryDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof LibraryApi
+     */
+    public createLibrary(createLibraryDto: CreateLibraryDto, options?: AxiosRequestConfig) {
+        return LibraryApiFp(this.configuration).createLibrary(createLibraryDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof LibraryApi
+     */
+    public deleteLibrary(id: string, options?: AxiosRequestConfig) {
+        return LibraryApiFp(this.configuration).deleteLibrary(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof LibraryApi
+     */
+    public getAllForUser(options?: AxiosRequestConfig) {
+        return LibraryApiFp(this.configuration).getAllForUser(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof LibraryApi
+     */
+    public getLibraryInfo(id: string, options?: AxiosRequestConfig) {
+        return LibraryApiFp(this.configuration).getLibraryInfo(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof LibraryApi
+     */
+    public getLibraryStatistics(id: string, options?: AxiosRequestConfig) {
+        return LibraryApiFp(this.configuration).getLibraryStatistics(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof LibraryApi
+     */
+    public removeOfflineFiles(id: string, options?: AxiosRequestConfig) {
+        return LibraryApiFp(this.configuration).removeOfflineFiles(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {ScanLibraryDto} scanLibraryDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof LibraryApi
+     */
+    public scanLibrary(id: string, scanLibraryDto: ScanLibraryDto, options?: AxiosRequestConfig) {
+        return LibraryApiFp(this.configuration).scanLibrary(id, scanLibraryDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {UpdateLibraryDto} updateLibraryDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof LibraryApi
+     */
+    public updateLibrary(id: string, updateLibraryDto: UpdateLibraryDto, options?: AxiosRequestConfig) {
+        return LibraryApiFp(this.configuration).updateLibrary(id, updateLibraryDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
