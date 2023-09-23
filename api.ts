@@ -6050,6 +6050,49 @@ export const AssetApiAxiosParamCreator = function (configuration?: Configuration
         },
         /**
          * 
+         * @param {number} [count] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getRandom: async (count?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/asset/random`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication api_key required
+            await setApiKeyToObject(localVarHeaderParameter, "x-api-key", configuration)
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication cookie required
+
+            if (count !== undefined) {
+                localVarQueryParameter['count'] = count;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {TimeBucketSize} size 
          * @param {string} [userId] 
          * @param {string} [albumId] 
@@ -6781,6 +6824,16 @@ export const AssetApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {number} [count] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getRandom(count?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<AssetResponseDto>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getRandom(count, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @param {TimeBucketSize} size 
          * @param {string} [userId] 
          * @param {string} [albumId] 
@@ -7075,6 +7128,15 @@ export const AssetApiFactory = function (configuration?: Configuration, basePath
          */
         getMemoryLane(timestamp: string, options?: any): AxiosPromise<Array<MemoryLaneResponseDto>> {
             return localVarFp.getMemoryLane(timestamp, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} [count] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getRandom(count?: number, options?: any): AxiosPromise<Array<AssetResponseDto>> {
+            return localVarFp.getRandom(count, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -7396,6 +7458,17 @@ export class AssetApi extends BaseAPI {
      */
     public getMemoryLane(timestamp: string, options?: AxiosRequestConfig) {
         return AssetApiFp(this.configuration).getMemoryLane(timestamp, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} [count] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AssetApi
+     */
+    public getRandom(count?: number, options?: AxiosRequestConfig) {
+        return AssetApiFp(this.configuration).getRandom(count, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
