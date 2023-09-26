@@ -1050,6 +1050,22 @@ export interface CheckExistingAssetsResponseDto {
 /**
  * 
  * @export
+ * @enum {string}
+ */
+
+export const CitiesFile = {
+    Cities15000: 'cities15000',
+    Cities5000: 'cities5000',
+    Cities1000: 'cities1000',
+    Cities500: 'cities500'
+} as const;
+
+export type CitiesFile = typeof CitiesFile[keyof typeof CitiesFile];
+
+
+/**
+ * 
+ * @export
  * @interface ClassificationConfig
  */
 export interface ClassificationConfig {
@@ -2633,6 +2649,12 @@ export interface ServerFeaturesDto {
      * @type {boolean}
      * @memberof ServerFeaturesDto
      */
+    'reverseGeocoding': boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof ServerFeaturesDto
+     */
     'search': boolean;
     /**
      * 
@@ -3069,6 +3091,12 @@ export interface SystemConfigDto {
     'passwordLogin': SystemConfigPasswordLoginDto;
     /**
      * 
+     * @type {SystemConfigReverseGeocodingDto}
+     * @memberof SystemConfigDto
+     */
+    'reverseGeocoding': SystemConfigReverseGeocodingDto;
+    /**
+     * 
      * @type {SystemConfigStorageTemplateDto}
      * @memberof SystemConfigDto
      */
@@ -3407,6 +3435,25 @@ export interface SystemConfigPasswordLoginDto {
      * 
      * @type {boolean}
      * @memberof SystemConfigPasswordLoginDto
+     */
+    'enabled': boolean;
+}
+/**
+ * 
+ * @export
+ * @interface SystemConfigReverseGeocodingDto
+ */
+export interface SystemConfigReverseGeocodingDto {
+    /**
+     * 
+     * @type {CitiesFile}
+     * @memberof SystemConfigReverseGeocodingDto
+     */
+    'citiesFileOverride': CitiesFile;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof SystemConfigReverseGeocodingDto
      */
     'enabled': boolean;
 }
