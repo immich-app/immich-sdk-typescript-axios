@@ -3517,6 +3517,12 @@ export interface SystemConfigTemplateStorageOptionDto {
      * @type {Array<string>}
      * @memberof SystemConfigTemplateStorageOptionDto
      */
+    'weekOptions': Array<string>;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof SystemConfigTemplateStorageOptionDto
+     */
     'yearOptions': Array<string>;
 }
 /**
