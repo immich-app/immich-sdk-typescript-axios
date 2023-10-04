@@ -6012,13 +6012,14 @@ export const AssetApiAxiosParamCreator = function (configuration?: Configuration
         },
         /**
          * 
+         * @param {boolean} [isArchived] 
          * @param {boolean} [isFavorite] 
          * @param {string} [fileCreatedAfter] 
          * @param {string} [fileCreatedBefore] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getMapMarkers: async (isFavorite?: boolean, fileCreatedAfter?: string, fileCreatedBefore?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getMapMarkers: async (isArchived?: boolean, isFavorite?: boolean, fileCreatedAfter?: string, fileCreatedBefore?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/asset/map-marker`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -6039,6 +6040,10 @@ export const AssetApiAxiosParamCreator = function (configuration?: Configuration
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
             // authentication cookie required
+
+            if (isArchived !== undefined) {
+                localVarQueryParameter['isArchived'] = isArchived;
+            }
 
             if (isFavorite !== undefined) {
                 localVarQueryParameter['isFavorite'] = isFavorite;
@@ -6868,14 +6873,15 @@ export const AssetApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {boolean} [isArchived] 
          * @param {boolean} [isFavorite] 
          * @param {string} [fileCreatedAfter] 
          * @param {string} [fileCreatedBefore] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getMapMarkers(isFavorite?: boolean, fileCreatedAfter?: string, fileCreatedBefore?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<MapMarkerResponseDto>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getMapMarkers(isFavorite, fileCreatedAfter, fileCreatedBefore, options);
+        async getMapMarkers(isArchived?: boolean, isFavorite?: boolean, fileCreatedAfter?: string, fileCreatedBefore?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<MapMarkerResponseDto>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getMapMarkers(isArchived, isFavorite, fileCreatedAfter, fileCreatedBefore, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -7177,14 +7183,15 @@ export const AssetApiFactory = function (configuration?: Configuration, basePath
         },
         /**
          * 
+         * @param {boolean} [isArchived] 
          * @param {boolean} [isFavorite] 
          * @param {string} [fileCreatedAfter] 
          * @param {string} [fileCreatedBefore] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getMapMarkers(isFavorite?: boolean, fileCreatedAfter?: string, fileCreatedBefore?: string, options?: any): AxiosPromise<Array<MapMarkerResponseDto>> {
-            return localVarFp.getMapMarkers(isFavorite, fileCreatedAfter, fileCreatedBefore, options).then((request) => request(axios, basePath));
+        getMapMarkers(isArchived?: boolean, isFavorite?: boolean, fileCreatedAfter?: string, fileCreatedBefore?: string, options?: any): AxiosPromise<Array<MapMarkerResponseDto>> {
+            return localVarFp.getMapMarkers(isArchived, isFavorite, fileCreatedAfter, fileCreatedBefore, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -7504,6 +7511,7 @@ export class AssetApi extends BaseAPI {
 
     /**
      * 
+     * @param {boolean} [isArchived] 
      * @param {boolean} [isFavorite] 
      * @param {string} [fileCreatedAfter] 
      * @param {string} [fileCreatedBefore] 
@@ -7511,8 +7519,8 @@ export class AssetApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof AssetApi
      */
-    public getMapMarkers(isFavorite?: boolean, fileCreatedAfter?: string, fileCreatedBefore?: string, options?: AxiosRequestConfig) {
-        return AssetApiFp(this.configuration).getMapMarkers(isFavorite, fileCreatedAfter, fileCreatedBefore, options).then((request) => request(this.axios, this.basePath));
+    public getMapMarkers(isArchived?: boolean, isFavorite?: boolean, fileCreatedAfter?: string, fileCreatedBefore?: string, options?: AxiosRequestConfig) {
+        return AssetApiFp(this.configuration).getMapMarkers(isArchived, isFavorite, fileCreatedAfter, fileCreatedBefore, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
