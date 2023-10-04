@@ -670,6 +670,12 @@ export interface AssetResponseDto {
      * @type {string}
      * @memberof AssetResponseDto
      */
+    'localDateTime': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof AssetResponseDto
+     */
     'originalFileName': string;
     /**
      * 
@@ -6074,13 +6080,16 @@ export const AssetApiAxiosParamCreator = function (configuration?: Configuration
         },
         /**
          * 
-         * @param {string} timestamp Get pictures for +24 hours from this time going back x years
+         * @param {number} day 
+         * @param {number} month 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getMemoryLane: async (timestamp: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'timestamp' is not null or undefined
-            assertParamExists('getMemoryLane', 'timestamp', timestamp)
+        getMemoryLane: async (day: number, month: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'day' is not null or undefined
+            assertParamExists('getMemoryLane', 'day', day)
+            // verify required parameter 'month' is not null or undefined
+            assertParamExists('getMemoryLane', 'month', month)
             const localVarPath = `/asset/memory-lane`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -6102,10 +6111,12 @@ export const AssetApiAxiosParamCreator = function (configuration?: Configuration
 
             // authentication cookie required
 
-            if (timestamp !== undefined) {
-                localVarQueryParameter['timestamp'] = (timestamp as any instanceof Date) ?
-                    (timestamp as any).toISOString() :
-                    timestamp;
+            if (day !== undefined) {
+                localVarQueryParameter['day'] = day;
+            }
+
+            if (month !== undefined) {
+                localVarQueryParameter['month'] = month;
             }
 
 
@@ -6886,12 +6897,13 @@ export const AssetApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {string} timestamp Get pictures for +24 hours from this time going back x years
+         * @param {number} day 
+         * @param {number} month 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getMemoryLane(timestamp: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<MemoryLaneResponseDto>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getMemoryLane(timestamp, options);
+        async getMemoryLane(day: number, month: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<MemoryLaneResponseDto>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getMemoryLane(day, month, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -7195,12 +7207,13 @@ export const AssetApiFactory = function (configuration?: Configuration, basePath
         },
         /**
          * 
-         * @param {string} timestamp Get pictures for +24 hours from this time going back x years
+         * @param {number} day 
+         * @param {number} month 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getMemoryLane(timestamp: string, options?: any): AxiosPromise<Array<MemoryLaneResponseDto>> {
-            return localVarFp.getMemoryLane(timestamp, options).then((request) => request(axios, basePath));
+        getMemoryLane(day: number, month: number, options?: any): AxiosPromise<Array<MemoryLaneResponseDto>> {
+            return localVarFp.getMemoryLane(day, month, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -7525,13 +7538,14 @@ export class AssetApi extends BaseAPI {
 
     /**
      * 
-     * @param {string} timestamp Get pictures for +24 hours from this time going back x years
+     * @param {number} day 
+     * @param {number} month 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AssetApi
      */
-    public getMemoryLane(timestamp: string, options?: AxiosRequestConfig) {
-        return AssetApiFp(this.configuration).getMemoryLane(timestamp, options).then((request) => request(this.axios, this.basePath));
+    public getMemoryLane(day: number, month: number, options?: AxiosRequestConfig) {
+        return AssetApiFp(this.configuration).getMemoryLane(day, month, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
