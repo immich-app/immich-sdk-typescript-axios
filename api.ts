@@ -10861,6 +10861,51 @@ export const SearchApiAxiosParamCreator = function (configuration?: Configuratio
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 
+         * @param {string} name 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        searchPerson: async (name: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'name' is not null or undefined
+            assertParamExists('searchPerson', 'name', name)
+            const localVarPath = `/search/person`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication api_key required
+            await setApiKeyToObject(localVarHeaderParameter, "x-api-key", configuration)
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication cookie required
+
+            if (name !== undefined) {
+                localVarQueryParameter['name'] = name;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -10905,6 +10950,16 @@ export const SearchApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.search(q, query, clip, type, isFavorite, isArchived, exifInfoCity, exifInfoState, exifInfoCountry, exifInfoMake, exifInfoModel, exifInfoProjectionType, smartInfoObjects, smartInfoTags, recent, motion, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
+        /**
+         * 
+         * @param {string} name 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async searchPerson(name: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<PersonResponseDto>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.searchPerson(name, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
     }
 };
 
@@ -10946,6 +11001,15 @@ export const SearchApiFactory = function (configuration?: Configuration, basePat
          */
         search(q?: string, query?: string, clip?: boolean, type?: 'IMAGE' | 'VIDEO' | 'AUDIO' | 'OTHER', isFavorite?: boolean, isArchived?: boolean, exifInfoCity?: string, exifInfoState?: string, exifInfoCountry?: string, exifInfoMake?: string, exifInfoModel?: string, exifInfoProjectionType?: string, smartInfoObjects?: Array<string>, smartInfoTags?: Array<string>, recent?: boolean, motion?: boolean, options?: any): AxiosPromise<SearchResponseDto> {
             return localVarFp.search(q, query, clip, type, isFavorite, isArchived, exifInfoCity, exifInfoState, exifInfoCountry, exifInfoMake, exifInfoModel, exifInfoProjectionType, smartInfoObjects, smartInfoTags, recent, motion, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} name 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        searchPerson(name: string, options?: any): AxiosPromise<Array<PersonResponseDto>> {
+            return localVarFp.searchPerson(name, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -10991,6 +11055,17 @@ export class SearchApi extends BaseAPI {
      */
     public search(q?: string, query?: string, clip?: boolean, type?: 'IMAGE' | 'VIDEO' | 'AUDIO' | 'OTHER', isFavorite?: boolean, isArchived?: boolean, exifInfoCity?: string, exifInfoState?: string, exifInfoCountry?: string, exifInfoMake?: string, exifInfoModel?: string, exifInfoProjectionType?: string, smartInfoObjects?: Array<string>, smartInfoTags?: Array<string>, recent?: boolean, motion?: boolean, options?: AxiosRequestConfig) {
         return SearchApiFp(this.configuration).search(q, query, clip, type, isFavorite, isArchived, exifInfoCity, exifInfoState, exifInfoCountry, exifInfoMake, exifInfoModel, exifInfoProjectionType, smartInfoObjects, smartInfoTags, recent, motion, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} name 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SearchApi
+     */
+    public searchPerson(name: string, options?: AxiosRequestConfig) {
+        return SearchApiFp(this.configuration).searchPerson(name, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
