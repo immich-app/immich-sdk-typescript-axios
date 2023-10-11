@@ -2564,6 +2564,12 @@ export interface SearchResponseDto {
 export interface ServerConfigDto {
     /**
      * 
+     * @type {boolean}
+     * @memberof ServerConfigDto
+     */
+    'isInitialized': boolean;
+    /**
+     * 
      * @type {string}
      * @memberof ServerConfigDto
      */
@@ -13440,6 +13446,15 @@ export const UserApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            // authentication api_key required
+            await setApiKeyToObject(localVarHeaderParameter, "x-api-key", configuration)
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication cookie required
 
             if (admin !== undefined) {
                 localVarQueryParameter['admin'] = admin;
