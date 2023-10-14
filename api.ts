@@ -1593,6 +1593,107 @@ export interface ExifResponseDto {
 /**
  * 
  * @export
+ * @interface FileChecksumDto
+ */
+export interface FileChecksumDto {
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof FileChecksumDto
+     */
+    'filenames': Array<string>;
+}
+/**
+ * 
+ * @export
+ * @interface FileChecksumResponseDto
+ */
+export interface FileChecksumResponseDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof FileChecksumResponseDto
+     */
+    'checksum': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FileChecksumResponseDto
+     */
+    'filename': string;
+}
+/**
+ * 
+ * @export
+ * @interface FileReportDto
+ */
+export interface FileReportDto {
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof FileReportDto
+     */
+    'extras': Array<string>;
+    /**
+     * 
+     * @type {Array<FileReportItemDto>}
+     * @memberof FileReportDto
+     */
+    'orphans': Array<FileReportItemDto>;
+}
+/**
+ * 
+ * @export
+ * @interface FileReportFixDto
+ */
+export interface FileReportFixDto {
+    /**
+     * 
+     * @type {Array<FileReportItemDto>}
+     * @memberof FileReportFixDto
+     */
+    'items': Array<FileReportItemDto>;
+}
+/**
+ * 
+ * @export
+ * @interface FileReportItemDto
+ */
+export interface FileReportItemDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof FileReportItemDto
+     */
+    'checksum'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof FileReportItemDto
+     */
+    'entityId': string;
+    /**
+     * 
+     * @type {PathEntityType}
+     * @memberof FileReportItemDto
+     */
+    'entityType': PathEntityType;
+    /**
+     * 
+     * @type {PathType}
+     * @memberof FileReportItemDto
+     */
+    'pathType': PathType;
+    /**
+     * 
+     * @type {string}
+     * @memberof FileReportItemDto
+     */
+    'pathValue': string;
+}
+/**
+ * 
+ * @export
  * @interface ImportAssetDto
  */
 export interface ImportAssetDto {
@@ -2168,6 +2269,40 @@ export interface OAuthConfigResponseDto {
      */
     'url'?: string;
 }
+/**
+ * 
+ * @export
+ * @enum {string}
+ */
+
+export const PathEntityType = {
+    Asset: 'asset',
+    Person: 'person',
+    User: 'user'
+} as const;
+
+export type PathEntityType = typeof PathEntityType[keyof typeof PathEntityType];
+
+
+/**
+ * 
+ * @export
+ * @enum {string}
+ */
+
+export const PathType = {
+    Original: 'original',
+    JpegThumbnail: 'jpeg_thumbnail',
+    WebpThumbnail: 'webp_thumbnail',
+    EncodedVideo: 'encoded_video',
+    Sidecar: 'sidecar',
+    Face: 'face',
+    Profile: 'profile'
+} as const;
+
+export type PathType = typeof PathType[keyof typeof PathType];
+
+
 /**
  * 
  * @export
@@ -7949,6 +8084,50 @@ export const AuditApiAxiosParamCreator = function (configuration?: Configuration
     return {
         /**
          * 
+         * @param {FileReportFixDto} fileReportFixDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        fixAuditFiles: async (fileReportFixDto: FileReportFixDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'fileReportFixDto' is not null or undefined
+            assertParamExists('fixAuditFiles', 'fileReportFixDto', fileReportFixDto)
+            const localVarPath = `/audit/file-report/fix`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication api_key required
+            await setApiKeyToObject(localVarHeaderParameter, "x-api-key", configuration)
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication cookie required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(fileReportFixDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {EntityType} entityType 
          * @param {string} after 
          * @param {string} [userId] 
@@ -8006,6 +8185,88 @@ export const AuditApiAxiosParamCreator = function (configuration?: Configuration
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAuditFiles: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/audit/file-report`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication api_key required
+            await setApiKeyToObject(localVarHeaderParameter, "x-api-key", configuration)
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication cookie required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {FileChecksumDto} fileChecksumDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getFileChecksums: async (fileChecksumDto: FileChecksumDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'fileChecksumDto' is not null or undefined
+            assertParamExists('getFileChecksums', 'fileChecksumDto', fileChecksumDto)
+            const localVarPath = `/audit/file-report/checksum`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication api_key required
+            await setApiKeyToObject(localVarHeaderParameter, "x-api-key", configuration)
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication cookie required
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(fileChecksumDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -8018,6 +8279,16 @@ export const AuditApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
+         * @param {FileReportFixDto} fileReportFixDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async fixAuditFiles(fileReportFixDto: FileReportFixDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.fixAuditFiles(fileReportFixDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @param {EntityType} entityType 
          * @param {string} after 
          * @param {string} [userId] 
@@ -8026,6 +8297,25 @@ export const AuditApiFp = function(configuration?: Configuration) {
          */
         async getAuditDeletes(entityType: EntityType, after: string, userId?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AuditDeletesResponseDto>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getAuditDeletes(entityType, after, userId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getAuditFiles(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FileReportDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAuditFiles(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {FileChecksumDto} fileChecksumDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getFileChecksums(fileChecksumDto: FileChecksumDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<FileChecksumResponseDto>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getFileChecksums(fileChecksumDto, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -8040,6 +8330,15 @@ export const AuditApiFactory = function (configuration?: Configuration, basePath
     return {
         /**
          * 
+         * @param {FileReportFixDto} fileReportFixDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        fixAuditFiles(fileReportFixDto: FileReportFixDto, options?: any): AxiosPromise<void> {
+            return localVarFp.fixAuditFiles(fileReportFixDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @param {EntityType} entityType 
          * @param {string} after 
          * @param {string} [userId] 
@@ -8048,6 +8347,23 @@ export const AuditApiFactory = function (configuration?: Configuration, basePath
          */
         getAuditDeletes(entityType: EntityType, after: string, userId?: string, options?: any): AxiosPromise<AuditDeletesResponseDto> {
             return localVarFp.getAuditDeletes(entityType, after, userId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAuditFiles(options?: any): AxiosPromise<FileReportDto> {
+            return localVarFp.getAuditFiles(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {FileChecksumDto} fileChecksumDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getFileChecksums(fileChecksumDto: FileChecksumDto, options?: any): AxiosPromise<Array<FileChecksumResponseDto>> {
+            return localVarFp.getFileChecksums(fileChecksumDto, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -8061,6 +8377,17 @@ export const AuditApiFactory = function (configuration?: Configuration, basePath
 export class AuditApi extends BaseAPI {
     /**
      * 
+     * @param {FileReportFixDto} fileReportFixDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AuditApi
+     */
+    public fixAuditFiles(fileReportFixDto: FileReportFixDto, options?: AxiosRequestConfig) {
+        return AuditApiFp(this.configuration).fixAuditFiles(fileReportFixDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
      * @param {EntityType} entityType 
      * @param {string} after 
      * @param {string} [userId] 
@@ -8070,6 +8397,27 @@ export class AuditApi extends BaseAPI {
      */
     public getAuditDeletes(entityType: EntityType, after: string, userId?: string, options?: AxiosRequestConfig) {
         return AuditApiFp(this.configuration).getAuditDeletes(entityType, after, userId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AuditApi
+     */
+    public getAuditFiles(options?: AxiosRequestConfig) {
+        return AuditApiFp(this.configuration).getAuditFiles(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {FileChecksumDto} fileChecksumDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AuditApi
+     */
+    public getFileChecksums(fileChecksumDto: FileChecksumDto, options?: AxiosRequestConfig) {
+        return AuditApiFp(this.configuration).getFileChecksums(fileChecksumDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
