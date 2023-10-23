@@ -3283,6 +3283,12 @@ export interface SystemConfigDto {
     'storageTemplate': SystemConfigStorageTemplateDto;
     /**
      * 
+     * @type {SystemConfigThemeDto}
+     * @memberof SystemConfigDto
+     */
+    'theme': SystemConfigThemeDto;
+    /**
+     * 
      * @type {SystemConfigThumbnailDto}
      * @memberof SystemConfigDto
      */
@@ -3710,6 +3716,19 @@ export interface SystemConfigTemplateStorageOptionDto {
      * @memberof SystemConfigTemplateStorageOptionDto
      */
     'yearOptions': Array<string>;
+}
+/**
+ * 
+ * @export
+ * @interface SystemConfigThemeDto
+ */
+export interface SystemConfigThemeDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof SystemConfigThemeDto
+     */
+    'customCss': string;
 }
 /**
  * 
