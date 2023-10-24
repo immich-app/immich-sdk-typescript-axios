@@ -2448,6 +2448,19 @@ export interface PersonResponseDto {
 /**
  * 
  * @export
+ * @interface PersonStatisticsResponseDto
+ */
+export interface PersonStatisticsResponseDto {
+    /**
+     * 
+     * @type {number}
+     * @memberof PersonStatisticsResponseDto
+     */
+    'assets': number;
+}
+/**
+ * 
+ * @export
  * @interface PersonUpdateDto
  */
 export interface PersonUpdateDto {
@@ -10802,6 +10815,48 @@ export const PersonApiAxiosParamCreator = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+        getPersonStatistics: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('getPersonStatistics', 'id', id)
+            const localVarPath = `/person/{id}/statistics`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication api_key required
+            await setApiKeyToObject(localVarHeaderParameter, "x-api-key", configuration)
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication cookie required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
         getPersonThumbnail: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('getPersonThumbnail', 'id', id)
@@ -11024,6 +11079,16 @@ export const PersonApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+        async getPersonStatistics(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PersonStatisticsResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getPersonStatistics(id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
         async getPersonThumbnail(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<File>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getPersonThumbnail(id, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
@@ -11096,6 +11161,15 @@ export const PersonApiFactory = function (configuration?: Configuration, basePat
          */
         getPersonAssets(id: string, options?: any): AxiosPromise<Array<AssetResponseDto>> {
             return localVarFp.getPersonAssets(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getPersonStatistics(id: string, options?: any): AxiosPromise<PersonStatisticsResponseDto> {
+            return localVarFp.getPersonStatistics(id, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -11176,6 +11250,17 @@ export class PersonApi extends BaseAPI {
      */
     public getPersonAssets(id: string, options?: AxiosRequestConfig) {
         return PersonApiFp(this.configuration).getPersonAssets(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof PersonApi
+     */
+    public getPersonStatistics(id: string, options?: AxiosRequestConfig) {
+        return PersonApiFp(this.configuration).getPersonStatistics(id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -11391,10 +11476,11 @@ export const SearchApiAxiosParamCreator = function (configuration?: Configuratio
         /**
          * 
          * @param {string} name 
+         * @param {boolean} [withHidden] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        searchPerson: async (name: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        searchPerson: async (name: string, withHidden?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'name' is not null or undefined
             assertParamExists('searchPerson', 'name', name)
             const localVarPath = `/search/person`;
@@ -11420,6 +11506,10 @@ export const SearchApiAxiosParamCreator = function (configuration?: Configuratio
 
             if (name !== undefined) {
                 localVarQueryParameter['name'] = name;
+            }
+
+            if (withHidden !== undefined) {
+                localVarQueryParameter['withHidden'] = withHidden;
             }
 
 
@@ -11480,11 +11570,12 @@ export const SearchApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {string} name 
+         * @param {boolean} [withHidden] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async searchPerson(name: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<PersonResponseDto>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.searchPerson(name, options);
+        async searchPerson(name: string, withHidden?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<PersonResponseDto>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.searchPerson(name, withHidden, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -11532,11 +11623,12 @@ export const SearchApiFactory = function (configuration?: Configuration, basePat
         /**
          * 
          * @param {string} name 
+         * @param {boolean} [withHidden] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        searchPerson(name: string, options?: any): AxiosPromise<Array<PersonResponseDto>> {
-            return localVarFp.searchPerson(name, options).then((request) => request(axios, basePath));
+        searchPerson(name: string, withHidden?: boolean, options?: any): AxiosPromise<Array<PersonResponseDto>> {
+            return localVarFp.searchPerson(name, withHidden, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -11587,12 +11679,13 @@ export class SearchApi extends BaseAPI {
     /**
      * 
      * @param {string} name 
+     * @param {boolean} [withHidden] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SearchApi
      */
-    public searchPerson(name: string, options?: AxiosRequestConfig) {
-        return SearchApiFp(this.configuration).searchPerson(name, options).then((request) => request(this.axios, this.basePath));
+    public searchPerson(name: string, withHidden?: boolean, options?: AxiosRequestConfig) {
+        return SearchApiFp(this.configuration).searchPerson(name, withHidden, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
