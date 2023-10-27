@@ -2944,10 +2944,10 @@ export interface ServerStatsResponseDto {
 export interface ServerThemeDto {
     /**
      * 
-     * @type {SystemConfigThemeDto}
+     * @type {string}
      * @memberof ServerThemeDto
      */
-    'theme': SystemConfigThemeDto;
+    'customCss': string;
 }
 /**
  * 
