@@ -3018,6 +3018,12 @@ export interface SharedLinkCreateDto {
     'expiresAt'?: string | null;
     /**
      * 
+     * @type {string}
+     * @memberof SharedLinkCreateDto
+     */
+    'password'?: string;
+    /**
+     * 
      * @type {boolean}
      * @memberof SharedLinkCreateDto
      */
@@ -3065,6 +3071,12 @@ export interface SharedLinkEditDto {
      * @memberof SharedLinkEditDto
      */
     'expiresAt'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof SharedLinkEditDto
+     */
+    'password'?: string;
     /**
      * 
      * @type {boolean}
@@ -3134,10 +3146,22 @@ export interface SharedLinkResponseDto {
     'key': string;
     /**
      * 
+     * @type {string}
+     * @memberof SharedLinkResponseDto
+     */
+    'password': string | null;
+    /**
+     * 
      * @type {boolean}
      * @memberof SharedLinkResponseDto
      */
     'showMetadata': boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof SharedLinkResponseDto
+     */
+    'token'?: string | null;
     /**
      * 
      * @type {SharedLinkType}
@@ -12246,11 +12270,13 @@ export const SharedLinkApiAxiosParamCreator = function (configuration?: Configur
         },
         /**
          * 
+         * @param {string} [password] 
+         * @param {string} [token] 
          * @param {string} [key] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getMySharedLink: async (key?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getMySharedLink: async (password?: string, token?: string, key?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/shared-link/me`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -12271,6 +12297,14 @@ export const SharedLinkApiAxiosParamCreator = function (configuration?: Configur
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
             // authentication cookie required
+
+            if (password !== undefined) {
+                localVarQueryParameter['password'] = password;
+            }
+
+            if (token !== undefined) {
+                localVarQueryParameter['token'] = token;
+            }
 
             if (key !== undefined) {
                 localVarQueryParameter['key'] = key;
@@ -12515,12 +12549,14 @@ export const SharedLinkApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {string} [password] 
+         * @param {string} [token] 
          * @param {string} [key] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getMySharedLink(key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SharedLinkResponseDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getMySharedLink(key, options);
+        async getMySharedLink(password?: string, token?: string, key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SharedLinkResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getMySharedLink(password, token, key, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -12606,12 +12642,14 @@ export const SharedLinkApiFactory = function (configuration?: Configuration, bas
         },
         /**
          * 
+         * @param {string} [password] 
+         * @param {string} [token] 
          * @param {string} [key] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getMySharedLink(key?: string, options?: any): AxiosPromise<SharedLinkResponseDto> {
-            return localVarFp.getMySharedLink(key, options).then((request) => request(axios, basePath));
+        getMySharedLink(password?: string, token?: string, key?: string, options?: any): AxiosPromise<SharedLinkResponseDto> {
+            return localVarFp.getMySharedLink(password, token, key, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -12698,13 +12736,15 @@ export class SharedLinkApi extends BaseAPI {
 
     /**
      * 
+     * @param {string} [password] 
+     * @param {string} [token] 
      * @param {string} [key] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SharedLinkApi
      */
-    public getMySharedLink(key?: string, options?: AxiosRequestConfig) {
-        return SharedLinkApiFp(this.configuration).getMySharedLink(key, options).then((request) => request(this.axios, this.basePath));
+    public getMySharedLink(password?: string, token?: string, key?: string, options?: AxiosRequestConfig) {
+        return SharedLinkApiFp(this.configuration).getMySharedLink(password, token, key, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
