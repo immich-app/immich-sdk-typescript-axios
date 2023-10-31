@@ -3259,6 +3259,12 @@ export interface SystemConfigDto {
     'job': SystemConfigJobDto;
     /**
      * 
+     * @type {SystemConfigLibraryDto}
+     * @memberof SystemConfigDto
+     */
+    'library': SystemConfigLibraryDto;
+    /**
+     * 
      * @type {SystemConfigMachineLearningDto}
      * @memberof SystemConfigDto
      */
@@ -3505,6 +3511,38 @@ export interface SystemConfigJobDto {
      * @memberof SystemConfigJobDto
      */
     'videoConversion': JobSettingsDto;
+}
+/**
+ * 
+ * @export
+ * @interface SystemConfigLibraryDto
+ */
+export interface SystemConfigLibraryDto {
+    /**
+     * 
+     * @type {SystemConfigLibraryScanDto}
+     * @memberof SystemConfigLibraryDto
+     */
+    'scan': SystemConfigLibraryScanDto;
+}
+/**
+ * 
+ * @export
+ * @interface SystemConfigLibraryScanDto
+ */
+export interface SystemConfigLibraryScanDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof SystemConfigLibraryScanDto
+     */
+    'cronExpression': string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof SystemConfigLibraryScanDto
+     */
+    'enabled': boolean;
 }
 /**
  * 
