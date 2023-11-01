@@ -4979,10 +4979,11 @@ export const ActivityApiAxiosParamCreator = function (configuration?: Configurat
          * @param {string} albumId 
          * @param {string} [assetId] 
          * @param {ReactionType} [type] 
+         * @param {string} [userId] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getActivities: async (albumId: string, assetId?: string, type?: ReactionType, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getActivities: async (albumId: string, assetId?: string, type?: ReactionType, userId?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'albumId' is not null or undefined
             assertParamExists('getActivities', 'albumId', albumId)
             const localVarPath = `/activity`;
@@ -5016,6 +5017,10 @@ export const ActivityApiAxiosParamCreator = function (configuration?: Configurat
 
             if (type !== undefined) {
                 localVarQueryParameter['type'] = type;
+            }
+
+            if (userId !== undefined) {
+                localVarQueryParameter['userId'] = userId;
             }
 
 
@@ -5114,11 +5119,12 @@ export const ActivityApiFp = function(configuration?: Configuration) {
          * @param {string} albumId 
          * @param {string} [assetId] 
          * @param {ReactionType} [type] 
+         * @param {string} [userId] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getActivities(albumId: string, assetId?: string, type?: ReactionType, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ActivityResponseDto>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getActivities(albumId, assetId, type, options);
+        async getActivities(albumId: string, assetId?: string, type?: ReactionType, userId?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ActivityResponseDto>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getActivities(albumId, assetId, type, userId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -5165,11 +5171,12 @@ export const ActivityApiFactory = function (configuration?: Configuration, baseP
          * @param {string} albumId 
          * @param {string} [assetId] 
          * @param {ReactionType} [type] 
+         * @param {string} [userId] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getActivities(albumId: string, assetId?: string, type?: ReactionType, options?: any): AxiosPromise<Array<ActivityResponseDto>> {
-            return localVarFp.getActivities(albumId, assetId, type, options).then((request) => request(axios, basePath));
+        getActivities(albumId: string, assetId?: string, type?: ReactionType, userId?: string, options?: any): AxiosPromise<Array<ActivityResponseDto>> {
+            return localVarFp.getActivities(albumId, assetId, type, userId, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -5218,12 +5225,13 @@ export class ActivityApi extends BaseAPI {
      * @param {string} albumId 
      * @param {string} [assetId] 
      * @param {ReactionType} [type] 
+     * @param {string} [userId] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ActivityApi
      */
-    public getActivities(albumId: string, assetId?: string, type?: ReactionType, options?: AxiosRequestConfig) {
-        return ActivityApiFp(this.configuration).getActivities(albumId, assetId, type, options).then((request) => request(this.axios, this.basePath));
+    public getActivities(albumId: string, assetId?: string, type?: ReactionType, userId?: string, options?: AxiosRequestConfig) {
+        return ActivityApiFp(this.configuration).getActivities(albumId, assetId, type, userId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
