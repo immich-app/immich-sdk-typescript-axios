@@ -4492,9 +4492,9 @@ export const APIKeyApiAxiosParamCreator = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createKey: async (aPIKeyCreateDto: APIKeyCreateDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        createApiKey: async (aPIKeyCreateDto: APIKeyCreateDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'aPIKeyCreateDto' is not null or undefined
-            assertParamExists('createKey', 'aPIKeyCreateDto', aPIKeyCreateDto)
+            assertParamExists('createApiKey', 'aPIKeyCreateDto', aPIKeyCreateDto)
             const localVarPath = `/api-key`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -4536,9 +4536,9 @@ export const APIKeyApiAxiosParamCreator = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteKey: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        deleteApiKey: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('deleteKey', 'id', id)
+            assertParamExists('deleteApiKey', 'id', id)
             const localVarPath = `/api-key/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -4578,9 +4578,9 @@ export const APIKeyApiAxiosParamCreator = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getKey: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getApiKey: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('getKey', 'id', id)
+            assertParamExists('getApiKey', 'id', id)
             const localVarPath = `/api-key/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -4619,7 +4619,7 @@ export const APIKeyApiAxiosParamCreator = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getKeys: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getApiKeys: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api-key`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -4659,11 +4659,11 @@ export const APIKeyApiAxiosParamCreator = function (configuration?: Configuratio
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateKey: async (id: string, aPIKeyUpdateDto: APIKeyUpdateDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        updateApiKey: async (id: string, aPIKeyUpdateDto: APIKeyUpdateDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('updateKey', 'id', id)
+            assertParamExists('updateApiKey', 'id', id)
             // verify required parameter 'aPIKeyUpdateDto' is not null or undefined
-            assertParamExists('updateKey', 'aPIKeyUpdateDto', aPIKeyUpdateDto)
+            assertParamExists('updateApiKey', 'aPIKeyUpdateDto', aPIKeyUpdateDto)
             const localVarPath = `/api-key/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -4716,8 +4716,8 @@ export const APIKeyApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async createKey(aPIKeyCreateDto: APIKeyCreateDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<APIKeyCreateResponseDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.createKey(aPIKeyCreateDto, options);
+        async createApiKey(aPIKeyCreateDto: APIKeyCreateDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<APIKeyCreateResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createApiKey(aPIKeyCreateDto, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -4726,8 +4726,8 @@ export const APIKeyApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteKey(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteKey(id, options);
+        async deleteApiKey(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteApiKey(id, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -4736,8 +4736,8 @@ export const APIKeyApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getKey(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<APIKeyResponseDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getKey(id, options);
+        async getApiKey(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<APIKeyResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getApiKey(id, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -4745,8 +4745,8 @@ export const APIKeyApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getKeys(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<APIKeyResponseDto>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getKeys(options);
+        async getApiKeys(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<APIKeyResponseDto>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getApiKeys(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -4756,8 +4756,8 @@ export const APIKeyApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async updateKey(id: string, aPIKeyUpdateDto: APIKeyUpdateDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<APIKeyResponseDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.updateKey(id, aPIKeyUpdateDto, options);
+        async updateApiKey(id: string, aPIKeyUpdateDto: APIKeyUpdateDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<APIKeyResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.updateApiKey(id, aPIKeyUpdateDto, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -4776,8 +4776,8 @@ export const APIKeyApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        createKey(aPIKeyCreateDto: APIKeyCreateDto, options?: any): AxiosPromise<APIKeyCreateResponseDto> {
-            return localVarFp.createKey(aPIKeyCreateDto, options).then((request) => request(axios, basePath));
+        createApiKey(aPIKeyCreateDto: APIKeyCreateDto, options?: any): AxiosPromise<APIKeyCreateResponseDto> {
+            return localVarFp.createApiKey(aPIKeyCreateDto, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -4785,8 +4785,8 @@ export const APIKeyApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteKey(id: string, options?: any): AxiosPromise<void> {
-            return localVarFp.deleteKey(id, options).then((request) => request(axios, basePath));
+        deleteApiKey(id: string, options?: any): AxiosPromise<void> {
+            return localVarFp.deleteApiKey(id, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -4794,16 +4794,16 @@ export const APIKeyApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getKey(id: string, options?: any): AxiosPromise<APIKeyResponseDto> {
-            return localVarFp.getKey(id, options).then((request) => request(axios, basePath));
+        getApiKey(id: string, options?: any): AxiosPromise<APIKeyResponseDto> {
+            return localVarFp.getApiKey(id, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getKeys(options?: any): AxiosPromise<Array<APIKeyResponseDto>> {
-            return localVarFp.getKeys(options).then((request) => request(axios, basePath));
+        getApiKeys(options?: any): AxiosPromise<Array<APIKeyResponseDto>> {
+            return localVarFp.getApiKeys(options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -4812,8 +4812,8 @@ export const APIKeyApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        updateKey(id: string, aPIKeyUpdateDto: APIKeyUpdateDto, options?: any): AxiosPromise<APIKeyResponseDto> {
-            return localVarFp.updateKey(id, aPIKeyUpdateDto, options).then((request) => request(axios, basePath));
+        updateApiKey(id: string, aPIKeyUpdateDto: APIKeyUpdateDto, options?: any): AxiosPromise<APIKeyResponseDto> {
+            return localVarFp.updateApiKey(id, aPIKeyUpdateDto, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -4832,8 +4832,8 @@ export class APIKeyApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof APIKeyApi
      */
-    public createKey(aPIKeyCreateDto: APIKeyCreateDto, options?: AxiosRequestConfig) {
-        return APIKeyApiFp(this.configuration).createKey(aPIKeyCreateDto, options).then((request) => request(this.axios, this.basePath));
+    public createApiKey(aPIKeyCreateDto: APIKeyCreateDto, options?: AxiosRequestConfig) {
+        return APIKeyApiFp(this.configuration).createApiKey(aPIKeyCreateDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -4843,8 +4843,8 @@ export class APIKeyApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof APIKeyApi
      */
-    public deleteKey(id: string, options?: AxiosRequestConfig) {
-        return APIKeyApiFp(this.configuration).deleteKey(id, options).then((request) => request(this.axios, this.basePath));
+    public deleteApiKey(id: string, options?: AxiosRequestConfig) {
+        return APIKeyApiFp(this.configuration).deleteApiKey(id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -4854,8 +4854,8 @@ export class APIKeyApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof APIKeyApi
      */
-    public getKey(id: string, options?: AxiosRequestConfig) {
-        return APIKeyApiFp(this.configuration).getKey(id, options).then((request) => request(this.axios, this.basePath));
+    public getApiKey(id: string, options?: AxiosRequestConfig) {
+        return APIKeyApiFp(this.configuration).getApiKey(id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -4864,8 +4864,8 @@ export class APIKeyApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof APIKeyApi
      */
-    public getKeys(options?: AxiosRequestConfig) {
-        return APIKeyApiFp(this.configuration).getKeys(options).then((request) => request(this.axios, this.basePath));
+    public getApiKeys(options?: AxiosRequestConfig) {
+        return APIKeyApiFp(this.configuration).getApiKeys(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -4876,8 +4876,8 @@ export class APIKeyApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof APIKeyApi
      */
-    public updateKey(id: string, aPIKeyUpdateDto: APIKeyUpdateDto, options?: AxiosRequestConfig) {
-        return APIKeyApiFp(this.configuration).updateKey(id, aPIKeyUpdateDto, options).then((request) => request(this.axios, this.basePath));
+    public updateApiKey(id: string, aPIKeyUpdateDto: APIKeyUpdateDto, options?: AxiosRequestConfig) {
+        return APIKeyApiFp(this.configuration).updateApiKey(id, aPIKeyUpdateDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -6089,9 +6089,9 @@ export const AssetApiAxiosParamCreator = function (configuration?: Configuration
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bulkUploadCheck: async (assetBulkUploadCheckDto: AssetBulkUploadCheckDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        checkBulkUpload: async (assetBulkUploadCheckDto: AssetBulkUploadCheckDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'assetBulkUploadCheckDto' is not null or undefined
-            assertParamExists('bulkUploadCheck', 'assetBulkUploadCheckDto', assetBulkUploadCheckDto)
+            assertParamExists('checkBulkUpload', 'assetBulkUploadCheckDto', assetBulkUploadCheckDto)
             const localVarPath = `/asset/bulk-upload-check`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -6512,7 +6512,7 @@ export const AssetApiAxiosParamCreator = function (configuration?: Configuration
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getAssetStats: async (isArchived?: boolean, isFavorite?: boolean, isTrashed?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getAssetStatistics: async (isArchived?: boolean, isFavorite?: boolean, isTrashed?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/asset/statistics`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -6592,98 +6592,6 @@ export const AssetApiAxiosParamCreator = function (configuration?: Configuration
 
             if (format !== undefined) {
                 localVarQueryParameter['format'] = format;
-            }
-
-            if (key !== undefined) {
-                localVarQueryParameter['key'] = key;
-            }
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {TimeBucketSize} size 
-         * @param {string} timeBucket 
-         * @param {string} [userId] 
-         * @param {string} [albumId] 
-         * @param {string} [personId] 
-         * @param {boolean} [isArchived] 
-         * @param {boolean} [isFavorite] 
-         * @param {boolean} [isTrashed] 
-         * @param {boolean} [withStacked] 
-         * @param {string} [key] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getByTimeBucket: async (size: TimeBucketSize, timeBucket: string, userId?: string, albumId?: string, personId?: string, isArchived?: boolean, isFavorite?: boolean, isTrashed?: boolean, withStacked?: boolean, key?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'size' is not null or undefined
-            assertParamExists('getByTimeBucket', 'size', size)
-            // verify required parameter 'timeBucket' is not null or undefined
-            assertParamExists('getByTimeBucket', 'timeBucket', timeBucket)
-            const localVarPath = `/asset/time-bucket`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication api_key required
-            await setApiKeyToObject(localVarHeaderParameter, "x-api-key", configuration)
-
-            // authentication bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication cookie required
-
-            if (size !== undefined) {
-                localVarQueryParameter['size'] = size;
-            }
-
-            if (userId !== undefined) {
-                localVarQueryParameter['userId'] = userId;
-            }
-
-            if (albumId !== undefined) {
-                localVarQueryParameter['albumId'] = albumId;
-            }
-
-            if (personId !== undefined) {
-                localVarQueryParameter['personId'] = personId;
-            }
-
-            if (isArchived !== undefined) {
-                localVarQueryParameter['isArchived'] = isArchived;
-            }
-
-            if (isFavorite !== undefined) {
-                localVarQueryParameter['isFavorite'] = isFavorite;
-            }
-
-            if (isTrashed !== undefined) {
-                localVarQueryParameter['isTrashed'] = isTrashed;
-            }
-
-            if (withStacked !== undefined) {
-                localVarQueryParameter['withStacked'] = withStacked;
-            }
-
-            if (timeBucket !== undefined) {
-                localVarQueryParameter['timeBucket'] = timeBucket;
             }
 
             if (key !== undefined) {
@@ -6970,6 +6878,98 @@ export const AssetApiAxiosParamCreator = function (configuration?: Configuration
 
             if (count !== undefined) {
                 localVarQueryParameter['count'] = count;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {TimeBucketSize} size 
+         * @param {string} timeBucket 
+         * @param {string} [userId] 
+         * @param {string} [albumId] 
+         * @param {string} [personId] 
+         * @param {boolean} [isArchived] 
+         * @param {boolean} [isFavorite] 
+         * @param {boolean} [isTrashed] 
+         * @param {boolean} [withStacked] 
+         * @param {string} [key] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getTimeBucket: async (size: TimeBucketSize, timeBucket: string, userId?: string, albumId?: string, personId?: string, isArchived?: boolean, isFavorite?: boolean, isTrashed?: boolean, withStacked?: boolean, key?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'size' is not null or undefined
+            assertParamExists('getTimeBucket', 'size', size)
+            // verify required parameter 'timeBucket' is not null or undefined
+            assertParamExists('getTimeBucket', 'timeBucket', timeBucket)
+            const localVarPath = `/asset/time-bucket`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication api_key required
+            await setApiKeyToObject(localVarHeaderParameter, "x-api-key", configuration)
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication cookie required
+
+            if (size !== undefined) {
+                localVarQueryParameter['size'] = size;
+            }
+
+            if (userId !== undefined) {
+                localVarQueryParameter['userId'] = userId;
+            }
+
+            if (albumId !== undefined) {
+                localVarQueryParameter['albumId'] = albumId;
+            }
+
+            if (personId !== undefined) {
+                localVarQueryParameter['personId'] = personId;
+            }
+
+            if (isArchived !== undefined) {
+                localVarQueryParameter['isArchived'] = isArchived;
+            }
+
+            if (isFavorite !== undefined) {
+                localVarQueryParameter['isFavorite'] = isFavorite;
+            }
+
+            if (isTrashed !== undefined) {
+                localVarQueryParameter['isTrashed'] = isTrashed;
+            }
+
+            if (withStacked !== undefined) {
+                localVarQueryParameter['withStacked'] = withStacked;
+            }
+
+            if (timeBucket !== undefined) {
+                localVarQueryParameter['timeBucket'] = timeBucket;
+            }
+
+            if (key !== undefined) {
+                localVarQueryParameter['key'] = key;
             }
 
 
@@ -7667,8 +7667,8 @@ export const AssetApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async bulkUploadCheck(assetBulkUploadCheckDto: AssetBulkUploadCheckDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AssetBulkUploadCheckResponseDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.bulkUploadCheck(assetBulkUploadCheckDto, options);
+        async checkBulkUpload(assetBulkUploadCheckDto: AssetBulkUploadCheckDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AssetBulkUploadCheckResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.checkBulkUpload(assetBulkUploadCheckDto, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -7765,8 +7765,8 @@ export const AssetApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getAssetStats(isArchived?: boolean, isFavorite?: boolean, isTrashed?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AssetStatsResponseDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getAssetStats(isArchived, isFavorite, isTrashed, options);
+        async getAssetStatistics(isArchived?: boolean, isFavorite?: boolean, isTrashed?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AssetStatsResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAssetStatistics(isArchived, isFavorite, isTrashed, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -7779,25 +7779,6 @@ export const AssetApiFp = function(configuration?: Configuration) {
          */
         async getAssetThumbnail(id: string, format?: ThumbnailFormat, key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<File>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getAssetThumbnail(id, format, key, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {TimeBucketSize} size 
-         * @param {string} timeBucket 
-         * @param {string} [userId] 
-         * @param {string} [albumId] 
-         * @param {string} [personId] 
-         * @param {boolean} [isArchived] 
-         * @param {boolean} [isFavorite] 
-         * @param {boolean} [isTrashed] 
-         * @param {boolean} [withStacked] 
-         * @param {string} [key] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getByTimeBucket(size: TimeBucketSize, timeBucket: string, userId?: string, albumId?: string, personId?: string, isArchived?: boolean, isFavorite?: boolean, isTrashed?: boolean, withStacked?: boolean, key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<AssetResponseDto>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getByTimeBucket(size, timeBucket, userId, albumId, personId, isArchived, isFavorite, isTrashed, withStacked, key, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -7861,6 +7842,25 @@ export const AssetApiFp = function(configuration?: Configuration) {
          */
         async getRandom(count?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<AssetResponseDto>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getRandom(count, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {TimeBucketSize} size 
+         * @param {string} timeBucket 
+         * @param {string} [userId] 
+         * @param {string} [albumId] 
+         * @param {string} [personId] 
+         * @param {boolean} [isArchived] 
+         * @param {boolean} [isFavorite] 
+         * @param {boolean} [isTrashed] 
+         * @param {boolean} [withStacked] 
+         * @param {string} [key] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getTimeBucket(size: TimeBucketSize, timeBucket: string, userId?: string, albumId?: string, personId?: string, isArchived?: boolean, isFavorite?: boolean, isTrashed?: boolean, withStacked?: boolean, key?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<AssetResponseDto>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getTimeBucket(size, timeBucket, userId, albumId, personId, isArchived, isFavorite, isTrashed, withStacked, key, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -8025,8 +8025,8 @@ export const AssetApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        bulkUploadCheck(assetBulkUploadCheckDto: AssetBulkUploadCheckDto, options?: any): AxiosPromise<AssetBulkUploadCheckResponseDto> {
-            return localVarFp.bulkUploadCheck(assetBulkUploadCheckDto, options).then((request) => request(axios, basePath));
+        checkBulkUpload(assetBulkUploadCheckDto: AssetBulkUploadCheckDto, options?: any): AxiosPromise<AssetBulkUploadCheckResponseDto> {
+            return localVarFp.checkBulkUpload(assetBulkUploadCheckDto, options).then((request) => request(axios, basePath));
         },
         /**
          * Checks if multiple assets exist on the server and returns all existing - used by background backup
@@ -8114,8 +8114,8 @@ export const AssetApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getAssetStats(isArchived?: boolean, isFavorite?: boolean, isTrashed?: boolean, options?: any): AxiosPromise<AssetStatsResponseDto> {
-            return localVarFp.getAssetStats(isArchived, isFavorite, isTrashed, options).then((request) => request(axios, basePath));
+        getAssetStatistics(isArchived?: boolean, isFavorite?: boolean, isTrashed?: boolean, options?: any): AxiosPromise<AssetStatsResponseDto> {
+            return localVarFp.getAssetStatistics(isArchived, isFavorite, isTrashed, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -8127,24 +8127,6 @@ export const AssetApiFactory = function (configuration?: Configuration, basePath
          */
         getAssetThumbnail(id: string, format?: ThumbnailFormat, key?: string, options?: any): AxiosPromise<File> {
             return localVarFp.getAssetThumbnail(id, format, key, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {TimeBucketSize} size 
-         * @param {string} timeBucket 
-         * @param {string} [userId] 
-         * @param {string} [albumId] 
-         * @param {string} [personId] 
-         * @param {boolean} [isArchived] 
-         * @param {boolean} [isFavorite] 
-         * @param {boolean} [isTrashed] 
-         * @param {boolean} [withStacked] 
-         * @param {string} [key] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getByTimeBucket(size: TimeBucketSize, timeBucket: string, userId?: string, albumId?: string, personId?: string, isArchived?: boolean, isFavorite?: boolean, isTrashed?: boolean, withStacked?: boolean, key?: string, options?: any): AxiosPromise<Array<AssetResponseDto>> {
-            return localVarFp.getByTimeBucket(size, timeBucket, userId, albumId, personId, isArchived, isFavorite, isTrashed, withStacked, key, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -8202,6 +8184,24 @@ export const AssetApiFactory = function (configuration?: Configuration, basePath
          */
         getRandom(count?: number, options?: any): AxiosPromise<Array<AssetResponseDto>> {
             return localVarFp.getRandom(count, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {TimeBucketSize} size 
+         * @param {string} timeBucket 
+         * @param {string} [userId] 
+         * @param {string} [albumId] 
+         * @param {string} [personId] 
+         * @param {boolean} [isArchived] 
+         * @param {boolean} [isFavorite] 
+         * @param {boolean} [isTrashed] 
+         * @param {boolean} [withStacked] 
+         * @param {string} [key] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getTimeBucket(size: TimeBucketSize, timeBucket: string, userId?: string, albumId?: string, personId?: string, isArchived?: boolean, isFavorite?: boolean, isTrashed?: boolean, withStacked?: boolean, key?: string, options?: any): AxiosPromise<Array<AssetResponseDto>> {
+            return localVarFp.getTimeBucket(size, timeBucket, userId, albumId, personId, isArchived, isFavorite, isTrashed, withStacked, key, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -8354,8 +8354,8 @@ export class AssetApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof AssetApi
      */
-    public bulkUploadCheck(assetBulkUploadCheckDto: AssetBulkUploadCheckDto, options?: AxiosRequestConfig) {
-        return AssetApiFp(this.configuration).bulkUploadCheck(assetBulkUploadCheckDto, options).then((request) => request(this.axios, this.basePath));
+    public checkBulkUpload(assetBulkUploadCheckDto: AssetBulkUploadCheckDto, options?: AxiosRequestConfig) {
+        return AssetApiFp(this.configuration).checkBulkUpload(assetBulkUploadCheckDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -8461,8 +8461,8 @@ export class AssetApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof AssetApi
      */
-    public getAssetStats(isArchived?: boolean, isFavorite?: boolean, isTrashed?: boolean, options?: AxiosRequestConfig) {
-        return AssetApiFp(this.configuration).getAssetStats(isArchived, isFavorite, isTrashed, options).then((request) => request(this.axios, this.basePath));
+    public getAssetStatistics(isArchived?: boolean, isFavorite?: boolean, isTrashed?: boolean, options?: AxiosRequestConfig) {
+        return AssetApiFp(this.configuration).getAssetStatistics(isArchived, isFavorite, isTrashed, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -8476,26 +8476,6 @@ export class AssetApi extends BaseAPI {
      */
     public getAssetThumbnail(id: string, format?: ThumbnailFormat, key?: string, options?: AxiosRequestConfig) {
         return AssetApiFp(this.configuration).getAssetThumbnail(id, format, key, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {TimeBucketSize} size 
-     * @param {string} timeBucket 
-     * @param {string} [userId] 
-     * @param {string} [albumId] 
-     * @param {string} [personId] 
-     * @param {boolean} [isArchived] 
-     * @param {boolean} [isFavorite] 
-     * @param {boolean} [isTrashed] 
-     * @param {boolean} [withStacked] 
-     * @param {string} [key] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof AssetApi
-     */
-    public getByTimeBucket(size: TimeBucketSize, timeBucket: string, userId?: string, albumId?: string, personId?: string, isArchived?: boolean, isFavorite?: boolean, isTrashed?: boolean, withStacked?: boolean, key?: string, options?: AxiosRequestConfig) {
-        return AssetApiFp(this.configuration).getByTimeBucket(size, timeBucket, userId, albumId, personId, isArchived, isFavorite, isTrashed, withStacked, key, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -8565,6 +8545,26 @@ export class AssetApi extends BaseAPI {
      */
     public getRandom(count?: number, options?: AxiosRequestConfig) {
         return AssetApiFp(this.configuration).getRandom(count, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {TimeBucketSize} size 
+     * @param {string} timeBucket 
+     * @param {string} [userId] 
+     * @param {string} [albumId] 
+     * @param {string} [personId] 
+     * @param {boolean} [isArchived] 
+     * @param {boolean} [isFavorite] 
+     * @param {boolean} [isTrashed] 
+     * @param {boolean} [withStacked] 
+     * @param {string} [key] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AssetApi
+     */
+    public getTimeBucket(size: TimeBucketSize, timeBucket: string, userId?: string, albumId?: string, personId?: string, isArchived?: boolean, isFavorite?: boolean, isTrashed?: boolean, withStacked?: boolean, key?: string, options?: AxiosRequestConfig) {
+        return AssetApiFp(this.configuration).getTimeBucket(size, timeBucket, userId, albumId, personId, isArchived, isFavorite, isTrashed, withStacked, key, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -9081,41 +9081,6 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
     return {
         /**
          * 
-         * @param {SignUpDto} signUpDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        adminSignUp: async (signUpDto: SignUpDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'signUpDto' is not null or undefined
-            assertParamExists('adminSignUp', 'signUpDto', signUpDto)
-            const localVarPath = `/auth/admin-sign-up`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(signUpDto, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
          * @param {ChangePasswordDto} changePasswordDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -9351,6 +9316,41 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
         },
         /**
          * 
+         * @param {SignUpDto} signUpDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        signUpAdmin: async (signUpDto: SignUpDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'signUpDto' is not null or undefined
+            assertParamExists('signUpAdmin', 'signUpDto', signUpDto)
+            const localVarPath = `/auth/admin-sign-up`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(signUpDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -9397,16 +9397,6 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
 export const AuthenticationApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = AuthenticationApiAxiosParamCreator(configuration)
     return {
-        /**
-         * 
-         * @param {SignUpDto} signUpDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async adminSignUp(signUpDto: SignUpDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AdminSignupResponseDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.adminSignUp(signUpDto, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
         /**
          * 
          * @param {ChangePasswordDto} changePasswordDto 
@@ -9466,6 +9456,16 @@ export const AuthenticationApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {SignUpDto} signUpDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async signUpAdmin(signUpDto: SignUpDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AdminSignupResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.signUpAdmin(signUpDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -9483,15 +9483,6 @@ export const AuthenticationApiFp = function(configuration?: Configuration) {
 export const AuthenticationApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = AuthenticationApiFp(configuration)
     return {
-        /**
-         * 
-         * @param {SignUpDto} signUpDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        adminSignUp(signUpDto: SignUpDto, options?: any): AxiosPromise<AdminSignupResponseDto> {
-            return localVarFp.adminSignUp(signUpDto, options).then((request) => request(axios, basePath));
-        },
         /**
          * 
          * @param {ChangePasswordDto} changePasswordDto 
@@ -9545,6 +9536,15 @@ export const AuthenticationApiFactory = function (configuration?: Configuration,
         },
         /**
          * 
+         * @param {SignUpDto} signUpDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        signUpAdmin(signUpDto: SignUpDto, options?: any): AxiosPromise<AdminSignupResponseDto> {
+            return localVarFp.signUpAdmin(signUpDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -9561,17 +9561,6 @@ export const AuthenticationApiFactory = function (configuration?: Configuration,
  * @extends {BaseAPI}
  */
 export class AuthenticationApi extends BaseAPI {
-    /**
-     * 
-     * @param {SignUpDto} signUpDto 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof AuthenticationApi
-     */
-    public adminSignUp(signUpDto: SignUpDto, options?: AxiosRequestConfig) {
-        return AuthenticationApiFp(this.configuration).adminSignUp(signUpDto, options).then((request) => request(this.axios, this.basePath));
-    }
-
     /**
      * 
      * @param {ChangePasswordDto} changePasswordDto 
@@ -9633,6 +9622,17 @@ export class AuthenticationApi extends BaseAPI {
      */
     public logoutAuthDevices(options?: AxiosRequestConfig) {
         return AuthenticationApiFp(this.configuration).logoutAuthDevices(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {SignUpDto} signUpDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AuthenticationApi
+     */
+    public signUpAdmin(signUpDto: SignUpDto, options?: AxiosRequestConfig) {
+        return AuthenticationApiFp(this.configuration).signUpAdmin(signUpDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -9928,7 +9928,7 @@ export const LibraryApiAxiosParamCreator = function (configuration?: Configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getAllForUser: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getLibraries: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/library`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -10218,8 +10218,8 @@ export const LibraryApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getAllForUser(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<LibraryResponseDto>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getAllForUser(options);
+        async getLibraries(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<LibraryResponseDto>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getLibraries(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -10307,8 +10307,8 @@ export const LibraryApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getAllForUser(options?: any): AxiosPromise<Array<LibraryResponseDto>> {
-            return localVarFp.getAllForUser(options).then((request) => request(axios, basePath));
+        getLibraries(options?: any): AxiosPromise<Array<LibraryResponseDto>> {
+            return localVarFp.getLibraries(options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -10395,8 +10395,8 @@ export class LibraryApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof LibraryApi
      */
-    public getAllForUser(options?: AxiosRequestConfig) {
-        return LibraryApiFp(this.configuration).getAllForUser(options).then((request) => request(this.axios, this.basePath));
+    public getLibraries(options?: AxiosRequestConfig) {
+        return LibraryApiFp(this.configuration).getLibraries(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -10466,48 +10466,13 @@ export const OAuthApiAxiosParamCreator = function (configuration?: Configuration
     return {
         /**
          * 
-         * @param {OAuthConfigDto} oAuthConfigDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        authorizeOAuth: async (oAuthConfigDto: OAuthConfigDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'oAuthConfigDto' is not null or undefined
-            assertParamExists('authorizeOAuth', 'oAuthConfigDto', oAuthConfigDto)
-            const localVarPath = `/oauth/authorize`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(oAuthConfigDto, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
          * @param {OAuthCallbackDto} oAuthCallbackDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        callback: async (oAuthCallbackDto: OAuthCallbackDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        finishOAuth: async (oAuthCallbackDto: OAuthCallbackDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'oAuthCallbackDto' is not null or undefined
-            assertParamExists('callback', 'oAuthCallbackDto', oAuthCallbackDto)
+            assertParamExists('finishOAuth', 'oAuthCallbackDto', oAuthCallbackDto)
             const localVarPath = `/oauth/callback`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -10541,9 +10506,9 @@ export const OAuthApiAxiosParamCreator = function (configuration?: Configuration
          * @deprecated
          * @throws {RequiredError}
          */
-        generateConfig: async (oAuthConfigDto: OAuthConfigDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        generateOAuthConfig: async (oAuthConfigDto: OAuthConfigDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'oAuthConfigDto' is not null or undefined
-            assertParamExists('generateConfig', 'oAuthConfigDto', oAuthConfigDto)
+            assertParamExists('generateOAuthConfig', 'oAuthConfigDto', oAuthConfigDto)
             const localVarPath = `/oauth/config`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -10576,9 +10541,9 @@ export const OAuthApiAxiosParamCreator = function (configuration?: Configuration
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        link: async (oAuthCallbackDto: OAuthCallbackDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        linkOAuthAccount: async (oAuthCallbackDto: OAuthCallbackDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'oAuthCallbackDto' is not null or undefined
-            assertParamExists('link', 'oAuthCallbackDto', oAuthCallbackDto)
+            assertParamExists('linkOAuthAccount', 'oAuthCallbackDto', oAuthCallbackDto)
             const localVarPath = `/oauth/link`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -10619,7 +10584,7 @@ export const OAuthApiAxiosParamCreator = function (configuration?: Configuration
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        mobileRedirect: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        redirectOAuthToMobile: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/oauth/mobile-redirect`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -10645,10 +10610,45 @@ export const OAuthApiAxiosParamCreator = function (configuration?: Configuration
         },
         /**
          * 
+         * @param {OAuthConfigDto} oAuthConfigDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        unlink: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        startOAuth: async (oAuthConfigDto: OAuthConfigDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'oAuthConfigDto' is not null or undefined
+            assertParamExists('startOAuth', 'oAuthConfigDto', oAuthConfigDto)
+            const localVarPath = `/oauth/authorize`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(oAuthConfigDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        unlinkOAuthAccount: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/oauth/unlink`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -10693,22 +10693,12 @@ export const OAuthApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
-         * @param {OAuthConfigDto} oAuthConfigDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async authorizeOAuth(oAuthConfigDto: OAuthConfigDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OAuthAuthorizeResponseDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.authorizeOAuth(oAuthConfigDto, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
          * @param {OAuthCallbackDto} oAuthCallbackDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async callback(oAuthCallbackDto: OAuthCallbackDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoginResponseDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.callback(oAuthCallbackDto, options);
+        async finishOAuth(oAuthCallbackDto: OAuthCallbackDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<LoginResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.finishOAuth(oAuthCallbackDto, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -10718,8 +10708,8 @@ export const OAuthApiFp = function(configuration?: Configuration) {
          * @deprecated
          * @throws {RequiredError}
          */
-        async generateConfig(oAuthConfigDto: OAuthConfigDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OAuthConfigResponseDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.generateConfig(oAuthConfigDto, options);
+        async generateOAuthConfig(oAuthConfigDto: OAuthConfigDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OAuthConfigResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.generateOAuthConfig(oAuthConfigDto, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -10728,8 +10718,8 @@ export const OAuthApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async link(oAuthCallbackDto: OAuthCallbackDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserResponseDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.link(oAuthCallbackDto, options);
+        async linkOAuthAccount(oAuthCallbackDto: OAuthCallbackDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.linkOAuthAccount(oAuthCallbackDto, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -10737,8 +10727,18 @@ export const OAuthApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async mobileRedirect(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.mobileRedirect(options);
+        async redirectOAuthToMobile(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.redirectOAuthToMobile(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {OAuthConfigDto} oAuthConfigDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async startOAuth(oAuthConfigDto: OAuthConfigDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OAuthAuthorizeResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.startOAuth(oAuthConfigDto, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -10746,8 +10746,8 @@ export const OAuthApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async unlink(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserResponseDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.unlink(options);
+        async unlinkOAuthAccount(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.unlinkOAuthAccount(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -10762,21 +10762,12 @@ export const OAuthApiFactory = function (configuration?: Configuration, basePath
     return {
         /**
          * 
-         * @param {OAuthConfigDto} oAuthConfigDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        authorizeOAuth(oAuthConfigDto: OAuthConfigDto, options?: any): AxiosPromise<OAuthAuthorizeResponseDto> {
-            return localVarFp.authorizeOAuth(oAuthConfigDto, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
          * @param {OAuthCallbackDto} oAuthCallbackDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        callback(oAuthCallbackDto: OAuthCallbackDto, options?: any): AxiosPromise<LoginResponseDto> {
-            return localVarFp.callback(oAuthCallbackDto, options).then((request) => request(axios, basePath));
+        finishOAuth(oAuthCallbackDto: OAuthCallbackDto, options?: any): AxiosPromise<LoginResponseDto> {
+            return localVarFp.finishOAuth(oAuthCallbackDto, options).then((request) => request(axios, basePath));
         },
         /**
          * @deprecated use feature flags and /oauth/authorize
@@ -10785,8 +10776,8 @@ export const OAuthApiFactory = function (configuration?: Configuration, basePath
          * @deprecated
          * @throws {RequiredError}
          */
-        generateConfig(oAuthConfigDto: OAuthConfigDto, options?: any): AxiosPromise<OAuthConfigResponseDto> {
-            return localVarFp.generateConfig(oAuthConfigDto, options).then((request) => request(axios, basePath));
+        generateOAuthConfig(oAuthConfigDto: OAuthConfigDto, options?: any): AxiosPromise<OAuthConfigResponseDto> {
+            return localVarFp.generateOAuthConfig(oAuthConfigDto, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -10794,24 +10785,33 @@ export const OAuthApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        link(oAuthCallbackDto: OAuthCallbackDto, options?: any): AxiosPromise<UserResponseDto> {
-            return localVarFp.link(oAuthCallbackDto, options).then((request) => request(axios, basePath));
+        linkOAuthAccount(oAuthCallbackDto: OAuthCallbackDto, options?: any): AxiosPromise<UserResponseDto> {
+            return localVarFp.linkOAuthAccount(oAuthCallbackDto, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        mobileRedirect(options?: any): AxiosPromise<void> {
-            return localVarFp.mobileRedirect(options).then((request) => request(axios, basePath));
+        redirectOAuthToMobile(options?: any): AxiosPromise<void> {
+            return localVarFp.redirectOAuthToMobile(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {OAuthConfigDto} oAuthConfigDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        startOAuth(oAuthConfigDto: OAuthConfigDto, options?: any): AxiosPromise<OAuthAuthorizeResponseDto> {
+            return localVarFp.startOAuth(oAuthConfigDto, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        unlink(options?: any): AxiosPromise<UserResponseDto> {
-            return localVarFp.unlink(options).then((request) => request(axios, basePath));
+        unlinkOAuthAccount(options?: any): AxiosPromise<UserResponseDto> {
+            return localVarFp.unlinkOAuthAccount(options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -10825,24 +10825,13 @@ export const OAuthApiFactory = function (configuration?: Configuration, basePath
 export class OAuthApi extends BaseAPI {
     /**
      * 
-     * @param {OAuthConfigDto} oAuthConfigDto 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof OAuthApi
-     */
-    public authorizeOAuth(oAuthConfigDto: OAuthConfigDto, options?: AxiosRequestConfig) {
-        return OAuthApiFp(this.configuration).authorizeOAuth(oAuthConfigDto, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
      * @param {OAuthCallbackDto} oAuthCallbackDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof OAuthApi
      */
-    public callback(oAuthCallbackDto: OAuthCallbackDto, options?: AxiosRequestConfig) {
-        return OAuthApiFp(this.configuration).callback(oAuthCallbackDto, options).then((request) => request(this.axios, this.basePath));
+    public finishOAuth(oAuthCallbackDto: OAuthCallbackDto, options?: AxiosRequestConfig) {
+        return OAuthApiFp(this.configuration).finishOAuth(oAuthCallbackDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -10853,8 +10842,8 @@ export class OAuthApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof OAuthApi
      */
-    public generateConfig(oAuthConfigDto: OAuthConfigDto, options?: AxiosRequestConfig) {
-        return OAuthApiFp(this.configuration).generateConfig(oAuthConfigDto, options).then((request) => request(this.axios, this.basePath));
+    public generateOAuthConfig(oAuthConfigDto: OAuthConfigDto, options?: AxiosRequestConfig) {
+        return OAuthApiFp(this.configuration).generateOAuthConfig(oAuthConfigDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -10864,8 +10853,8 @@ export class OAuthApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof OAuthApi
      */
-    public link(oAuthCallbackDto: OAuthCallbackDto, options?: AxiosRequestConfig) {
-        return OAuthApiFp(this.configuration).link(oAuthCallbackDto, options).then((request) => request(this.axios, this.basePath));
+    public linkOAuthAccount(oAuthCallbackDto: OAuthCallbackDto, options?: AxiosRequestConfig) {
+        return OAuthApiFp(this.configuration).linkOAuthAccount(oAuthCallbackDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -10874,8 +10863,19 @@ export class OAuthApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof OAuthApi
      */
-    public mobileRedirect(options?: AxiosRequestConfig) {
-        return OAuthApiFp(this.configuration).mobileRedirect(options).then((request) => request(this.axios, this.basePath));
+    public redirectOAuthToMobile(options?: AxiosRequestConfig) {
+        return OAuthApiFp(this.configuration).redirectOAuthToMobile(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {OAuthConfigDto} oAuthConfigDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OAuthApi
+     */
+    public startOAuth(oAuthConfigDto: OAuthConfigDto, options?: AxiosRequestConfig) {
+        return OAuthApiFp(this.configuration).startOAuth(oAuthConfigDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -10884,8 +10884,8 @@ export class OAuthApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof OAuthApi
      */
-    public unlink(options?: AxiosRequestConfig) {
-        return OAuthApiFp(this.configuration).unlink(options).then((request) => request(this.axios, this.basePath));
+    public unlinkOAuthAccount(options?: AxiosRequestConfig) {
+        return OAuthApiFp(this.configuration).unlinkOAuthAccount(options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -12268,37 +12268,8 @@ export const ServerInfoApiAxiosParamCreator = function (configuration?: Configur
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getServerVersion: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/server-info/version`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getStats: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/server-info/stats`;
+        getServerStatistics: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/server-info/statistics`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -12318,6 +12289,35 @@ export const ServerInfoApiAxiosParamCreator = function (configuration?: Configur
             await setBearerAuthToObject(localVarHeaderParameter, configuration)
 
             // authentication cookie required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getServerVersion: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/server-info/version`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
 
 
     
@@ -12459,8 +12459,8 @@ export const ServerInfoApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getServerVersion(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServerVersionResponseDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getServerVersion(options);
+        async getServerStatistics(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServerStatsResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getServerStatistics(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -12468,8 +12468,8 @@ export const ServerInfoApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getStats(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServerStatsResponseDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getStats(options);
+        async getServerVersion(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServerVersionResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getServerVersion(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -12538,16 +12538,16 @@ export const ServerInfoApiFactory = function (configuration?: Configuration, bas
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getServerVersion(options?: any): AxiosPromise<ServerVersionResponseDto> {
-            return localVarFp.getServerVersion(options).then((request) => request(axios, basePath));
+        getServerStatistics(options?: any): AxiosPromise<ServerStatsResponseDto> {
+            return localVarFp.getServerStatistics(options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getStats(options?: any): AxiosPromise<ServerStatsResponseDto> {
-            return localVarFp.getStats(options).then((request) => request(axios, basePath));
+        getServerVersion(options?: any): AxiosPromise<ServerVersionResponseDto> {
+            return localVarFp.getServerVersion(options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -12619,8 +12619,8 @@ export class ServerInfoApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ServerInfoApi
      */
-    public getServerVersion(options?: AxiosRequestConfig) {
-        return ServerInfoApiFp(this.configuration).getServerVersion(options).then((request) => request(this.axios, this.basePath));
+    public getServerStatistics(options?: AxiosRequestConfig) {
+        return ServerInfoApiFp(this.configuration).getServerStatistics(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -12629,8 +12629,8 @@ export class ServerInfoApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ServerInfoApi
      */
-    public getStats(options?: AxiosRequestConfig) {
-        return ServerInfoApiFp(this.configuration).getStats(options).then((request) => request(this.axios, this.basePath));
+    public getServerVersion(options?: AxiosRequestConfig) {
+        return ServerInfoApiFp(this.configuration).getServerVersion(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -13383,7 +13383,7 @@ export const SystemConfigApiAxiosParamCreator = function (configuration?: Config
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getDefaults: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getConfigDefaults: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/system-config/defaults`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -13522,8 +13522,8 @@ export const SystemConfigApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getDefaults(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SystemConfigDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getDefaults(options);
+        async getConfigDefaults(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SystemConfigDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getConfigDefaults(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -13568,8 +13568,8 @@ export const SystemConfigApiFactory = function (configuration?: Configuration, b
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getDefaults(options?: any): AxiosPromise<SystemConfigDto> {
-            return localVarFp.getDefaults(options).then((request) => request(axios, basePath));
+        getConfigDefaults(options?: any): AxiosPromise<SystemConfigDto> {
+            return localVarFp.getConfigDefaults(options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -13614,8 +13614,8 @@ export class SystemConfigApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof SystemConfigApi
      */
-    public getDefaults(options?: AxiosRequestConfig) {
-        return SystemConfigApiFp(this.configuration).getDefaults(options).then((request) => request(this.axios, this.basePath));
+    public getConfigDefaults(options?: AxiosRequestConfig) {
+        return SystemConfigApiFp(this.configuration).getConfigDefaults(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
