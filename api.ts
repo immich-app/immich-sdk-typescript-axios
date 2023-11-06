@@ -6351,16 +6351,18 @@ export const AssetApiAxiosParamCreator = function (configuration?: Configuration
         },
         /**
          * Get all AssetEntity belong to the user
+         * @param {number} [skip] 
+         * @param {number} [take] 
          * @param {string} [userId] 
          * @param {boolean} [isFavorite] 
          * @param {boolean} [isArchived] 
-         * @param {number} [skip] 
          * @param {string} [updatedAfter] 
+         * @param {string} [updatedBefore] 
          * @param {string} [ifNoneMatch] ETag of data already cached on the client
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getAllAssets: async (userId?: string, isFavorite?: boolean, isArchived?: boolean, skip?: number, updatedAfter?: string, ifNoneMatch?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getAllAssets: async (skip?: number, take?: number, userId?: string, isFavorite?: boolean, isArchived?: boolean, updatedAfter?: string, updatedBefore?: string, ifNoneMatch?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/asset`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -6382,6 +6384,14 @@ export const AssetApiAxiosParamCreator = function (configuration?: Configuration
 
             // authentication cookie required
 
+            if (skip !== undefined) {
+                localVarQueryParameter['skip'] = skip;
+            }
+
+            if (take !== undefined) {
+                localVarQueryParameter['take'] = take;
+            }
+
             if (userId !== undefined) {
                 localVarQueryParameter['userId'] = userId;
             }
@@ -6394,14 +6404,16 @@ export const AssetApiAxiosParamCreator = function (configuration?: Configuration
                 localVarQueryParameter['isArchived'] = isArchived;
             }
 
-            if (skip !== undefined) {
-                localVarQueryParameter['skip'] = skip;
-            }
-
             if (updatedAfter !== undefined) {
                 localVarQueryParameter['updatedAfter'] = (updatedAfter as any instanceof Date) ?
                     (updatedAfter as any).toISOString() :
                     updatedAfter;
+            }
+
+            if (updatedBefore !== undefined) {
+                localVarQueryParameter['updatedBefore'] = (updatedBefore as any instanceof Date) ?
+                    (updatedBefore as any).toISOString() :
+                    updatedBefore;
             }
 
             if (ifNoneMatch != null) {
@@ -7722,17 +7734,19 @@ export const AssetApiFp = function(configuration?: Configuration) {
         },
         /**
          * Get all AssetEntity belong to the user
+         * @param {number} [skip] 
+         * @param {number} [take] 
          * @param {string} [userId] 
          * @param {boolean} [isFavorite] 
          * @param {boolean} [isArchived] 
-         * @param {number} [skip] 
          * @param {string} [updatedAfter] 
+         * @param {string} [updatedBefore] 
          * @param {string} [ifNoneMatch] ETag of data already cached on the client
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getAllAssets(userId?: string, isFavorite?: boolean, isArchived?: boolean, skip?: number, updatedAfter?: string, ifNoneMatch?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<AssetResponseDto>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getAllAssets(userId, isFavorite, isArchived, skip, updatedAfter, ifNoneMatch, options);
+        async getAllAssets(skip?: number, take?: number, userId?: string, isFavorite?: boolean, isArchived?: boolean, updatedAfter?: string, updatedBefore?: string, ifNoneMatch?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<AssetResponseDto>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAllAssets(skip, take, userId, isFavorite, isArchived, updatedAfter, updatedBefore, ifNoneMatch, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -8074,17 +8088,19 @@ export const AssetApiFactory = function (configuration?: Configuration, basePath
         },
         /**
          * Get all AssetEntity belong to the user
+         * @param {number} [skip] 
+         * @param {number} [take] 
          * @param {string} [userId] 
          * @param {boolean} [isFavorite] 
          * @param {boolean} [isArchived] 
-         * @param {number} [skip] 
          * @param {string} [updatedAfter] 
+         * @param {string} [updatedBefore] 
          * @param {string} [ifNoneMatch] ETag of data already cached on the client
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getAllAssets(userId?: string, isFavorite?: boolean, isArchived?: boolean, skip?: number, updatedAfter?: string, ifNoneMatch?: string, options?: any): AxiosPromise<Array<AssetResponseDto>> {
-            return localVarFp.getAllAssets(userId, isFavorite, isArchived, skip, updatedAfter, ifNoneMatch, options).then((request) => request(axios, basePath));
+        getAllAssets(skip?: number, take?: number, userId?: string, isFavorite?: boolean, isArchived?: boolean, updatedAfter?: string, updatedBefore?: string, ifNoneMatch?: string, options?: any): AxiosPromise<Array<AssetResponseDto>> {
+            return localVarFp.getAllAssets(skip, take, userId, isFavorite, isArchived, updatedAfter, updatedBefore, ifNoneMatch, options).then((request) => request(axios, basePath));
         },
         /**
          * Get a single asset\'s information
@@ -8414,18 +8430,20 @@ export class AssetApi extends BaseAPI {
 
     /**
      * Get all AssetEntity belong to the user
+     * @param {number} [skip] 
+     * @param {number} [take] 
      * @param {string} [userId] 
      * @param {boolean} [isFavorite] 
      * @param {boolean} [isArchived] 
-     * @param {number} [skip] 
      * @param {string} [updatedAfter] 
+     * @param {string} [updatedBefore] 
      * @param {string} [ifNoneMatch] ETag of data already cached on the client
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AssetApi
      */
-    public getAllAssets(userId?: string, isFavorite?: boolean, isArchived?: boolean, skip?: number, updatedAfter?: string, ifNoneMatch?: string, options?: AxiosRequestConfig) {
-        return AssetApiFp(this.configuration).getAllAssets(userId, isFavorite, isArchived, skip, updatedAfter, ifNoneMatch, options).then((request) => request(this.axios, this.basePath));
+    public getAllAssets(skip?: number, take?: number, userId?: string, isFavorite?: boolean, isArchived?: boolean, updatedAfter?: string, updatedBefore?: string, ifNoneMatch?: string, options?: AxiosRequestConfig) {
+        return AssetApiFp(this.configuration).getAllAssets(skip, take, userId, isFavorite, isArchived, updatedAfter, updatedBefore, ifNoneMatch, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
