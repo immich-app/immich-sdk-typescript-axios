@@ -208,43 +208,6 @@ export interface AddUsersDto {
 /**
  * 
  * @export
- * @interface AdminSignupResponseDto
- */
-export interface AdminSignupResponseDto {
-    /**
-     * 
-     * @type {string}
-     * @memberof AdminSignupResponseDto
-     */
-    'createdAt': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof AdminSignupResponseDto
-     */
-    'email': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof AdminSignupResponseDto
-     */
-    'firstName': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof AdminSignupResponseDto
-     */
-    'id': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof AdminSignupResponseDto
-     */
-    'lastName': string;
-}
-/**
- * 
- * @export
  * @interface AlbumCountResponseDto
  */
 export interface AlbumCountResponseDto {
@@ -9488,7 +9451,7 @@ export const AuthenticationApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async signUpAdmin(signUpDto: SignUpDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AdminSignupResponseDto>> {
+        async signUpAdmin(signUpDto: SignUpDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserResponseDto>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.signUpAdmin(signUpDto, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -9568,7 +9531,7 @@ export const AuthenticationApiFactory = function (configuration?: Configuration,
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        signUpAdmin(signUpDto: SignUpDto, options?: any): AxiosPromise<AdminSignupResponseDto> {
+        signUpAdmin(signUpDto: SignUpDto, options?: any): AxiosPromise<UserResponseDto> {
             return localVarFp.signUpAdmin(signUpDto, options).then((request) => request(axios, basePath));
         },
         /**
