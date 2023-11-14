@@ -667,6 +667,20 @@ export interface AssetJobsDto {
 /**
  * 
  * @export
+ * @enum {string}
+ */
+
+export const AssetOrder = {
+    Asc: 'asc',
+    Desc: 'desc'
+} as const;
+
+export type AssetOrder = typeof AssetOrder[keyof typeof AssetOrder];
+
+
+/**
+ * 
+ * @export
  * @interface AssetResponseDto
  */
 export interface AssetResponseDto {
@@ -7467,6 +7481,260 @@ export const AssetApiAxiosParamCreator = function (configuration?: Configuration
         },
         /**
          * 
+         * @param {string} [id] 
+         * @param {string} [libraryId] 
+         * @param {AssetTypeEnum} [type] 
+         * @param {AssetOrder} [order] 
+         * @param {string} [deviceAssetId] 
+         * @param {string} [deviceId] 
+         * @param {string} [checksum] 
+         * @param {boolean} [isArchived] 
+         * @param {boolean} [isEncoded] 
+         * @param {boolean} [isExternal] 
+         * @param {boolean} [isFavorite] 
+         * @param {boolean} [isMotion] 
+         * @param {boolean} [isOffline] 
+         * @param {boolean} [isReadOnly] 
+         * @param {boolean} [isVisible] 
+         * @param {boolean} [withDeleted] 
+         * @param {boolean} [withStacked] 
+         * @param {boolean} [withExif] 
+         * @param {boolean} [withPeople] 
+         * @param {string} [createdBefore] 
+         * @param {string} [createdAfter] 
+         * @param {string} [updatedBefore] 
+         * @param {string} [updatedAfter] 
+         * @param {string} [trashedBefore] 
+         * @param {string} [trashedAfter] 
+         * @param {string} [takenBefore] 
+         * @param {string} [takenAfter] 
+         * @param {string} [originalFileName] 
+         * @param {string} [originalPath] 
+         * @param {string} [resizePath] 
+         * @param {string} [webpPath] 
+         * @param {string} [encodedVideoPath] 
+         * @param {string} [city] 
+         * @param {string} [state] 
+         * @param {string} [country] 
+         * @param {string} [make] 
+         * @param {string} [model] 
+         * @param {string} [lensModel] 
+         * @param {number} [page] 
+         * @param {number} [size] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        searchAssets: async (id?: string, libraryId?: string, type?: AssetTypeEnum, order?: AssetOrder, deviceAssetId?: string, deviceId?: string, checksum?: string, isArchived?: boolean, isEncoded?: boolean, isExternal?: boolean, isFavorite?: boolean, isMotion?: boolean, isOffline?: boolean, isReadOnly?: boolean, isVisible?: boolean, withDeleted?: boolean, withStacked?: boolean, withExif?: boolean, withPeople?: boolean, createdBefore?: string, createdAfter?: string, updatedBefore?: string, updatedAfter?: string, trashedBefore?: string, trashedAfter?: string, takenBefore?: string, takenAfter?: string, originalFileName?: string, originalPath?: string, resizePath?: string, webpPath?: string, encodedVideoPath?: string, city?: string, state?: string, country?: string, make?: string, model?: string, lensModel?: string, page?: number, size?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/assets`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication api_key required
+            await setApiKeyToObject(localVarHeaderParameter, "x-api-key", configuration)
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication cookie required
+
+            if (id !== undefined) {
+                localVarQueryParameter['id'] = id;
+            }
+
+            if (libraryId !== undefined) {
+                localVarQueryParameter['libraryId'] = libraryId;
+            }
+
+            if (type !== undefined) {
+                localVarQueryParameter['type'] = type;
+            }
+
+            if (order !== undefined) {
+                localVarQueryParameter['order'] = order;
+            }
+
+            if (deviceAssetId !== undefined) {
+                localVarQueryParameter['deviceAssetId'] = deviceAssetId;
+            }
+
+            if (deviceId !== undefined) {
+                localVarQueryParameter['deviceId'] = deviceId;
+            }
+
+            if (checksum !== undefined) {
+                localVarQueryParameter['checksum'] = checksum;
+            }
+
+            if (isArchived !== undefined) {
+                localVarQueryParameter['isArchived'] = isArchived;
+            }
+
+            if (isEncoded !== undefined) {
+                localVarQueryParameter['isEncoded'] = isEncoded;
+            }
+
+            if (isExternal !== undefined) {
+                localVarQueryParameter['isExternal'] = isExternal;
+            }
+
+            if (isFavorite !== undefined) {
+                localVarQueryParameter['isFavorite'] = isFavorite;
+            }
+
+            if (isMotion !== undefined) {
+                localVarQueryParameter['isMotion'] = isMotion;
+            }
+
+            if (isOffline !== undefined) {
+                localVarQueryParameter['isOffline'] = isOffline;
+            }
+
+            if (isReadOnly !== undefined) {
+                localVarQueryParameter['isReadOnly'] = isReadOnly;
+            }
+
+            if (isVisible !== undefined) {
+                localVarQueryParameter['isVisible'] = isVisible;
+            }
+
+            if (withDeleted !== undefined) {
+                localVarQueryParameter['withDeleted'] = withDeleted;
+            }
+
+            if (withStacked !== undefined) {
+                localVarQueryParameter['withStacked'] = withStacked;
+            }
+
+            if (withExif !== undefined) {
+                localVarQueryParameter['withExif'] = withExif;
+            }
+
+            if (withPeople !== undefined) {
+                localVarQueryParameter['withPeople'] = withPeople;
+            }
+
+            if (createdBefore !== undefined) {
+                localVarQueryParameter['createdBefore'] = (createdBefore as any instanceof Date) ?
+                    (createdBefore as any).toISOString() :
+                    createdBefore;
+            }
+
+            if (createdAfter !== undefined) {
+                localVarQueryParameter['createdAfter'] = (createdAfter as any instanceof Date) ?
+                    (createdAfter as any).toISOString() :
+                    createdAfter;
+            }
+
+            if (updatedBefore !== undefined) {
+                localVarQueryParameter['updatedBefore'] = (updatedBefore as any instanceof Date) ?
+                    (updatedBefore as any).toISOString() :
+                    updatedBefore;
+            }
+
+            if (updatedAfter !== undefined) {
+                localVarQueryParameter['updatedAfter'] = (updatedAfter as any instanceof Date) ?
+                    (updatedAfter as any).toISOString() :
+                    updatedAfter;
+            }
+
+            if (trashedBefore !== undefined) {
+                localVarQueryParameter['trashedBefore'] = (trashedBefore as any instanceof Date) ?
+                    (trashedBefore as any).toISOString() :
+                    trashedBefore;
+            }
+
+            if (trashedAfter !== undefined) {
+                localVarQueryParameter['trashedAfter'] = (trashedAfter as any instanceof Date) ?
+                    (trashedAfter as any).toISOString() :
+                    trashedAfter;
+            }
+
+            if (takenBefore !== undefined) {
+                localVarQueryParameter['takenBefore'] = (takenBefore as any instanceof Date) ?
+                    (takenBefore as any).toISOString() :
+                    takenBefore;
+            }
+
+            if (takenAfter !== undefined) {
+                localVarQueryParameter['takenAfter'] = (takenAfter as any instanceof Date) ?
+                    (takenAfter as any).toISOString() :
+                    takenAfter;
+            }
+
+            if (originalFileName !== undefined) {
+                localVarQueryParameter['originalFileName'] = originalFileName;
+            }
+
+            if (originalPath !== undefined) {
+                localVarQueryParameter['originalPath'] = originalPath;
+            }
+
+            if (resizePath !== undefined) {
+                localVarQueryParameter['resizePath'] = resizePath;
+            }
+
+            if (webpPath !== undefined) {
+                localVarQueryParameter['webpPath'] = webpPath;
+            }
+
+            if (encodedVideoPath !== undefined) {
+                localVarQueryParameter['encodedVideoPath'] = encodedVideoPath;
+            }
+
+            if (city !== undefined) {
+                localVarQueryParameter['city'] = city;
+            }
+
+            if (state !== undefined) {
+                localVarQueryParameter['state'] = state;
+            }
+
+            if (country !== undefined) {
+                localVarQueryParameter['country'] = country;
+            }
+
+            if (make !== undefined) {
+                localVarQueryParameter['make'] = make;
+            }
+
+            if (model !== undefined) {
+                localVarQueryParameter['model'] = model;
+            }
+
+            if (lensModel !== undefined) {
+                localVarQueryParameter['lensModel'] = lensModel;
+            }
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (size !== undefined) {
+                localVarQueryParameter['size'] = size;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {string} id 
          * @param {boolean} [isThumb] 
          * @param {boolean} [isWeb] 
@@ -8085,6 +8353,55 @@ export const AssetApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {string} [id] 
+         * @param {string} [libraryId] 
+         * @param {AssetTypeEnum} [type] 
+         * @param {AssetOrder} [order] 
+         * @param {string} [deviceAssetId] 
+         * @param {string} [deviceId] 
+         * @param {string} [checksum] 
+         * @param {boolean} [isArchived] 
+         * @param {boolean} [isEncoded] 
+         * @param {boolean} [isExternal] 
+         * @param {boolean} [isFavorite] 
+         * @param {boolean} [isMotion] 
+         * @param {boolean} [isOffline] 
+         * @param {boolean} [isReadOnly] 
+         * @param {boolean} [isVisible] 
+         * @param {boolean} [withDeleted] 
+         * @param {boolean} [withStacked] 
+         * @param {boolean} [withExif] 
+         * @param {boolean} [withPeople] 
+         * @param {string} [createdBefore] 
+         * @param {string} [createdAfter] 
+         * @param {string} [updatedBefore] 
+         * @param {string} [updatedAfter] 
+         * @param {string} [trashedBefore] 
+         * @param {string} [trashedAfter] 
+         * @param {string} [takenBefore] 
+         * @param {string} [takenAfter] 
+         * @param {string} [originalFileName] 
+         * @param {string} [originalPath] 
+         * @param {string} [resizePath] 
+         * @param {string} [webpPath] 
+         * @param {string} [encodedVideoPath] 
+         * @param {string} [city] 
+         * @param {string} [state] 
+         * @param {string} [country] 
+         * @param {string} [make] 
+         * @param {string} [model] 
+         * @param {string} [lensModel] 
+         * @param {number} [page] 
+         * @param {number} [size] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async searchAssets(id?: string, libraryId?: string, type?: AssetTypeEnum, order?: AssetOrder, deviceAssetId?: string, deviceId?: string, checksum?: string, isArchived?: boolean, isEncoded?: boolean, isExternal?: boolean, isFavorite?: boolean, isMotion?: boolean, isOffline?: boolean, isReadOnly?: boolean, isVisible?: boolean, withDeleted?: boolean, withStacked?: boolean, withExif?: boolean, withPeople?: boolean, createdBefore?: string, createdAfter?: string, updatedBefore?: string, updatedAfter?: string, trashedBefore?: string, trashedAfter?: string, takenBefore?: string, takenAfter?: string, originalFileName?: string, originalPath?: string, resizePath?: string, webpPath?: string, encodedVideoPath?: string, city?: string, state?: string, country?: string, make?: string, model?: string, lensModel?: string, page?: number, size?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<AssetResponseDto>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.searchAssets(id, libraryId, type, order, deviceAssetId, deviceId, checksum, isArchived, isEncoded, isExternal, isFavorite, isMotion, isOffline, isReadOnly, isVisible, withDeleted, withStacked, withExif, withPeople, createdBefore, createdAfter, updatedBefore, updatedAfter, trashedBefore, trashedAfter, takenBefore, takenAfter, originalFileName, originalPath, resizePath, webpPath, encodedVideoPath, city, state, country, make, model, lensModel, page, size, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @param {string} id 
          * @param {boolean} [isThumb] 
          * @param {boolean} [isWeb] 
@@ -8419,6 +8736,54 @@ export const AssetApiFactory = function (configuration?: Configuration, basePath
          */
         searchAsset(searchAssetDto: SearchAssetDto, options?: any): AxiosPromise<Array<AssetResponseDto>> {
             return localVarFp.searchAsset(searchAssetDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} [id] 
+         * @param {string} [libraryId] 
+         * @param {AssetTypeEnum} [type] 
+         * @param {AssetOrder} [order] 
+         * @param {string} [deviceAssetId] 
+         * @param {string} [deviceId] 
+         * @param {string} [checksum] 
+         * @param {boolean} [isArchived] 
+         * @param {boolean} [isEncoded] 
+         * @param {boolean} [isExternal] 
+         * @param {boolean} [isFavorite] 
+         * @param {boolean} [isMotion] 
+         * @param {boolean} [isOffline] 
+         * @param {boolean} [isReadOnly] 
+         * @param {boolean} [isVisible] 
+         * @param {boolean} [withDeleted] 
+         * @param {boolean} [withStacked] 
+         * @param {boolean} [withExif] 
+         * @param {boolean} [withPeople] 
+         * @param {string} [createdBefore] 
+         * @param {string} [createdAfter] 
+         * @param {string} [updatedBefore] 
+         * @param {string} [updatedAfter] 
+         * @param {string} [trashedBefore] 
+         * @param {string} [trashedAfter] 
+         * @param {string} [takenBefore] 
+         * @param {string} [takenAfter] 
+         * @param {string} [originalFileName] 
+         * @param {string} [originalPath] 
+         * @param {string} [resizePath] 
+         * @param {string} [webpPath] 
+         * @param {string} [encodedVideoPath] 
+         * @param {string} [city] 
+         * @param {string} [state] 
+         * @param {string} [country] 
+         * @param {string} [make] 
+         * @param {string} [model] 
+         * @param {string} [lensModel] 
+         * @param {number} [page] 
+         * @param {number} [size] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        searchAssets(id?: string, libraryId?: string, type?: AssetTypeEnum, order?: AssetOrder, deviceAssetId?: string, deviceId?: string, checksum?: string, isArchived?: boolean, isEncoded?: boolean, isExternal?: boolean, isFavorite?: boolean, isMotion?: boolean, isOffline?: boolean, isReadOnly?: boolean, isVisible?: boolean, withDeleted?: boolean, withStacked?: boolean, withExif?: boolean, withPeople?: boolean, createdBefore?: string, createdAfter?: string, updatedBefore?: string, updatedAfter?: string, trashedBefore?: string, trashedAfter?: string, takenBefore?: string, takenAfter?: string, originalFileName?: string, originalPath?: string, resizePath?: string, webpPath?: string, encodedVideoPath?: string, city?: string, state?: string, country?: string, make?: string, model?: string, lensModel?: string, page?: number, size?: number, options?: any): AxiosPromise<Array<AssetResponseDto>> {
+            return localVarFp.searchAssets(id, libraryId, type, order, deviceAssetId, deviceId, checksum, isArchived, isEncoded, isExternal, isFavorite, isMotion, isOffline, isReadOnly, isVisible, withDeleted, withStacked, withExif, withPeople, createdBefore, createdAfter, updatedBefore, updatedAfter, trashedBefore, trashedAfter, takenBefore, takenAfter, originalFileName, originalPath, resizePath, webpPath, encodedVideoPath, city, state, country, make, model, lensModel, page, size, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -8800,6 +9165,56 @@ export class AssetApi extends BaseAPI {
      */
     public searchAsset(searchAssetDto: SearchAssetDto, options?: AxiosRequestConfig) {
         return AssetApiFp(this.configuration).searchAsset(searchAssetDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} [id] 
+     * @param {string} [libraryId] 
+     * @param {AssetTypeEnum} [type] 
+     * @param {AssetOrder} [order] 
+     * @param {string} [deviceAssetId] 
+     * @param {string} [deviceId] 
+     * @param {string} [checksum] 
+     * @param {boolean} [isArchived] 
+     * @param {boolean} [isEncoded] 
+     * @param {boolean} [isExternal] 
+     * @param {boolean} [isFavorite] 
+     * @param {boolean} [isMotion] 
+     * @param {boolean} [isOffline] 
+     * @param {boolean} [isReadOnly] 
+     * @param {boolean} [isVisible] 
+     * @param {boolean} [withDeleted] 
+     * @param {boolean} [withStacked] 
+     * @param {boolean} [withExif] 
+     * @param {boolean} [withPeople] 
+     * @param {string} [createdBefore] 
+     * @param {string} [createdAfter] 
+     * @param {string} [updatedBefore] 
+     * @param {string} [updatedAfter] 
+     * @param {string} [trashedBefore] 
+     * @param {string} [trashedAfter] 
+     * @param {string} [takenBefore] 
+     * @param {string} [takenAfter] 
+     * @param {string} [originalFileName] 
+     * @param {string} [originalPath] 
+     * @param {string} [resizePath] 
+     * @param {string} [webpPath] 
+     * @param {string} [encodedVideoPath] 
+     * @param {string} [city] 
+     * @param {string} [state] 
+     * @param {string} [country] 
+     * @param {string} [make] 
+     * @param {string} [model] 
+     * @param {string} [lensModel] 
+     * @param {number} [page] 
+     * @param {number} [size] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AssetApi
+     */
+    public searchAssets(id?: string, libraryId?: string, type?: AssetTypeEnum, order?: AssetOrder, deviceAssetId?: string, deviceId?: string, checksum?: string, isArchived?: boolean, isEncoded?: boolean, isExternal?: boolean, isFavorite?: boolean, isMotion?: boolean, isOffline?: boolean, isReadOnly?: boolean, isVisible?: boolean, withDeleted?: boolean, withStacked?: boolean, withExif?: boolean, withPeople?: boolean, createdBefore?: string, createdAfter?: string, updatedBefore?: string, updatedAfter?: string, trashedBefore?: string, trashedAfter?: string, takenBefore?: string, takenAfter?: string, originalFileName?: string, originalPath?: string, resizePath?: string, webpPath?: string, encodedVideoPath?: string, city?: string, state?: string, country?: string, make?: string, model?: string, lensModel?: string, page?: number, size?: number, options?: AxiosRequestConfig) {
+        return AssetApiFp(this.configuration).searchAssets(id, libraryId, type, order, deviceAssetId, deviceId, checksum, isArchived, isEncoded, isExternal, isFavorite, isMotion, isOffline, isReadOnly, isVisible, withDeleted, withStacked, withExif, withPeople, createdBefore, createdAfter, updatedBefore, updatedAfter, trashedBefore, trashedAfter, takenBefore, takenAfter, originalFileName, originalPath, resizePath, webpPath, encodedVideoPath, city, state, country, make, model, lensModel, page, size, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
