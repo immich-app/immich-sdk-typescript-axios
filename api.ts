@@ -1758,97 +1758,6 @@ export interface FileReportItemDto {
 /**
  * 
  * @export
- * @interface ImportAssetDto
- */
-export interface ImportAssetDto {
-    /**
-     * 
-     * @type {string}
-     * @memberof ImportAssetDto
-     */
-    'assetPath': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ImportAssetDto
-     */
-    'deviceAssetId': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ImportAssetDto
-     */
-    'deviceId': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ImportAssetDto
-     */
-    'duration'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ImportAssetDto
-     */
-    'fileCreatedAt': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ImportAssetDto
-     */
-    'fileModifiedAt': string;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof ImportAssetDto
-     */
-    'isArchived'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof ImportAssetDto
-     */
-    'isExternal'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof ImportAssetDto
-     */
-    'isFavorite'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof ImportAssetDto
-     */
-    'isOffline'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof ImportAssetDto
-     */
-    'isReadOnly'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof ImportAssetDto
-     */
-    'isVisible'?: boolean;
-    /**
-     * 
-     * @type {string}
-     * @memberof ImportAssetDto
-     */
-    'libraryId'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ImportAssetDto
-     */
-    'sidecarPath'?: string;
-}
-/**
- * 
- * @export
  * @enum {string}
  */
 
@@ -7254,50 +7163,6 @@ export const AssetApiAxiosParamCreator = function (configuration?: Configuration
         },
         /**
          * 
-         * @param {ImportAssetDto} importAssetDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        importFile: async (importAssetDto: ImportAssetDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'importAssetDto' is not null or undefined
-            assertParamExists('importFile', 'importAssetDto', importAssetDto)
-            const localVarPath = `/asset/import`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication api_key required
-            await setApiKeyToObject(localVarHeaderParameter, "x-api-key", configuration)
-
-            // authentication bearer required
-            // http bearer authentication required
-            await setBearerAuthToObject(localVarHeaderParameter, configuration)
-
-            // authentication cookie required
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(importAssetDto, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
          * @param {BulkIdsDto} bulkIdsDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -8247,16 +8112,6 @@ export const AssetApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {ImportAssetDto} importAssetDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async importFile(importAssetDto: ImportAssetDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AssetFileUploadResponseDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.importFile(importAssetDto, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
          * @param {BulkIdsDto} bulkIdsDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -8625,15 +8480,6 @@ export const AssetApiFactory = function (configuration?: Configuration, basePath
          */
         getUserAssetsByDeviceId(deviceId: string, options?: any): AxiosPromise<Array<string>> {
             return localVarFp.getUserAssetsByDeviceId(deviceId, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {ImportAssetDto} importAssetDto 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        importFile(importAssetDto: ImportAssetDto, options?: any): AxiosPromise<AssetFileUploadResponseDto> {
-            return localVarFp.importFile(importAssetDto, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -9035,17 +8881,6 @@ export class AssetApi extends BaseAPI {
      */
     public getUserAssetsByDeviceId(deviceId: string, options?: AxiosRequestConfig) {
         return AssetApiFp(this.configuration).getUserAssetsByDeviceId(deviceId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {ImportAssetDto} importAssetDto 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof AssetApi
-     */
-    public importFile(importAssetDto: ImportAssetDto, options?: AxiosRequestConfig) {
-        return AssetApiFp(this.configuration).importFile(importAssetDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
