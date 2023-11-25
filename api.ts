@@ -6461,6 +6461,48 @@ export const AssetApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
+         * Get all asset of a device that are in the database, ID only.
+         * @param {string} deviceId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAllUserAssetsByDeviceId: async (deviceId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'deviceId' is not null or undefined
+            assertParamExists('getAllUserAssetsByDeviceId', 'deviceId', deviceId)
+            const localVarPath = `/asset/device/{deviceId}`
+                .replace(`{${"deviceId"}}`, encodeURIComponent(String(deviceId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication api_key required
+            await setApiKeyToObject(localVarHeaderParameter, "x-api-key", configuration)
+
+            // authentication bearer required
+            // http bearer authentication required
+            await setBearerAuthToObject(localVarHeaderParameter, configuration)
+
+            // authentication cookie required
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Get a single asset\'s information
          * @param {string} id 
          * @param {string} [key] 
@@ -7120,9 +7162,11 @@ export const AssetApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * Get all asset of a device that are in the database, ID only.
+         * 
+         * @summary Use /asset/device/:deviceId instead - Remove in 1.92 release
          * @param {string} deviceId 
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         getUserAssetsByDeviceId: async (deviceId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
@@ -7955,6 +7999,16 @@ export const AssetApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
+         * Get all asset of a device that are in the database, ID only.
+         * @param {string} deviceId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getAllUserAssetsByDeviceId(deviceId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<string>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAllUserAssetsByDeviceId(deviceId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
          * Get a single asset\'s information
          * @param {string} id 
          * @param {string} [key] 
@@ -8101,9 +8155,11 @@ export const AssetApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Get all asset of a device that are in the database, ID only.
+         * 
+         * @summary Use /asset/device/:deviceId instead - Remove in 1.92 release
          * @param {string} deviceId 
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         async getUserAssetsByDeviceId(deviceId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<string>>> {
@@ -8339,6 +8395,15 @@ export const AssetApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.getAllAssets(skip, take, userId, isFavorite, isArchived, updatedAfter, updatedBefore, ifNoneMatch, options).then((request) => request(axios, basePath));
         },
         /**
+         * Get all asset of a device that are in the database, ID only.
+         * @param {string} deviceId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAllUserAssetsByDeviceId(deviceId: string, options?: any): AxiosPromise<Array<string>> {
+            return localVarFp.getAllUserAssetsByDeviceId(deviceId, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Get a single asset\'s information
          * @param {string} id 
          * @param {string} [key] 
@@ -8473,9 +8538,11 @@ export const AssetApiFactory = function (configuration?: Configuration, basePath
             return localVarFp.getTimeBuckets(size, userId, albumId, personId, isArchived, isFavorite, isTrashed, withStacked, withPartners, key, options).then((request) => request(axios, basePath));
         },
         /**
-         * Get all asset of a device that are in the database, ID only.
+         * 
+         * @summary Use /asset/device/:deviceId instead - Remove in 1.92 release
          * @param {string} deviceId 
          * @param {*} [options] Override http request option.
+         * @deprecated
          * @throws {RequiredError}
          */
         getUserAssetsByDeviceId(deviceId: string, options?: any): AxiosPromise<Array<string>> {
@@ -8715,6 +8782,17 @@ export class AssetApi extends BaseAPI {
     }
 
     /**
+     * Get all asset of a device that are in the database, ID only.
+     * @param {string} deviceId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AssetApi
+     */
+    public getAllUserAssetsByDeviceId(deviceId: string, options?: AxiosRequestConfig) {
+        return AssetApiFp(this.configuration).getAllUserAssetsByDeviceId(deviceId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * Get a single asset\'s information
      * @param {string} id 
      * @param {string} [key] 
@@ -8873,9 +8951,11 @@ export class AssetApi extends BaseAPI {
     }
 
     /**
-     * Get all asset of a device that are in the database, ID only.
+     * 
+     * @summary Use /asset/device/:deviceId instead - Remove in 1.92 release
      * @param {string} deviceId 
      * @param {*} [options] Override http request option.
+     * @deprecated
      * @throws {RequiredError}
      * @memberof AssetApi
      */
