@@ -445,6 +445,12 @@ export interface AssetBulkDeleteDto {
 export interface AssetBulkUpdateDto {
     /**
      * 
+     * @type {string}
+     * @memberof AssetBulkUpdateDto
+     */
+    'dateTimeOriginal'?: string;
+    /**
+     * 
      * @type {Array<string>}
      * @memberof AssetBulkUpdateDto
      */
@@ -461,6 +467,18 @@ export interface AssetBulkUpdateDto {
      * @memberof AssetBulkUpdateDto
      */
     'isFavorite'?: boolean;
+    /**
+     * 
+     * @type {number}
+     * @memberof AssetBulkUpdateDto
+     */
+    'latitude'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof AssetBulkUpdateDto
+     */
+    'longitude'?: number;
     /**
      * 
      * @type {boolean}
@@ -4106,6 +4124,12 @@ export interface UpdateAssetDto {
      * @type {string}
      * @memberof UpdateAssetDto
      */
+    'dateTimeOriginal'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateAssetDto
+     */
     'description'?: string;
     /**
      * 
@@ -4119,6 +4143,18 @@ export interface UpdateAssetDto {
      * @memberof UpdateAssetDto
      */
     'isFavorite'?: boolean;
+    /**
+     * 
+     * @type {number}
+     * @memberof UpdateAssetDto
+     */
+    'latitude'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof UpdateAssetDto
+     */
+    'longitude'?: number;
 }
 /**
  * 
