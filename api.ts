@@ -374,12 +374,6 @@ export interface AllJobStatusResponseDto {
      * @type {JobStatusDto}
      * @memberof AllJobStatusResponseDto
      */
-    'objectTagging': JobStatusDto;
-    /**
-     * 
-     * @type {JobStatusDto}
-     * @memberof AllJobStatusResponseDto
-     */
     'recognizeFaces': JobStatusDto;
     /**
      * 
@@ -1348,37 +1342,6 @@ export interface CheckExistingAssetsResponseDto {
 /**
  * 
  * @export
- * @interface ClassificationConfig
- */
-export interface ClassificationConfig {
-    /**
-     * 
-     * @type {boolean}
-     * @memberof ClassificationConfig
-     */
-    'enabled': boolean;
-    /**
-     * 
-     * @type {number}
-     * @memberof ClassificationConfig
-     */
-    'minScore': number;
-    /**
-     * 
-     * @type {string}
-     * @memberof ClassificationConfig
-     */
-    'modelName': string;
-    /**
-     * 
-     * @type {ModelType}
-     * @memberof ClassificationConfig
-     */
-    'modelType'?: ModelType;
-}
-/**
- * 
- * @export
  * @enum {string}
  */
 
@@ -2032,7 +1995,6 @@ export const JobName = {
     ThumbnailGeneration: 'thumbnailGeneration',
     MetadataExtraction: 'metadataExtraction',
     VideoConversion: 'videoConversion',
-    ObjectTagging: 'objectTagging',
     RecognizeFaces: 'recognizeFaces',
     SmartSearch: 'smartSearch',
     BackgroundTask: 'backgroundTask',
@@ -2373,7 +2335,6 @@ export interface MergePersonDto {
  */
 
 export const ModelType = {
-    ImageClassification: 'image-classification',
     FacialRecognition: 'facial-recognition',
     Clip: 'clip'
 } as const;
@@ -3155,12 +3116,6 @@ export interface ServerFeaturesDto {
      * @type {boolean}
      * @memberof ServerFeaturesDto
      */
-    'tagImage': boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof ServerFeaturesDto
-     */
     'trash': boolean;
 }
 /**
@@ -3813,12 +3768,6 @@ export interface SystemConfigJobDto {
      * @type {JobSettingsDto}
      * @memberof SystemConfigJobDto
      */
-    'objectTagging': JobSettingsDto;
-    /**
-     * 
-     * @type {JobSettingsDto}
-     * @memberof SystemConfigJobDto
-     */
     'recognizeFaces': JobSettingsDto;
     /**
      * 
@@ -3914,12 +3863,6 @@ export interface SystemConfigLoggingDto {
  * @interface SystemConfigMachineLearningDto
  */
 export interface SystemConfigMachineLearningDto {
-    /**
-     * 
-     * @type {ClassificationConfig}
-     * @memberof SystemConfigMachineLearningDto
-     */
-    'classification': ClassificationConfig;
     /**
      * 
      * @type {CLIPConfig}
