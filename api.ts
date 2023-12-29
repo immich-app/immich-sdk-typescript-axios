@@ -3792,12 +3792,6 @@ export interface SystemConfigJobDto {
      * @type {JobSettingsDto}
      * @memberof SystemConfigJobDto
      */
-    'storageTemplateMigration': JobSettingsDto;
-    /**
-     * 
-     * @type {JobSettingsDto}
-     * @memberof SystemConfigJobDto
-     */
     'thumbnailGeneration': JobSettingsDto;
     /**
      * 
@@ -4031,6 +4025,18 @@ export interface SystemConfigReverseGeocodingDto {
  * @interface SystemConfigStorageTemplateDto
  */
 export interface SystemConfigStorageTemplateDto {
+    /**
+     * 
+     * @type {boolean}
+     * @memberof SystemConfigStorageTemplateDto
+     */
+    'enabled': boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof SystemConfigStorageTemplateDto
+     */
+    'hashVerificationEnabled': boolean;
     /**
      * 
      * @type {string}
